@@ -38,7 +38,7 @@ four different types of *Mus musculus* cells.
 samples <- read.csv(file = "sample_key.csv")
 
 # Importing BigBed format files:
-pth <- "../inputs/Mus_musculus/MACS2/"
+pth <- "../BigBed/"
 bbfiles <- list.files(path = pth, "*bb")
 grl <- GRangesList()
 chr_abr <- c(paste0("chr", 1:19), "chrX", "chrY")
@@ -192,31 +192,43 @@ peaks and trying to determine Tbx5 motifs using PWM matrix.
 #"BSgenome.Mmusculus.UCSC.mm10"                      
 #"BSgenome.Mmusculus.UCSC.mm10.masked" 
 
-mpwm <- read.table("TBX5_MOUSE.H11MO.0.D.pwm")
-mpwm <- t(mpwm)
-rownames(mpwm) <- c("A","C","G","T")
-mpwm
-ggseqlogo(mpwm)
+#mpwm <- read.table("TBX5_MOUSE.H11MO.0.D.pwm")
+#mpwm <- t(mpwm)
+#rownames(mpwm) <- c("A","C","G","T")
+#mpwm
+#ggseqlogo(mpwm)
 #########################################################
 
 # Calculating Tbx5 hits within fetched fasta files of peaks:
-pth_fasta <- "../inputs/Mus_musculus/MACS2/FASTA/"
+pth_fasta <- "../FASTA/"
 peak_sequences <- list.files(path = pth_fasta, "*fasta")
 hit_vec <- c()
 
 find_motif_hits <- function(sequences) {
     for (i in 1:length(sequences)) {
-        hits <- countPWM(as.matrix(mpwm), sequences[[i]], min.score="75%")
-        if (hits == 0) { next }
-        else { hit_vec <- c(hit_vec, hits) }
+        #hits <- countPWM(as.matrix(mpwm), sequences[[i]], min.score = "75%")
+        #if (hits == 0) { next }
+        #else { hit_vec <- c(hit_vec, hits) }
+        name <- paste0(tools::file_path_sans_ext(sequences[[i]]), ".bb")
+        file <- import(paste0("../BigBed/", name)) %>% filter(seqnames %in% chr_abr)
+        lens <- paste0("Mėginio ", name, " ilgis yra = ", length(file))
     }
-    return(sum(hit_vec))
+    return(lens)
 }
 
 
 for (i in 1:length(peak_sequences)) {
     filename <- peak_sequences[i]
-    seq <- readDNAStringSet(paste0("../inputs/Mus_musculus/MACS2/FASTA/", filename))
-    print(paste0(peak_sequences[i], " turi ", find_motif_hits(seq), " atitikimų."))
+    seq <- readDNAStringSet(paste0("../FASTA/", filename))
+    #print(paste0(peak_sequences[i], " turi ", find_motif_hits(seq), " atitikimų."))
+    print(find_motif_hits(filename))
 }
+```
+
+```{r PWM_matching}
+#mpwm <- read.table("TBX5_MOUSE.H11MO.0.D.pwm")
+#mpwm <- t(mpwm)
+#rownames(mpwm) <- c("A","C","G","T")
+#mpwm
+
 ```
