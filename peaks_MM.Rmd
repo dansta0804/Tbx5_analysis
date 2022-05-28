@@ -1,0 +1,222 @@
+## Tbx5 gene expression analysis
+### Introduction
+
+This part of the work provides the analysis that was performed using the
+data from eight ChIP-seq experiments which analyzed gene expression of 
+*Tbx5* transcription factor in *Mus musculus* organism.\
+
+The experiments that were used for *Mus musculus* *Tbx5* gene expression
+analysis are listed below.\
+
+***Mus musculus:***\
+
+ - [1. EXP058852 ](https://gtrd.biouml.org/#!table/gtrd_current.experiments/Details/ID=EXP058852)(*heart ventricle*)\
+ - [2. EXP030898 ](https://gtrd.biouml.org/#!table/gtrd_current.experiments/Details/ID=EXP030898)(*HL-1 (cardiac muscle cells)*)\
+ - [3. EXP062056 ](https://gtrd.biouml.org/#!table/gtrd_current.experiments/Details/ID=EXP062056)(*neonatal cardiac fibroblast cells line expressing large T antigen*)\
+ - [4. EXP058843 ](https://gtrd.biouml.org/#!table/gtrd_current.experiments/Details/ID=EXP058843)(*mouse embryonic fibroblasts*)\
+ - [5. EXP058847 ](https://gtrd.biouml.org/#!table/gtrd_current.experiments/Details/ID=EXP058847)(*mouse embryonic fibroblasts*)\
+ - [6. EXP058850 ](https://gtrd.biouml.org/#!table/gtrd_current.experiments/Details/ID=EXP058850)(*mouse embryonic fibroblasts*)\
+ - [7. EXP058856 ](https://gtrd.biouml.org/#!table/gtrd_current.experiments/Details/ID=EXP058856)(*mouse embryonic fibroblasts*)\
+
+The analysis provides the following information:\
+ **1.** Total peak counts of each performed experiment;\
+ **2.** Peak count distribution within different chromosomes.\
+
+```{r Libraries}
+library(pacman)
+p_load(data.table, rtracklayer, randomcoloR, ggplot2, ggthemes, plyranges, ggpubr,
+       BRGenomics, reshape2, plotly, heatmaply, dplyr, gplots, genomation, ggseqlogo,
+       BSgenome.Mmusculus.UCSC.mm10, BSgenome, Biostrings)
+```
+
+### Total peak counts
+The barplot below shows how many *Tbx5* gene peaks were detected while analyzing
+four different types of *Mus musculus* cells.
+
+```{r fig, fig.width = 6, fig.height = 7, fig.align = "center"}
+# Creating Sample Key table:
+samples <- read.csv(file = "sample_key.csv")
+
+# Importing BigBed format files:
+pth <- "../inputs/Mus_musculus/MACS2/"
+bbfiles <- list.files(path = pth, "*bb")
+grl <- GRangesList()
+chr_abr <- c(paste0("chr", 1:19), "chrX", "chrY")
+
+
+for (i in 1:length(bbfiles)) {
+    grl[[i]] <- import(paste0(pth, bbfiles[i])) %>% filter(seqnames %in% chr_abr)
+    names(grl)[i] <- samples$Graph_names[samples$Filename == bbfiles[i]]
+}
+
+peaks <- lapply(grl, length) %>%
+            as.data.table()  %>%
+            melt() %>%
+            as.data.frame()  %>%
+            setnames(., c("Experiment", "Peak_count"))
+
+col_fill <- randomColor(1, hue = "red", luminosity = "dark")
+
+bplot1 <- ggplot(peaks, aes(x = peaks$Experiment, y = peaks$Peak_count)) +
+                geom_bar(stat = "identity", position = "dodge", width = 0.4,
+                         color = "black", fill = col_fill) +
+                geom_text(aes(label = peaks$Peak_count),
+                          position = position_dodge(width = 0.9), vjust = -0.25) +
+                labs(title = "Peak counts within experiments", x = "Experiment",
+                     y = "Peak counts")
+
+bplot1 + theme(
+    panel.background = element_rect(fill = "#eeeef1", colour = "#4c0001"),
+    panel.grid.major.y = element_line(colour = "#cab5b5", size = 0.3,
+                                      linetype = "dashed"),
+    panel.grid.minor.y = element_line(colour = "#cab5b5", size = 0.3,
+                                      linetype = "dashed"),
+    panel.grid.major.x = element_line(colour = "#cab5b5", size = 0.2,
+                                      linetype = "longdash"),
+    panel.grid.minor.x = element_line(colour = "#cab5b5", size = 0.2,
+                                      linetype = "longdash"),
+    axis.text.x = element_text(angle = 45, hjust = 1),
+    plot.title = element_text(hjust = 0.5, face = "bold"))
+
+
+# Determining which experiment has a maximum peak count:
+max_count <- peaks[which.max(peaks$Peak_count), ]
+min_count <- peaks[which.min(peaks$Peak_count), ]
+```
+
+According to the barchart, the greatest number of *Tbx5* gene expression peaks was
+detected in the cells that were analyzed in
+***```r max_count```*** experiment.
+The smallest number of *Tbx5* gene peaks was observed in the dataset that was
+retrieved from ***```r min_count```*** experiment.
+
+### Peak counts by chromosome
+
+The barcharts below show how peak counts are distributed within
+different chromosomes. Each bar represents separate experiment.
+
+```{r fig2, fig2.align = "center"}
+peak_counts <- data.frame(matrix(ncol = 3, nrow = 0)) %>%
+                    setNames(., c("Name", "Chromosome", "Peak_count"))
+
+count_peaks <- function(name, objects) {
+    for (chr in chr_abr) {
+        peaks <- objects[[name]] %>%
+                    filter(seqnames == chr) %>%
+                    length()
+        peak_counts[nrow(peak_counts) + 1,] = c(name, chr, peaks)
+    }
+    return(peak_counts)
+}
+
+peak_counts <- lapply(names(grl), count_peaks, objects = grl) %>% bind_rows()
+
+cas <- unique(peak_counts$Chromosome)
+peak_counts$Chromosome <- factor(peak_counts$Chromosome, levels = c(cas))
+
+col_fill <- randomColor(1, hue = "red", luminosity = "dark")
+
+# Pastaba: būtina pridėti 'as.numeric', nes kitu atveju Peak_count yra
+# traktuojamas kaip 'string' - stulpelių dydžiai atvaizduojami leksikografiškai -
+# gaunamas klaidingas atvaizdavimas (pvz. 67 reikšmę atvaizduojantis stulpelis yra
+# daug didesnis už stulpelį, kuris atvaizduoja 2948)!
+
+bplot2 <- ggplot(peak_counts, aes(x = Name, y = as.numeric(Peak_count))) +
+            geom_bar(stat = "identity", color = "black", fill = col_fill) +
+            facet_wrap(~ Chromosome) +
+            theme(legend.position = "none") +
+            xlab("Peak distribution within chromosomes") +
+            ylab("Peaks") +
+            ylim(0, 15000) +
+            geom_text(aes(label = paste0(as.numeric(Peak_count)),
+                          y = as.numeric(Peak_count)), vjust = -1, hjust = .5,
+                          size = 3, angle = 0, color = "black")
+
+bplot2 + theme_linedraw() +
+theme(axis.text.x = element_text(angle = 90, size = 8, hjust = 1),
+      axis.title.x = element_text(size = 14, colour = "black"),
+      axis.title.y = element_text(size = 14, colour = "black"))
+```
+
+### Peak overlaps between samples
+The heatmap below helps to indicate the biggest number of peak overlaps between 7
+experiments.\
+
+```{r}
+coef_matrix <- matrix(nrow = length(grl), ncol = length(grl))
+
+jaccard <- function(a, b) {
+    len <- reduce(c(grl[[a]], grl[[a]])) %>% length()
+    return((length(GenomicRanges::intersect(grl[[a]], grl[[b]])) / len) * 100)
+}
+
+for (i in 1:length(grl)) {
+    for (y in 1:length(grl)) {
+        coef_matrix[i, y] = jaccard(i, y)
+    }
+}
+
+colnames(coef_matrix) <- names(grl)
+rownames(coef_matrix) <- names(grl)
+
+coef_mat1 <- coef_matrix
+coef_mat2 <- coef_matrix
+
+coef_mat1[lower.tri(coef_mat1, diag = TRUE)] <- NA
+coef_mat2[upper.tri(coef_mat2, diag = TRUE)] <- NA
+
+coef_mat_bind = rbind(data.matrix(coef_mat1), data.matrix(coef_mat2))
+melt_coef_mat <- melt(coef_mat_bind, na.rm = TRUE)
+
+ggplot(melt_coef_mat, aes(x = Var2, y = Var1, fill = value)) +
+    geom_tile(color = "black") +
+    geom_text(aes(label = round(value, digits = 5)),
+                  color = "#030101", size = 4) +
+    labs(title = "Peak overlaps between samples",
+         x = "Experiment", y = "Experiment") +
+    scale_fill_gradient(low = "#ffee8e", high = "#ab1f1f") +
+    guides(fill = guide_colourbar(title = "Coefficient", face = "bold")) +
+    theme(axis.text = element_text(size = 10, colour = "black"),
+          axis.text.x = element_text(angle = 45, hjust = 1),
+          axis.title.x = element_text(size = 14, colour = "black"),
+          axis.title.y = element_text(size = 14, colour = "black"),
+          panel.grid.major = element_line(color = "#eeeeee"),
+          plot.title = element_text(hjust = 0.5, size = 16, face = "bold"))
+```
+
+### Motif determination using PWM matrix
+The following analysis is focused on analysing the sequences based on the
+peaks and trying to determine Tbx5 motifs using PWM matrix.
+
+```{r}
+#"BSgenome.Mmusculus.UCSC.mm10"                      
+#"BSgenome.Mmusculus.UCSC.mm10.masked" 
+
+mpwm <- read.table("TBX5_MOUSE.H11MO.0.D.pwm")
+mpwm <- t(mpwm)
+rownames(mpwm) <- c("A","C","G","T")
+mpwm
+ggseqlogo(mpwm)
+#########################################################
+
+# Calculating Tbx5 hits within fetched fasta files of peaks:
+pth_fasta <- "../inputs/Mus_musculus/MACS2/FASTA/"
+peak_sequences <- list.files(path = pth_fasta, "*fasta")
+hit_vec <- c()
+
+find_motif_hits <- function(sequences) {
+    for (i in 1:length(sequences)) {
+        hits <- countPWM(as.matrix(mpwm), sequences[[i]], min.score="75%")
+        if (hits == 0) { next }
+        else { hit_vec <- c(hit_vec, hits) }
+    }
+    return(sum(hit_vec))
+}
+
+
+for (i in 1:length(peak_sequences)) {
+    filename <- peak_sequences[i]
+    seq <- readDNAStringSet(paste0("../inputs/Mus_musculus/MACS2/FASTA/", filename))
+    print(paste0(peak_sequences[i], " turi ", find_motif_hits(seq), " atitikimų."))
+}
+```

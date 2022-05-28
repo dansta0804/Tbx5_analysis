@@ -1,0 +1,271 @@
+\documentclass[11pt]{article}
+
+%\documentclass[17pt]{extarticle}
+
+%\usepackage{extsizes}
+\usepackage{indentfirst}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[english,lithuanian]{babel}
+\usepackage{array}
+\usepackage{caption}
+
+\usepackage{amsmath, amsthm, amssymb}
+\usepackage{graphicx}
+\usepackage{setspace}
+\usepackage{verbatim}
+\usepackage[left=3cm,top=2cm,right=1.5cm,bottom=2cm]{geometry}
+ %\textwidth 6.5in
+ %\textheight 9.00in
+
+  \onehalfspacing
+
+% Author's MACROS
+ \newcommand{\EE}{\mathbb{E}\,} % Mean
+ \newcommand{\ee}{{\mathrm e}}  % nice exponent
+ \newcommand{\dd}{{\mathrm d}}
+ \newcommand{\RR}{\mathbb{R}}
+ %Macros end
+
+\begin{document}
+\selectlanguage{lithuanian}
+
+\begin{titlepage}
+\vskip 20pt
+\begin{center}
+\includegraphics[scale=0.5]{MIF}
+\end{center}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% TITULINIO PUSLAPIO TEKSTAS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\vskip 20pt
+\centerline{\bf \large \textbf{VILNIAUS UNIVERSITETAS}}
+\bigskip
+\centerline{\large \textbf{MATEMATIKOS IR INFORMATIKOS FAKULTETAS}}
+\bigskip
+\centerline{\large \textbf{BIOINFORMATIKOS BAKALAURO STUDIJŲ PROGRAMA}}
+
+\vskip 90pt
+\begin{center}
+    {\bf \LARGE \emph{tbx5} ir \emph{tcf21} genų įtakos regeneracijai tyrimai}
+\end{center}
+\begin{center}
+    {\bf \Large Research of the \emph{tbx5} and \emph{tcf21} genes' functions in regeneration}
+\end{center}
+\vskip 20pt
+\centerline{\bf \Large \textbf{Kursinis darbas}}
+\bigskip
+\vskip 50pt
+
+\hskip 140pt {\Large Autorius: Danielė Stasiūnaitė}
+
+\hskip 140pt{\Large VU el. p.: (daniele.stasiunaite@mif.stud.vu.lt)}
+\bigskip
+\vskip 20pt
+
+\hskip 140pt {\Large Darbo vadovas: J. Asist. Kotryna Kvederavičiūtė}
+\vskip 60pt
+\vskip 60pt
+\centerline{\large \textbf{Vilnius}}
+\centerline{\large \textbf{2022}}
+\newpage
+\end{titlepage}
+
+\selectlanguage{lithuanian}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% TURINIO PUSLAPIS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  
+\tableofcontents
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% LIETUVIŠKOS SANTRAUKOS PUSLAPIS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  
+\section*{Santrauka}
+Darbo santrauka.\\
+
+\textbf{Raktiniai žodžiai: TF, ChIP-seq}
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ANGLIŠKOS SANTRAUKOS PUSLAPIS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Summary}
+Short summary of results.\\
+
+\textbf{Keywords?}
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ĮVADO PUSLAPIS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Įvadas}
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% DUOMENŲ APŽVALGA
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Duomenys}
+
+Tyrime naudoti duomenys atsisiųsti iš \emph{GTRD} (Gene Transcription
+Regulation Database) duomenų bazės, saugančios informaciją apie įvairių
+transkripcijos faktorių jungimosi prie DNR sekų regionus. Ši duomenų
+bazė pasirinkta dėl sistemiškai surinktų ChIP-seq eksperimentų, kurių
+metu gauti rezultatai unifikuotai apdorojami ir paruošiami tyrėjų
+analizėms. Taip pat \emph{GTRD} duomenų bazėje duomenys saugomi
+binariniu anotacijų formatu \emph{bigBed}, leidžiandžiu atvaizduoti
+pasirinktą chromosomos regioną genomų naršyklėje sparčiau ir 
+efektyviau nei tekstinis \emph{BED} formatas.
+
+Žemiau esančioje lentelėje pateikta informacija apie tyrimui atlikti
+naudotus duomenis, surinktus iš naminės pelės \emph{(lot. Mus musculus)}
+ląstelių. Visi duomenys gauti iš eksperimentų, kurių metu buvo
+siekiama išsiaiškinti \emph{tbx5} ir kitų transkripcijos faktorių
+įtaką naujų širdies ląstelių, kardiomiocitų, susidarymui bei širdies
+funkcijų atsistatymui po ištikusio infarkto arba kitų, su širdies
+pažeidimais susijusių, sutrikimų.
+
+\begin{table}[htb]
+    \newcolumntype{M}[1]{>{\centering\arraybackslash}m{#1}}
+    \small
+    \caption*{1 lentelė. Mėginių charakteristikos}
+    \begin{tabular}{|M{2cm}|M{3.5cm}|M{3.7cm}|M{3cm}|M{3cm}|M{0.5cm}|}
+    \hline
+    \textbf{GTRD ID} & \textbf{Ląstelių tipas} &
+                    \textbf{Sąlygos pritaikymas} & \textbf{Antikūnai} &
+                    \textbf{PubMed ID}\\
+    \hline
+    EXP030893 & HL - 1 (širdies raumens) & Kontrolė & - & 21415370\\
+    \hline
+    EXP058852 & Širdies prieširdžių & Kamienas: C57BL/6; vystymosi
+                stadija: p4 & Tbx5 (sc-17866) & 31080136\\
+    \hline
+    EXP062056 & Pelių naujagimių širdies fibroblastų, ekspresuojančių didelį
+                kiekį T antigeno, linija & Kamienas: CD1; sąlyga: sb431542,
+                    xav939 & anti-TBX5 (sc-17866x) & 31271750\\
+    \hline
+    EXP058843 & MEF (embrionų fibroblastai) & Kamienas: C57BL/6; sąlyga: AGHMT
+                (2 d.) & anti-Tbx5 (sc-17866) & 31080136\\
+    \hline
+    EXP058847 & MEF (embrionų fibroblastai) & Kamienas: C57BL/6; sąlyga: GHMT
+                (2 d.) & Tbx5 (sc-17866) & 31080136\\
+    \hline
+    EXP058850 & MEF (embrionų fibroblastai) & Kamienas: C57BL/6; sąlyga: GMT
+                (2 d.) & Tbx5 (sc-17866) & 31080136\\
+    \hline
+    EXP058856 & MEF (embrionų fibroblastai) & Kamienas: C57BL/6; sąlyga: vienas
+                faktorius (2 d.) & Tbx5 (sc-17866) & 31080136\\
+    \hline
+    \end{tabular}
+\end{table}
+
+Tyrimui atlikti pasirinkti septynių eksperimentų duomenys tarp kurių buvo
+tiriami keturi embrionų fibroblastų kamienai, kuriems dvi dienas taikytos
+skirtingos sąlygos: veikimas AGHMT (AKT1 - serino/treonino kinazė 1; GATA4,
+HAND2, MEF2C, TBX5 - kardiogeniniai transkripcijos faktoriai), GHMT, GMT
+ir tik vienu transkripcijos faktoriumi, kuris nebuvo specifikuotas.
+
+Taip pat tirti pelių naujagimių fibroblastai, veikti inhibitoriais: 
+sb431542, skatinančiu kardiomiocitų diferenciaciją iš pliuripotentinių
+kamieninių ląstelių, ir xav939, sukeliančiu progenitorinių ląstelių
+kardiomiogenezę.
+
+Į duomenų rinkinį įtraukti du mėginiai, kuriems nebuvo taikytos papildomos
+sąlygos: kontrolinis HL - 1 širdies raumens ląstelių mėginys bei p4
+vystymosi stadijos širdies prieširdžių ląstelių mėginys.
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% METODAI
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Tyrimo metodai}
+\emph{Tbx5} transkripcijos faktoriaus regionų tyrimo analizė atlikta
+su R programavimo kalba (4.2.0 versija). Žemiau esančiuose atskiruose
+analizės etapų skyriuose nurodomos R bibliotekos ir papildomi komandinės
+eilutės įrankiai, kuriais naudojantis pasiekti tarpiniai analizės etapų
+rezultatai.
+
+\subsection{\emph{Tbx5} regionų skaičiaus nustatymas mėginiuose}
+\emph{Tbx5} regionų skaičius skirtinguose mėginiuose apskaičiuotas,
+naudojantis \emph{rtracklayer}  bibliotekos sukurtu GRanges objektu,
+aprašančiu genomines pozicijas bei su jomis susijusias anotacijas.
+Regionų skaičių mėginiuose vizualizuojantis grafikas sukurtas su
+\emph{ggplot2} biblioteka.
+
+\subsection{\emph{Tbx5} regionų skaičiaus pasiskirstymas chromosomose}
+Apjungti su pirmu?
+
+\subsection{Persidengiančių regionų mėginiuose analizė}
+Tekstas.
+
+\subsection{\emph{Tbx5} motyvo nustatymas}
+Tekstas.
+
+\subsection{Motyvų paieška \emph{de novo}}
+Tekstas.
+
+
+
+\newpage
+
+\section{Antros dalies pavadinimas}
+\subsection{Skyriaus pavadinimas}
+Grafikams įterpti:
+\begin{figure}[h]
+
+\end{figure}
+
+
+\subsection{Skyriaus pavadinimas}
+
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% GAUTŲ REZULTATŲ APŽVALGA
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Rezultatų apžvalga}
+Pateikiami svarbiausi rezultatai, apibendrinimai.
+
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% LITERATŪROS ŠALTINIAI
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\bibliographystyle{plain}
+\begin{thebibliography}{99}
+
+\bibitem{YLS16}1. Yang Yang; R. Leipus, J. \v{S}iaulys. Asymptotics for randomly weighted and stopped dependent sums, \emph{Stochastics: an international journal of probability and stochastic processes}, 2016, \textbf{88}(2), p.p. 300-319.
+ \bibitem{E05} T. Erhardsson. Stein’s method for Poisson and compound Poisson approximation, \emph{In: An Introduction to Stein’s Method. Lect. Notes Ser. Inst. Math. Sci. Natl. Univ. Singap. v. 4}, Singapore: Singapore Univ. Press, 2005, p.p. 61–113.
+\bibitem{KGDD08} R. Kaas, M. Goovaerts, J. Dhaene  and M. Denuit. \emph{Modern Actuarial Risk Theory:
+using R.} (Secon. edt.), Springer-Verlag, Berlin, Heidelberg,  2008, 393 p.
+\bibitem{St12} V. Stakėnas, \emph{Tikimybių teorija ir matematinė statistika} (rankraštis), 2012, 178 p. , http://www.statistika.mif.vu.lt/atsisiuntimui/statistika/
+
+\end{thebibliography}
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% PRIEDAI
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Priedas}
+Programiniam kodui pateikti galima naudoti  \verb|\verbatim| komandą:
+\small  %mažesnės raidės
+\begin{verbatim}
+
+R arba Python programinis kodas.
+
+\end{verbatim}
+
+
+
+\section{Literatūros apžvalga}
+Literatūros darbo tema apžvalga. Cituojant \cite{YLS16,KGDD08}. Nepamirškite pdflatex įvykdyti bent du kartus, kad pamatytumėte citavimą, ne klaustukus.
+
+
+\end{document}
