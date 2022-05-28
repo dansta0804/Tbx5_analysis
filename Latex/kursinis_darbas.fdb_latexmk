@@ -1,8 +1,8 @@
 # Fdb version 3
-["pdflatex"] 1653738593 "/home/daniele/Desktop/III_course/II_semester/Kursinis_darbas/TF_analysis/kursinis_darbas.tex" "/home/daniele/Desktop/III_course/II_semester/Kursinis_darbas/TF_analysis/kursinis_darbas.pdf" "kursinis_darbas" 1653738594
+["pdflatex"] 1653742187 "/home/daniele/Desktop/III_course/II_semester/Kursinis_darbas/TF_analysis/Latex/kursinis_darbas.tex" "/home/daniele/Desktop/III_course/II_semester/Kursinis_darbas/TF_analysis/Latex/kursinis_darbas.pdf" "kursinis_darbas" 1653742188
   "/etc/texmf/web2c/texmf.cnf" 1643220635 475 c0e671620eb5563b2130f56340a5fde8 ""
-  "/home/daniele/Desktop/III_course/II_semester/Kursinis_darbas/TF_analysis/kursinis_darbas.aux" 1653738594 1997 f30ba2e717de4b27f89fd571a5b1d259 ""
-  "/home/daniele/Desktop/III_course/II_semester/Kursinis_darbas/TF_analysis/kursinis_darbas.tex" 1653738593 9819 7a0ff603549ee0857ba258dd5f4bb2b1 ""
+  "/home/daniele/Desktop/III_course/II_semester/Kursinis_darbas/TF_analysis/Latex/kursinis_darbas.aux" 1653742188 1997 f30ba2e717de4b27f89fd571a5b1d259 ""
+  "/home/daniele/Desktop/III_course/II_semester/Kursinis_darbas/TF_analysis/Latex/kursinis_darbas.tex" 1653742187 10186 30c4915a98e3fb8dbb151a4e36e0aab1 ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/ecbi1200.tfm" 1136768653 3072 ccae1a240ab272417e4399fe942df546 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/ecbi1440.tfm" 1136768653 3072 4dda4299ed0d9dcf48c6a8bcfdc499fc ""
@@ -103,13 +103,13 @@
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1651178285 4770781 1ed1abab22da9c3e2cc82e4db562318b ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1651178323 8267335 fb006b53a623ebb44dcad1a2ee8f7503 ""
   "MIF.png" 1653738589 90584 784fb4a02b243ab099ba547780dcf446 ""
-  "kursinis_darbas.aux" 1653738594 1997 f30ba2e717de4b27f89fd571a5b1d259 "pdflatex"
-  "kursinis_darbas.tex" 1653738593 9819 7a0ff603549ee0857ba258dd5f4bb2b1 ""
-  "kursinis_darbas.toc" 1653738594 1261 5e6434a9bd34c754cc2963bd2c14b1de "pdflatex"
+  "kursinis_darbas.aux" 1653742188 1997 f30ba2e717de4b27f89fd571a5b1d259 "pdflatex"
+  "kursinis_darbas.tex" 1653742187 10186 30c4915a98e3fb8dbb151a4e36e0aab1 ""
+  "kursinis_darbas.toc" 1653742188 1261 5e6434a9bd34c754cc2963bd2c14b1de "pdflatex"
   (generated)
   "kursinis_darbas.aux"
-  "/home/daniele/Desktop/III_course/II_semester/Kursinis_darbas/TF_analysis/kursinis_darbas.pdf"
-  "kursinis_darbas.pdf"
-  "/home/daniele/Desktop/III_course/II_semester/Kursinis_darbas/TF_analysis/kursinis_darbas.log"
-  "kursinis_darbas.toc"
   "kursinis_darbas.log"
+  "kursinis_darbas.toc"
+  "kursinis_darbas.pdf"
+  "/home/daniele/Desktop/III_course/II_semester/Kursinis_darbas/TF_analysis/Latex/kursinis_darbas.pdf"
+  "/home/daniele/Desktop/III_course/II_semester/Kursinis_darbas/TF_analysis/Latex/kursinis_darbas.log"
