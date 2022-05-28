@@ -1,4 +1,4 @@
-\documentclass[11pt]{article}
+\documentclass[12pt]{article}
 
 %\documentclass[17pt]{extarticle}
 
@@ -208,7 +208,7 @@ papildomą funkciją \emph{facet\_wrap()}, sukuriančia atskirus
 grafikus chromosomoms.
 
 \subsection{Persidengiančių regionų mėginiuose analizė}
-Persidengiančių regionų tarp mėginių procentinė dalis apskaičiuota
+Persidengiančių regionų tarp mėginių procentinė dalis nustatyta
 su \emph{Jaccard()} funkcija, apskaičiuojančia, kiek yra sutampančių
 regionų tarp dviejų mėginių poros.
 Gauti rezultatai atvaizduoti spalvų intensyvumo grafike \emph{angl.
@@ -216,24 +216,33 @@ heatmap}, sukurtame \emph{ggplot2} bibliotekos funkciją \emph{ggplot}
 papildžius funkcija \emph{geom\_tile()}.
 
 \subsection{\emph{Tbx5} motyvo nustatymas}
-Tekstas.
+Šiame etape genomines pozicijas aprašantys \emph{bigBed} formato
+failai konvertuoti į \emph{BED} formato failus, pasinaudojus
+\emph{UCSC} komandinės eilutės programa \emph{bigBedToBed}\footnote[1]
+{\emph{bigBedToBed} aprašymas: 
+https://genome.ucsc.edu/goldenPath/help/bigBed.html}.
+Sugeneruoti \emph{BED} formato failai panaudoti pikus atitinkančių
+sekų iš naminės pelės \emph{Mus musculus} genomo gavimui
+\emph{fasta} formatu. Sekos atsisiųstos, pasinaudojus komandinės
+eilutės įrankio \emph{BEDTools}\footnote[2]{BEDTools paketo
+dokumentacija: 
+https://bedtools.readthedocs.io/en/latest/content/bedtools-suite.html}
+programa \emph{getfasta}\footnote[3]{\emph{getfasta} funkcijos
+dokumentacija: 
+https://bedtools.readthedocs.io/en/latest/content/tools/getfasta.html}.
+
+Kiekviename mėginyje esančio \emph{tbx5} transkripcijos faktoriaus
+motyvo procentinė dalis apskaičiuota susumavus \emph{Biostrings}
+bibliotekos funkcijos \emph{countPWM()} rezultatus bei gautą
+vertę padalinus iš bendro regionų skaičiaus.
+Rezultatai atvaizduoti, pasinaudojus \emph{ggplot} bibliotekos
+funkcijomis.
 
 \subsection{Motyvų paieška \emph{de novo}}
 Tekstas.
 
-
-
-\newpage
-
-\section{Antros dalies pavadinimas}
-\subsection{Skyriaus pavadinimas}
-Grafikams įterpti:
-\begin{figure}[h]
-
-\end{figure}
-
-
-\subsection{Skyriaus pavadinimas}
+\subsection{Sekų praturtinimo analizė}
+Tekstas.
 
 \newpage
 
@@ -242,7 +251,34 @@ Grafikams įterpti:
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Rezultatų apžvalga}
-Pateikiami svarbiausi rezultatai, apibendrinimai.
+Pirmajame analizės etape kiekviename mėginyje nustatytas bendras
+regionų skaičius pavaizduotas žemiau esančioje stulpelinėje
+diagramoje.
+
+\begin{figure}[htb]
+\caption*{1 pav. Regionų skaičių kiekviename mėginyje vaizduojanti diagrama}
+\begin{center}
+\includegraphics[width=0.6\linewidth]{Figures/total_peak_counts.png}
+\end{center}
+\end{figure}
+
+Remiantis diagrama didžiausias \emph{tbx5} transkripcijos faktoriaus
+regionų skaičius nustatytas eksperimento (mm_4_emb_fibr_r1)
+biologinėje replikoje, kurioje pelių embrionų fibroblastų ląstelės
+dvi dienas veiktos AGHMT () faktoriais.
+Šį rezultatą palyginus su kitomis biologinėmis replikomis, kuriose
+tirtas tas pats pelių embrionų fibroblastų ląstelių kamienas, tačiau
+ląstelės veiktos tik kai kuriais faktoriais, pastebimas gradualus
+\emph{tbx5} transkripcijos faktoriaus regionų skaičiaus mažėjimas
+diagramoje \emph{mm_4_emb_fibr_r2}, \emph{mm_4_emb_fibr_r3} ir
+\emph{mm_4_emb_fibr_r4} pavaizduotuose stulpeliuose. Mėginyje,
+kuriame embrionų fibroblastai veikti tik vienu faktoriumi,
+\emph{tbx5} transkripcijos faktoriaus regionų nustatoma nedaug.
+
+Tai leidžia daryti išvadą, kad \emph{tbx5} transkripcijos faktoriaus
+ekspresija stipriai priklauso nuo organizme esančių faktorių
+
+
 
 \newpage
 
