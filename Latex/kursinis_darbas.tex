@@ -190,14 +190,22 @@ eilutės įrankiai, kuriais naudojantis pasiekti tarpiniai analizės etapų
 rezultatai.
 
 \subsection{\emph{Tbx5} regionų skaičiaus nustatymas mėginiuose}
-\emph{Tbx5} regionų skaičius skirtinguose mėginiuose apskaičiuotas,
-naudojantis \emph{rtracklayer}  bibliotekos sukurtu GRanges objektu,
-aprašančiu genomines pozicijas bei su jomis susijusias anotacijas.
-Regionų skaičių mėginiuose vizualizuojantis grafikas sukurtas su
-\emph{ggplot2} biblioteka.
+\emph{Tbx5} regionų skaičius skirtinguose mėginiuose apskaičiuotas
+\emph{rtracklayer} bibliotekos sukurtam GRanges objektui, aprašančiam
+genomines pozicijas bei su jomis susijusias anotacijas, pritaikius
+standartinę R ilgio funkciją \emph{length()}.
+Regionų skaičių mėginiuose atvaizduojanti stulpelinė diagrama sukurta
+su \emph{ggplot2} bibliotekos \emph{geom\_bar()} funkcija.
 
 \subsection{\emph{Tbx5} regionų skaičiaus pasiskirstymas chromosomose}
-Apjungti su pirmu?
+Transkripcijos faktoriaus regionų skaičius skirtingose chromosomose
+suskaičiuotas, naudojantis standartine R funkcija \emph{length()},
+pritaikyta atskiroms chromosomoms, kurių pozicijos aprašytos GRanges
+objekte.
+Kiekvieno mėginio \emph{Tbx5} transkripcijos faktoriaus pasiskirstymas
+chromosomose atvaizduotas su \emph{ggplot2} biblioteka, panaudojus
+papildomą funkciją \emph{facet\_wrap()}, sukuriančia grafikus visoms
+chromosomoms.
 
 \subsection{Persidengiančių regionų mėginiuose analizė}
 Tekstas.
