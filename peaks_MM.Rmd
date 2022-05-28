@@ -62,10 +62,10 @@ bplot1 <- ggplot(peaks, aes(x = peaks$Experiment, y = peaks$Peak_count)) +
                          color = "black", fill = col_fill) +
                 geom_text(aes(label = peaks$Peak_count),
                           position = position_dodge(width = 0.9), vjust = -0.25) +
-                labs(title = "Regionų skaičius mėginiuose",
-                     x = "Eksperimentas", y = "Regionų skaičius")
+                labs(x = "Eksperimentas", y = "Regionų skaičius")
 
 png(file = "Latex/Figures/total_peak_counts.png")
+
 bplot1 + theme(
     panel.background = element_rect(fill = "#eeeef1", colour = "#4c0001"),
     panel.grid.major.y = element_line(colour = "#cab5b5", size = 0.3,
@@ -92,3 +92,53 @@ detected in the cells that were analyzed in
 The smallest number of *Tbx5* gene peaks was observed in the dataset that was
 retrieved from ***```r min_count```*** experiment.
 
+### Peak counts by chromosome
+
+The barcharts below show how peak counts are distributed within
+different chromosomes. Each bar represents separate experiment.
+
+```{r fig2, fig2.align = "center"}
+peak_counts <- data.frame(matrix(ncol = 3, nrow = 0)) %>%
+                    setNames(., c("Name", "Chromosome", "Peak_count"))
+
+count_peaks <- function(name, objects) {
+    for (chr in chr_abr) {
+        peaks <- objects[[name]] %>%
+                    filter(seqnames == chr) %>%
+                    length()
+        peak_counts[nrow(peak_counts) + 1,] = c(name, chr, peaks)
+    }
+    return(peak_counts)
+}
+
+peak_counts <- lapply(names(grl), count_peaks, objects = grl) %>% bind_rows()
+
+cas <- unique(peak_counts$Chromosome)
+peak_counts$Chromosome <- factor(peak_counts$Chromosome, levels = c(cas))
+
+col_fill <- randomColor(1, hue = "red", luminosity = "dark")
+
+# Pastaba: būtina pridėti 'as.numeric', nes kitu atveju Peak_count yra
+# traktuojamas kaip 'string' - stulpelių dydžiai atvaizduojami leksikografiškai -
+# gaunamas klaidingas atvaizdavimas (pvz. 67 reikšmę atvaizduojantis stulpelis yra
+# daug didesnis už stulpelį, kuris atvaizduoja 2948)!
+
+bplot2 <- ggplot(peak_counts, aes(x = Name, y = as.numeric(Peak_count))) +
+            geom_bar(stat = "identity", color = "black", fill = col_fill) +
+            facet_wrap(~ Chromosome) +
+            theme(legend.position = "none") +
+            ylab("Regionų skaičius") +
+            ylim(0, 20000) +
+            geom_text(aes(label = paste0(as.numeric(Peak_count)),
+                          y = as.numeric(Peak_count)), vjust = -1, hjust = .5,
+                          size = 2, angle = 0, color = "black")
+
+png(file = "Latex/Figures/peak_counts_by_chromosome.png")
+
+bplot2 + theme_linedraw() +
+theme(axis.text.x = element_text(angle = 90, size = 6, hjust = 1),
+      axis.title.x = element_text(size = 14, colour = "black"),
+      axis.title.y = element_text(size = 14, colour = "black"))
+
+dev.off()
+```
