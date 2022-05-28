@@ -87,7 +87,7 @@
 \section*{Santrauka}
 Darbo santrauka.\\
 
-\textbf{Raktiniai žodžiai: TF, ChIP-seq}
+\textbf{Raktiniai žodžiai: TF, ChIP-seq, regionas}
 \newpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -250,35 +250,92 @@ Tekstas.
 % GAUTŲ REZULTATŲ APŽVALGA
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% REGIONŲ SKAIČIUS MĖGINIUOSE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Rezultatų apžvalga}
+\subsection{Regionų skaičiaus skirtumai tarp mėginių}
 Pirmajame analizės etape kiekviename mėginyje nustatytas bendras
 regionų skaičius pavaizduotas žemiau esančioje stulpelinėje
 diagramoje.
 
 \begin{figure}[htb]
-\caption*{1 pav. Regionų skaičių kiekviename mėginyje vaizduojanti diagrama}
-\begin{center}
-\includegraphics[width=0.6\linewidth]{Figures/total_peak_counts.png}
-\end{center}
+    \begin{center}
+        \includegraphics[width=0.7\linewidth]{Figures/total_peak_counts.png}
+        \caption*{1 pav. Regionų skaičių kiekviename mėginyje vaizduojanti diagrama}
+    \end{center}
 \end{figure}
 
 Remiantis diagrama didžiausias \emph{tbx5} transkripcijos faktoriaus
-regionų skaičius nustatytas eksperimento (mm_4_emb_fibr_r1)
+regionų skaičius nustatytas eksperimento \emph{(mm\_4\_emb\_fibr\_r1)}
 biologinėje replikoje, kurioje pelių embrionų fibroblastų ląstelės
-dvi dienas veiktos AGHMT () faktoriais.
+dvi dienas veiktos AGHMT (AKT1, GATA4, HAND2, MEF2C ir TBX5) faktoriais.
 Šį rezultatą palyginus su kitomis biologinėmis replikomis, kuriose
 tirtas tas pats pelių embrionų fibroblastų ląstelių kamienas, tačiau
 ląstelės veiktos tik kai kuriais faktoriais, pastebimas gradualus
 \emph{tbx5} transkripcijos faktoriaus regionų skaičiaus mažėjimas
-diagramoje \emph{mm_4_emb_fibr_r2}, \emph{mm_4_emb_fibr_r3} ir
-\emph{mm_4_emb_fibr_r4} pavaizduotuose stulpeliuose. Mėginyje,
+diagramoje \emph{mm\_4\_emb\_fibr\_r2}, \emph{mm\_4\_emb\_fibr\_r3} ir
+\emph{mm\_4\_emb\_fibr\_r4} pavaizduotuose stulpeliuose. Mėginyje,
 kuriame embrionų fibroblastai veikti tik vienu faktoriumi,
-\emph{tbx5} transkripcijos faktoriaus regionų nustatoma nedaug.
+\emph{tbx5} transkripcijos faktoriaus regionų nustatoma nedaug -
+13520.
 
 Tai leidžia daryti išvadą, kad \emph{tbx5} transkripcijos faktoriaus
-ekspresija stipriai priklauso nuo organizme esančių faktorių
+geno ekspresija priklauso nuo kardiogeninių faktorių buvimo.
+
+Mažiausiai regionų nustatyta mėginyje, kuriame tirta pelių
+naujagimių širdies fibroblastų, ekspresuojančių T antigeną
+ir paveiktų inhibitoriais: \emph{sb431542} ir \emph{xav939}.
+Nepaisant to, kad abu inhibitoriai skatina širdies ląstelių
+diferenciaciją, itin mažas transkripcijos faktoriaus regionų
+skaičius rodo, kad papildomas veikimas inhibitoriais daro
+mažą įtaką transkripcijos faktoriaus pasireiškimui.
+
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% REGIONŲ SKAIČIUS ATSKIROSE CHROMOSOMOSE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Regionų pasiskirstymas atskirose chromosomose}
+Nustačius \emph{tbx5} transkripcijos faktoriaus regionų
+pasiskirstymą eksperimentų mėginiuose, kitame analizės etape
+patikrinta, kaip faktoriaus regionai pasiskirstę atskirose
+chromosomose.
+
+Vaizduojamuose grafikuose didžiausias regionų skaičius nustatomas
+pirmoje, antroje ir penktoje chromosomose. Naminės pelės pirmoji
+chromosoma yra pati didžiausia, turinti 195 milijonų bazių porų,
+antroji chromosoma sudaryta iš 182 megabazių, penktoji chromosoma -
+152 milijonų bazių porų, todėl didesnis regionų skaičius šiose
+chromosomose yra įprastas. Kitose chromosomose regionų skaičius
+yra mažesnis. Ypač mažas regionų skaičius nustatomas devynioliktoje
+(61 Mbp), X (169 Mbp) ir Y (91 Mbp) chromosomose.
+
+Biologinių replikų mėginiuose didžiausias regionų skaičius
+nustatytas antroje chromosomoje. Taip pat grafikuose išsiskiria
+kontrolinis HL - 1 širdies ląstelių mėginys, kuriame didžiausias
+regionų skaičius nustatomas penktojoje chromosomoje.
+
+\begin{figure}[htb]
+    \begin{center}
+        \includegraphics[width=0.8\linewidth]{Figures/peak_counts_by_chromosome.png}
+        \caption*{2 pav. Regionų pasiskirstymas chromosomose}
+    \end{center}
+\end{figure}
+
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% TARP MĖGINIŲ PERSIDENGIANTYS REGIONAI
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+\begin{figure}[htb]
+    \begin{center}
+        \includegraphics[width=0.8\linewidth]{Figures/peak_overlaps_between_samples.png}
+        \caption*{3 pav. Persidengiančių regionų procentinės dalies vaizdavimas}
+    \end{center}
+\end{figure}
 
 \newpage
 
