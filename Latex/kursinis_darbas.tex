@@ -9,23 +9,21 @@
 \usepackage[english,lithuanian]{babel}
 \usepackage{array}
 \usepackage{caption}
+\usepackage{makecell}
+\usepackage[euler]{textgreek}
 
 \usepackage{amsmath, amsthm, amssymb}
 \usepackage{graphicx}
 \usepackage{setspace}
 \usepackage{verbatim}
 \usepackage[left=3cm,top=2cm,right=1.5cm,bottom=2cm]{geometry}
- %\textwidth 6.5in
- %\textheight 9.00in
 
-  \onehalfspacing
+\onehalfspacing
 
-% Author's MACROS
- \newcommand{\EE}{\mathbb{E}\,} % Mean
- \newcommand{\ee}{{\mathrm e}}  % nice exponent
- \newcommand{\dd}{{\mathrm d}}
- \newcommand{\RR}{\mathbb{R}}
- %Macros end
+\newcommand{\EE}{\mathbb{E}\,} % Mean
+\newcommand{\ee}{{\mathrm e}}  % nice exponent
+\newcommand{\dd}{{\mathrm d}}
+\newcommand{\RR}{\mathbb{R}}
 
 \begin{document}
 \selectlanguage{lithuanian}
@@ -87,7 +85,7 @@
 \section*{Santrauka}
 Darbo santrauka.\\
 
-\textbf{Raktiniai žodžiai: TF, ChIP-seq, regionas}
+\textbf{Raktiniai žodžiai: TF, ChIP-seq, regionas?}
 \newpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -96,7 +94,7 @@ Darbo santrauka.\\
 \section*{Summary}
 Short summary of results.\\
 
-\textbf{Keywords?}
+\textbf{Keywords: TF, ChIP-seq, peak?}
 \newpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -109,73 +107,109 @@ Short summary of results.\\
 % DUOMENŲ APŽVALGA
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Duomenys}
-
-Tyrime naudoti duomenys atsisiųsti iš \emph{GTRD} (Gene Transcription
+\subsection{GTRD duomenų bazė}
+Tyrimui naudoti duomenys atsisiųsti iš \emph{GTRD} (Gene Transcription
 Regulation Database) duomenų bazės, saugančios informaciją apie įvairių
 transkripcijos faktorių jungimosi prie DNR sekų regionus. Ši duomenų
 bazė pasirinkta dėl sistemiškai surinktų ChIP-seq eksperimentų, kurių
-metu gauti rezultatai unifikuotai apdorojami ir paruošiami tyrėjų
-analizėms. Taip pat \emph{GTRD} duomenų bazėje duomenys saugomi
-binariniu anotacijų formatu \emph{bigBed}, leidžiandžiu atvaizduoti
-pasirinktą chromosomos regioną genomų naršyklėje sparčiau ir 
-efektyviau nei tekstinis \emph{BED} formatas.
+metu gauti rezultatai yra unifikuotai apdoroti ir paruošti tyrėjų
+analizėms.
 
+\emph{GTRD} duomenų bazėje duomenys saugomi binariniu anotacijų
+formatu \emph{bigBed}, leidžiandžiu atvaizduoti pasirinktą
+chromosomos regioną interaktyvioje genominės informacijos
+vizualizavimo naršyklėje \emph{UCSC Genome Browser} efektyviau
+nei tekstinis \emph{BED} formatas.
+
+\subsection{Pasirinktų mėginių apžvalga}
 Žemiau esančioje lentelėje pateikta informacija apie tyrimui atlikti
-naudotus duomenis, surinktus iš naminės pelės \emph{(lot. Mus musculus)}
-ląstelių. Visi duomenys gauti iš eksperimentų, kurių metu buvo
-siekiama išsiaiškinti \emph{tbx5} ir kitų transkripcijos faktorių
-įtaką naujų širdies ląstelių, kardiomiocitų, susidarymui bei širdies
-funkcijų atsistatymui po ištikusio infarkto arba kitų, su širdies
-pažeidimais susijusių, sutrikimų.
+naudotus duomenis, surinktus iš naminės pelės (lot. Mus musculus)
+ląstelių.
 
 \begin{table}[htb]
     \newcolumntype{M}[1]{>{\centering\arraybackslash}m{#1}}
     \small
     \caption*{1 lentelė. Mėginių charakteristikos}
-    \begin{tabular}{|M{2cm}|M{3.5cm}|M{3.7cm}|M{3cm}|M{3cm}|M{0.5cm}|}
+    %\begin{tabular}{|M{2cm}|M{3.5cm}|M{3.7cm}|M{3cm}|M{3cm}|M{0.5cm}|}
+    \begin{tabular}{|c|c|c|c|c|c|}
     \hline
+    %\thead{Sample\\ window}
     \textbf{GTRD ID} & \textbf{Ląstelių tipas} &
-                    \textbf{Sąlygos pritaikymas} & \textbf{Antikūnai} &
+                    \textbf{\thead{Sąlygos\\ pritaikymas}} & \textbf{Antikūnai} &
                     \textbf{PubMed ID}\\
     \hline
-    EXP030893 & HL - 1 (širdies raumens) & Kontrolė & - & 21415370\\
+    EXP030898 & \thead{HL - 1\\ (širdies raumens)} &
+                \thead{Kamienas: C57BL/6J;\\ Sąlyga: TRE promotorius (2 d.)} &
+                - & 21415370\\ 
     \hline
-    EXP058852 & Širdies prieširdžių & Kamienas: C57BL/6; vystymosi
-                stadija: p4 & Tbx5 (sc-17866) & 31080136\\
+    EXP058852 & Širdies prieširdžių & \thead{Kamienas: C57BL/6;\\ Vystymosi
+                stadija: p4} & \thead{Tbx5\\ (sc-17866)} & 31080136\\
     \hline
-    EXP062056 & Pelių naujagimių širdies fibroblastų, ekspresuojančių didelį
-                kiekį T antigeno, linija & Kamienas: CD1; sąlyga: sb431542,
-                    xav939 & anti-TBX5 (sc-17866x) & 31271750\\
+    EXP062056 & \thead{Pelių naujagimių širdies\\ fibroblastų, 
+                ekspresuojančių\\ didelį kiekį T antigeno, linija} &
+                \thead{Kamienas: CD1;\\ Sąlyga: sb431542, xav939} &
+                \thead{anti-TBX5\\ (sc-17866x)} & 31271750\\
     \hline
-    EXP058843 & MEF (embrionų fibroblastai) & Kamienas: C57BL/6; sąlyga: AGHMT
-                (2 d.) & anti-Tbx5 (sc-17866) & 31080136\\
+    EXP058843 & \thead{MEF\\ (embrionų fibroblastai)} &
+                \thead{Kamienas: C57BL/6;\\ Sąlyga: AGHMT (2 d.)} &
+                \thead{anti-Tbx5\\ (sc-17866)} & 31080136\\
     \hline
-    EXP058847 & MEF (embrionų fibroblastai) & Kamienas: C57BL/6; sąlyga: GHMT
-                (2 d.) & Tbx5 (sc-17866) & 31080136\\
+    EXP058847 & \thead{MEF\\ (embrionų fibroblastai)} &
+                \thead{Kamienas: C57BL/6;\\ Sąlyga: GHMT (2 d.)} &
+                \thead{Tbx5\\ (sc-17866)} & 31080136\\
     \hline
-    EXP058850 & MEF (embrionų fibroblastai) & Kamienas: C57BL/6; sąlyga: GMT
-                (2 d.) & Tbx5 (sc-17866) & 31080136\\
+    EXP058850 & \thead{MEF\\ (embrionų fibroblastai)} &
+                \thead{Kamienas: C57BL/6;\\ Sąlyga: GMT (2 d.)} &
+                \thead{Tbx5\\ (sc-17866)} & 31080136\\
     \hline
-    EXP058856 & MEF (embrionų fibroblastai) & Kamienas: C57BL/6; sąlyga: vienas
-                faktorius (2 d.) & Tbx5 (sc-17866) & 31080136\\
+    EXP058856 & \thead{MEF\\ (embrionų fibroblastai)} & 
+                \thead{Kamienas: C57BL/6;\\ Sąlyga: vienas faktorius\\ (2 d.)} &
+                \thead{Tbx5\\ (sc-17866)} & 31080136\\
     \hline
     \end{tabular}
 \end{table}
+\newpage
 
-Tyrimui atlikti pasirinkti septynių eksperimentų duomenys tarp kurių buvo
-tiriami keturi embrionų fibroblastų kamienai, kuriems dvi dienas taikytos
-skirtingos sąlygos: veikimas AGHMT (AKT1 - serino/treonino kinazė 1; GATA4,
-HAND2, MEF2C, TBX5 - kardiogeniniai transkripcijos faktoriai), GHMT, GMT
-ir tik vienu transkripcijos faktoriumi, kuris nebuvo specifikuotas.
+Tyrimui atlikti pasirinkti septynių eksperimentų duomenys:
 
-Taip pat tirti pelių naujagimių fibroblastai, veikti inhibitoriais: 
-sb431542, skatinančiu kardiomiocitų diferenciaciją iš pliuripotentinių
-kamieninių ląstelių, ir xav939, sukeliančiu progenitorinių ląstelių
-kardiomiogenezę.
+\begin{itemize}
+    \item \textbf{EXP030898}: vienas mėginys iš septyniolikos eksperimento
+        metu tirtų mėginių. Eksperimente buvo siekiama patvirtinti arba
+        atmesti hipotezę apie širdies stipriklių (angl. enhancer)
+        identifikiavimą prie chromatino jungiantis keliems transkripcijos
+        faktoriams.
 
-Į duomenų rinkinį įtraukti du mėginiai, kuriems nebuvo taikytos papildomos
-sąlygos: kontrolinis HL - 1 širdies raumens ląstelių mėginys bei p4
-vystymosi stadijos širdies prieširdžių ląstelių mėginys.
+        HL - 1 širdies raumens ląstelės buvo infekuotos
+        su adenovirusu, ekspresuojančiu troponiną T, kuris skatina rtTA ir
+        BirA genų ekspresiją, bei TRE promotoriu, skatinančiu Tbx5
+        transkripcijos faktoriaus geno raišką. Sąlygos taikytos 48 valandas.
+    \item \textbf{EXP058852}:
+    \item \textbf{EXP062056}: eksperimente ląstelės buvo infekuotos su
+        Gata4, Mef2c, ir Tbx5 transkripcijos faktorius sintetinačiais
+        retrovirusais. Ląstelės augintos terpėje, kurioje buvo {Tgf\textbeta}
+        inhibitoriaus sb431542, skatinančio kardiomiocitų diferenciaciją
+        iš pliuripotentinių kamieninių ląstelių, ir Wnt inhibitoriaus
+        xav939, stabdanžio nediferencijuotų ląstelių sintezę ir
+        skatinančio progenitorinių ląstelių kardiomiogenezę.
+\end{itemize}
+
+Pasirinktų duomenų rinkinyje naudotos vieno eksperimento, kuriame buvo
+tirti širdies ląstelių atsinaujinimo ir diferenciacijos mechanizmai,
+keturios biologinės replikos:
+
+\begin{itemize}
+    \item \textbf{EXP058843}: pirma biologinė replika. Embrionų fibroblastai
+        veikti AGHMT (AKT1 - serino/treonino kinazė 1; GATA4,
+        HAND2, MEF2C, TBX5 - kardiogeniniai transkripcijos faktoriai). Esant
+        kardiogeniniams transkripcijos faktoriams, AKT1 skatina fibroblastų
+        diferenciaciją į širdies ląsteles, kardiomiocitus.
+    \item \textbf{EXP058847}: antra biologinė replika. Neįtraukta AKT1.
+    \item \textbf{EXP058850}: trečia biologinė replika. Į kardiogeninių
+        transkripcijos faktorių mišinį neįtrauktas HAND2 transkripcijos
+        faktorius.
+    \item \textbf{EXP058856}: ketvirta biologinė replika. Ląstelės
+        veiktos tik vienu faktoriumi.
+  \end{itemize}
 \newpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -211,9 +245,9 @@ grafikus chromosomoms.
 Persidengiančių regionų tarp mėginių procentinė dalis nustatyta
 su \emph{Jaccard()} funkcija, apskaičiuojančia, kiek yra sutampančių
 regionų tarp dviejų mėginių poros.
-Gauti rezultatai atvaizduoti spalvų intensyvumo grafike \emph{angl.
-heatmap}, sukurtame \emph{ggplot2} bibliotekos funkciją \emph{ggplot}
-papildžius funkcija \emph{geom\_tile()}.
+Gauti rezultatai atvaizduoti spalvų intensyvumo grafike (angl.
+heatmap), sukurtame su \emph{ggplot2} bibliotekos pagrindine \emph{ggplot()}
+funkcija ir papildoma funkcija \emph{geom\_tile()}.
 
 \subsection{\emph{Tbx5} motyvo nustatymas}
 Šiame etape genomines pozicijas aprašantys \emph{bigBed} formato
@@ -222,9 +256,9 @@ failai konvertuoti į \emph{BED} formato failus, pasinaudojus
 {\emph{bigBedToBed} aprašymas: 
 https://genome.ucsc.edu/goldenPath/help/bigBed.html}.
 Sugeneruoti \emph{BED} formato failai panaudoti pikus atitinkančių
-sekų iš naminės pelės \emph{Mus musculus} genomo gavimui
-\emph{fasta} formatu. Sekos atsisiųstos, pasinaudojus komandinės
-eilutės įrankio \emph{BEDTools}\footnote[2]{BEDTools paketo
+sekų iš naminės pelės genomo gavimui \emph{fasta} formatu.
+Sekos iš genomo išgautos, pasinaudojus komandinės eilutės įrankio
+\emph{BEDTools}\footnote[2]{BEDTools paketo
 dokumentacija: 
 https://bedtools.readthedocs.io/en/latest/content/bedtools-suite.html}
 programa \emph{getfasta}\footnote[3]{\emph{getfasta} funkcijos
@@ -232,7 +266,7 @@ dokumentacija:
 https://bedtools.readthedocs.io/en/latest/content/tools/getfasta.html}.
 
 Kiekviename mėginyje esančio \emph{tbx5} transkripcijos faktoriaus
-motyvo procentinė dalis apskaičiuota susumavus \emph{Biostrings}
+motyvo procentinė dalis apskaičiuota susumavus R \emph{Biostrings}
 bibliotekos funkcijos \emph{countPWM()} rezultatus bei gautą
 vertę padalinus iš bendro regionų skaičiaus.
 Rezultatai atvaizduoti, pasinaudojus \emph{ggplot} bibliotekos
@@ -269,7 +303,7 @@ diagramoje.
 Remiantis diagrama didžiausias \emph{tbx5} transkripcijos faktoriaus
 regionų skaičius nustatytas eksperimento \emph{(mm\_4\_emb\_fibr\_r1)}
 biologinėje replikoje, kurioje pelių embrionų fibroblastų ląstelės
-dvi dienas veiktos AGHMT (AKT1, GATA4, HAND2, MEF2C ir TBX5) faktoriais.
+dvi dienas veiktos AGHMT faktoriais.
 Šį rezultatą palyginus su kitomis biologinėmis replikomis, kuriose
 tirtas tas pats pelių embrionų fibroblastų ląstelių kamienas, tačiau
 ląstelės veiktos tik kai kuriais faktoriais, pastebimas gradualus
@@ -330,9 +364,7 @@ regionų skaičius nustatomas penktojoje chromosomoje.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Tarp mėginių persidengiantys regionai}
 Dažnai siekiant nustatyti mėginių panašumą, yra tiriama, kokia
-mėginių duomenų dalis persidengia. Žemiau pateikiamame spalvų
-intensyvumo grafike vaizduojama tarp mėginių persidengiančių
-transkripcijos faktoriaus regionų procentinė dalis.
+mėginių duomenų dalis persidengia.
 
 \begin{figure}[htb]
     \begin{center}
@@ -341,17 +373,32 @@ transkripcijos faktoriaus regionų procentinė dalis.
     \end{center}
 \end{figure}
 
-Didžiausiausi persidengiančių regionų procentai nustatyti tarp
+Remiantis pavaizduoto spalvų intensyvumo grafiko duomenimis,
+didžiausiausi persidengiančių regionų procentai nustatyti tarp
 šių mėginių:
 \begin{itemize}
-    \item \textbf{81.577 \%}
-    \item \textbf{81.092 \%}
-    \item \textbf{77.827 \%}
-    \item \textbf{76.948 \%}
-    \item \textbf{75.439 \%}
+    \item \textbf{81.577 \%} - tarp mėginio, kuriame buvo tiriamos širdies
+            fibroblastų ląstelės, ekspresuojančios T antigeną, ir pirmos
+            biologinės replikos, kurioje tirti embrionų fibroblastai,
+            veikiant AGHMT.
+    \item \textbf{81.092 \%} - tarp pirmos biologinės replikos ir antros
+            biologinės replikos, kurioje nebuvo AKT1.
+    \item \textbf{77.827 \%} - tarp mėginio su T antigeną ekspresuojančiomis
+            širdies fibroblastų ląstelėmis ir antros biologinės replikos.
+    \item \textbf{76.948 \%} - tarp trečios biologinės replikos, kurioje
+            nebuvo HAND2 faktoriaus, ir antros biologinės replikos.
+    \item \textbf{75.439 \%} - tarp mėginio su T antigeną ekspresuojančiomis
+            širdies fibroblastų ląstelėmis ir trečios biologinės replikomis.
   \end{itemize}
 
 \newpage
+
+
+% mm3_cardiac_fibr_r1 ir mm4_emb_fibr_r1
+% mm4_emb_fibr_r1 ir mm4_emb_fibr_r2
+% mm3_cardiac_fibr_r1 ir mm4_emb_fibr_r2
+% mm4_emb_fibr_r3 ir mm4_emb_fibr_r2
+% mm3_cardiac_fibr_r1 ir mm4_emb_fibr_r3
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % LITERATŪROS ŠALTINIAI
@@ -359,13 +406,6 @@ Didžiausiausi persidengiančių regionų procentai nustatyti tarp
 
 \bibliographystyle{plain}
 \begin{thebibliography}{99}
-
-\bibitem{YLS16}1. Yang Yang; R. Leipus, J. \v{S}iaulys. Asymptotics for randomly weighted and stopped dependent sums, \emph{Stochastics: an international journal of probability and stochastic processes}, 2016, \textbf{88}(2), p.p. 300-319.
- \bibitem{E05} T. Erhardsson. Stein’s method for Poisson and compound Poisson approximation, \emph{In: An Introduction to Stein’s Method. Lect. Notes Ser. Inst. Math. Sci. Natl. Univ. Singap. v. 4}, Singapore: Singapore Univ. Press, 2005, p.p. 61–113.
-\bibitem{KGDD08} R. Kaas, M. Goovaerts, J. Dhaene  and M. Denuit. \emph{Modern Actuarial Risk Theory:
-using R.} (Secon. edt.), Springer-Verlag, Berlin, Heidelberg,  2008, 393 p.
-\bibitem{St12} V. Stakėnas, \emph{Tikimybių teorija ir matematinė statistika} (rankraštis), 2012, 178 p. , http://www.statistika.mif.vu.lt/atsisiuntimui/statistika/
-
 \end{thebibliography}
 \newpage
 
@@ -374,18 +414,5 @@ using R.} (Secon. edt.), Springer-Verlag, Berlin, Heidelberg,  2008, 393 p.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Priedas}
-Programiniam kodui pateikti galima naudoti  \verb|\verbatim| komandą:
-\small  %mažesnės raidės
-\begin{verbatim}
-
-R arba Python programinis kodas.
-
-\end{verbatim}
-
-
-
-\section{Literatūros apžvalga}
-Literatūros darbo tema apžvalga. Cituojant \cite{YLS16,KGDD08}. Nepamirškite pdflatex įvykdyti bent du kartus, kad pamatytumėte citavimą, ne klaustukus.
-
 
 \end{document}
