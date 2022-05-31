@@ -183,7 +183,9 @@ Tyrimui atlikti pasirinkti septynių eksperimentų duomenys:
         su adenovirusu, ekspresuojančiu troponiną T, kuris skatina rtTA ir
         BirA genų ekspresiją, bei TRE promotoriu, skatinančiu Tbx5
         transkripcijos faktoriaus geno raišką. Sąlygos taikytos 48 valandas.
-    \item \textbf{EXP058852}:
+    \item \textbf{EXP058852}: prieširdžių ląstelės buvo du kartus po 24
+        valandas sumaišytos su retrovirusais. Papildomos sąlygos nebuvo
+        taikytos.
     \item \textbf{EXP062056}: eksperimente ląstelės buvo infekuotos su
         Gata4, Mef2c, ir Tbx5 transkripcijos faktorius sintetinačiais
         retrovirusais. Ląstelės augintos terpėje, kurioje buvo {Tgf\textbeta}
@@ -223,57 +225,53 @@ analizės etapų skyriuose nurodomos R bibliotekos ir papildomi komandinės
 eilutės įrankiai, kuriais naudojantis pasiekti tarpiniai analizės etapų
 rezultatai.
 
-\subsection{\emph{Tbx5} regionų skaičiaus nustatymas mėginiuose}
+\subsection{Regionų skaičiaus nustatymas mėginiuose}
 \emph{Tbx5} regionų skaičius skirtinguose mėginiuose apskaičiuotas
-\emph{rtracklayer} bibliotekos sukurtam GRanges objektui, aprašančiam
-genomines pozicijas bei su jomis susijusias anotacijas, pritaikius
-standartinę R ilgio funkciją \emph{length()}.
-Regionų skaičių mėginiuose atvaizduojanti stulpelinė diagrama sukurta
-su \emph{ggplot2} bibliotekos \emph{geom\_bar()} funkcija.
+su standartine R ilgio funkcija \emph{length()}, kuri pritaikyta
+GRanges objektui, aprašančiam genomines pozicijas bei su jomis
+susijusias anotacijas. Objektas sukurtas su \emph{rtracklayer}
+bibliotekos funkcija \emph{import()}.
+Regionų skaičių mėginiuose atvaizduojanti stulpelinė diagrama
+sukurta su \emph{ggplot2} bibliotekos \emph{geom\_bar()} funkcija.
 
-\subsection{\emph{Tbx5} regionų skaičiaus pasiskirstymas chromosomose}
+\subsection{Regionų skaičiaus nustatymas chromosomose kiekvienam mėginiui}
 Transkripcijos faktoriaus regionų skaičius skirtingose chromosomose
-suskaičiuotas, naudojantis standartine R funkcija \emph{length()},
-pritaikyta atskiroms chromosomoms, kurių pozicijos aprašytos GRanges
-objekte.
+kiekvienam mėginiui apskaičiuotas, naudojantis standartine R
+funkcija \emph{length()}, pritaikyta atskiroms chromosomoms,
+kurių pozicijos aprašytos GRanges objekte.
 Kiekvieno mėginio \emph{Tbx5} transkripcijos faktoriaus pasiskirstymas
-chromosomose atvaizduotas su \emph{ggplot2} biblioteka, panaudojus
-papildomą funkciją \emph{facet\_wrap()}, sukuriančia atskirus 
-grafikus chromosomoms.
+chromosomose atvaizduotas su \emph{ggplot()} ir papildoma funkcija
+\emph{facet\_wrap()}, sukuriančia atskirus grafikus pagal pasirinktą
+elementą - chromosomas.
 
-\subsection{Persidengiančių regionų mėginiuose analizė}
+\subsection{Persidengiančių regionų procentinė dalis}
 Persidengiančių regionų tarp mėginių procentinė dalis nustatyta
-su \emph{Jaccard()} funkcija, apskaičiuojančia, kiek yra sutampančių
-regionų tarp dviejų mėginių poros.
+su sukurta \emph{Jaccard()} funkcija, apskaičiuojančia, kiek yra
+sutampančių regionų tarp dviejų mėginių poros.
 Gauti rezultatai atvaizduoti spalvų intensyvumo grafike (angl.
-heatmap), sukurtame su \emph{ggplot2} bibliotekos pagrindine \emph{ggplot()}
-funkcija ir papildoma funkcija \emph{geom\_tile()}.
+heatmap), sukurtame su \emph{ggplot()} ir papildoma funkcija
+\emph{geom\_tile()}.
 
 \subsection{\emph{Tbx5} motyvo nustatymas}
 Šiame etape genomines pozicijas aprašantys \emph{bigBed} formato
 failai konvertuoti į \emph{BED} formato failus, pasinaudojus
-\emph{UCSC} komandinės eilutės programa \emph{bigBedToBed}\footnote[1]
-{\emph{bigBedToBed} aprašymas: 
-https://genome.ucsc.edu/goldenPath/help/bigBed.html}.
+\emph{UCSC} komandinės eilutės programa \emph{bigBedToBed}.
+
 Sugeneruoti \emph{BED} formato failai panaudoti pikus atitinkančių
 sekų iš naminės pelės genomo gavimui \emph{fasta} formatu.
 Sekos iš genomo išgautos, pasinaudojus komandinės eilutės įrankio
-\emph{BEDTools}\footnote[2]{BEDTools paketo
-dokumentacija: 
-https://bedtools.readthedocs.io/en/latest/content/bedtools-suite.html}
-programa \emph{getfasta}\footnote[3]{\emph{getfasta} funkcijos
-dokumentacija: 
-https://bedtools.readthedocs.io/en/latest/content/tools/getfasta.html}.
+\emph{BEDTools} (2.30.0 versija) programa \emph{getfasta}.
 
 Kiekviename mėginyje esančio \emph{tbx5} transkripcijos faktoriaus
-motyvo procentinė dalis apskaičiuota susumavus R \emph{Biostrings}
+motyvo procentinė dalis apskaičiuota susumavus \emph{Biostrings}
 bibliotekos funkcijos \emph{countPWM()} rezultatus bei gautą
 vertę padalinus iš bendro regionų skaičiaus.
-Rezultatai atvaizduoti, pasinaudojus \emph{ggplot} bibliotekos
-funkcijomis.
 
 \subsection{Motyvų paieška \emph{de novo}}
-Tekstas.
+Praturtintų sekų radimui panaudota komandinės eilutės įrankio
+\emph{HOMER} (v4.11 versija) programa \emph{homer2}. Gauti
+motyvai nustatyti, pasinaudojus transkripcijos faktorių
+profilių duomenų baze JASPAR.
 
 \subsection{Sekų praturtinimo analizė}
 Tekstas.
@@ -406,6 +404,9 @@ didžiausiausi persidengiančių regionų procentai nustatyti tarp
 
 \bibliographystyle{plain}
 \begin{thebibliography}{99}
+% \emph{bigBedToBed} aprašymas: https://genome.ucsc.edu/goldenPath/help/bigBed.html
+% \emph{BEDTools} paketo dokumentacija: https://bedtools.readthedocs.io/en/latest/content/bedtools-suite.html
+% \emph{getfasta} funkcijos dokumentacija: https://bedtools.readthedocs.io/en/latest/content/tools/getfasta.html
 \end{thebibliography}
 \newpage
 
