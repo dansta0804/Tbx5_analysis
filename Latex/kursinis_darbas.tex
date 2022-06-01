@@ -116,14 +116,14 @@ metu gauti rezultatai yra unifikuotai apdoroti ir paruošti tyrėjų
 analizėms.
 
 \emph{GTRD} duomenų bazėje duomenys saugomi binariniu anotacijų
-formatu \emph{bigBed}, leidžiandžiu atvaizduoti pasirinktą
+formatu \emph{bigBed}, leidžiančiu atvaizduoti pasirinktą
 chromosomos regioną interaktyvioje genominės informacijos
 vizualizavimo naršyklėje \emph{UCSC Genome Browser} efektyviau
 nei tekstinis \emph{BED} formatas.
 
 \subsection{Pasirinktų mėginių apžvalga}
 Žemiau esančioje lentelėje pateikta informacija apie tyrimui atlikti
-naudotus duomenis, surinktus iš naminės pelės (lot. Mus musculus)
+naudotus duomenis, surinktus iš Naminės pelės (lot. \emph{Mus musculus})
 ląstelių.
 
 \begin{table}[htb]
@@ -175,23 +175,23 @@ Tyrimui atlikti pasirinkti septynių eksperimentų duomenys:
 \begin{itemize}
     \item \textbf{EXP030898}: vienas mėginys iš septyniolikos eksperimento
         metu tirtų mėginių. Eksperimente buvo siekiama patvirtinti arba
-        atmesti hipotezę apie širdies stipriklių (angl. enhancer)
+        atmesti hipotezę apie širdies stipriklių (angl. \emph{enhancer})
         identifikiavimą prie chromatino jungiantis keliems transkripcijos
         faktoriams.
 
         HL - 1 širdies raumens ląstelės buvo infekuotos
-        su adenovirusu, ekspresuojančiu troponiną T, kuris skatina rtTA ir
-        BirA genų ekspresiją, bei TRE promotoriu, skatinančiu Tbx5
+        su adenovirusu, ekspresuojančiu troponiną T, kuris skatina \emph{rtTA} ir
+        \emph{BirA} genų ekspresiją, bei TRE promotoriumi, skatinančiu Tbx5
         transkripcijos faktoriaus geno raišką. Sąlygos taikytos 48 valandas.
     \item \textbf{EXP058852}: prieširdžių ląstelės buvo du kartus po 24
-        valandas sumaišytos su retrovirusais. Papildomos sąlygos nebuvo
+        valandas laikytos mišinyje su retrovirusais. Papildomos sąlygos nebuvo
         taikytos.
     \item \textbf{EXP062056}: eksperimente ląstelės buvo infekuotos su
-        Gata4, Mef2c, ir Tbx5 transkripcijos faktorius sintetinačiais
+        Gata4, Mef2c, ir Tbx5 transkripcijos faktorius sintetinančiais
         retrovirusais. Ląstelės augintos terpėje, kurioje buvo {Tgf\textbeta}
         inhibitoriaus sb431542, skatinančio kardiomiocitų diferenciaciją
         iš pliuripotentinių kamieninių ląstelių, ir Wnt inhibitoriaus
-        xav939, stabdanžio nediferencijuotų ląstelių sintezę ir
+        xav939, stabdančio nediferencijuotų ląstelių sintezę ir
         skatinančio progenitorinių ląstelių kardiomiogenezę.
 \end{itemize}
 
@@ -204,7 +204,7 @@ keturios biologinės replikos:
         veikti AGHMT (AKT1 - serino/treonino kinazė 1; GATA4,
         HAND2, MEF2C, TBX5 - kardiogeniniai transkripcijos faktoriai). Esant
         kardiogeniniams transkripcijos faktoriams, AKT1 skatina fibroblastų
-        diferenciaciją į širdies ląsteles, kardiomiocitus.
+        diferenciaciją į širdies ląsteles - kardiomiocitus.
     \item \textbf{EXP058847}: antra biologinė replika. Neįtraukta AKT1.
     \item \textbf{EXP058850}: trečia biologinė replika. Į kardiogeninių
         transkripcijos faktorių mišinį neįtrauktas HAND2 transkripcijos
@@ -228,17 +228,17 @@ rezultatai.
 \subsection{Regionų skaičiaus nustatymas mėginiuose}
 \emph{Tbx5} regionų skaičius skirtinguose mėginiuose apskaičiuotas
 su standartine R ilgio funkcija \emph{length()}, kuri pritaikyta
-GRanges objektui, aprašančiam genomines pozicijas bei su jomis
+\emph{GRanges} objektui, aprašančiam genomines pozicijas bei su jomis
 susijusias anotacijas. Objektas sukurtas su \emph{rtracklayer}
 bibliotekos funkcija \emph{import()}.
 Regionų skaičių mėginiuose atvaizduojanti stulpelinė diagrama
 sukurta su \emph{ggplot2} bibliotekos \emph{geom\_bar()} funkcija.
 
-\subsection{Regionų skaičiaus nustatymas chromosomose kiekvienam mėginiui}
+\subsection{Regionų skaičiaus nustatymas chromosomose}
 Transkripcijos faktoriaus regionų skaičius skirtingose chromosomose
 kiekvienam mėginiui apskaičiuotas, naudojantis standartine R
 funkcija \emph{length()}, pritaikyta atskiroms chromosomoms,
-kurių pozicijos aprašytos GRanges objekte.
+kurių pozicijos aprašytos \emph{GRanges} objekte.
 Kiekvieno mėginio \emph{Tbx5} transkripcijos faktoriaus pasiskirstymas
 chromosomose atvaizduotas su \emph{ggplot()} ir papildoma funkcija
 \emph{facet\_wrap()}, sukuriančia atskirus grafikus pagal pasirinktą
@@ -249,7 +249,7 @@ Persidengiančių regionų tarp mėginių procentinė dalis nustatyta
 su sukurta \emph{Jaccard()} funkcija, apskaičiuojančia, kiek yra
 sutampančių regionų tarp dviejų mėginių poros.
 Gauti rezultatai atvaizduoti spalvų intensyvumo grafike (angl.
-heatmap), sukurtame su \emph{ggplot()} ir papildoma funkcija
+\emph{heatmap}), sukurtame su \emph{ggplot()} ir papildoma funkcija
 \emph{geom\_tile()}.
 
 \subsection{\emph{Tbx5} motyvo nustatymas}
@@ -258,7 +258,7 @@ failai konvertuoti į \emph{BED} formato failus, pasinaudojus
 \emph{UCSC} komandinės eilutės programa \emph{bigBedToBed}.
 
 Sugeneruoti \emph{BED} formato failai panaudoti pikus atitinkančių
-sekų iš naminės pelės genomo gavimui \emph{fasta} formatu.
+sekų iš Naminės pelės genomo gavimui \emph{fasta} formatu.
 Sekos iš genomo išgautos, pasinaudojus komandinės eilutės įrankio
 \emph{BEDTools} (2.30.0 versija) programa \emph{getfasta}.
 
@@ -271,10 +271,10 @@ vertę padalinus iš bendro regionų skaičiaus.
 Praturtintų sekų radimui panaudota komandinės eilutės įrankio
 \emph{HOMER} (v4.11 versija) programa \emph{homer2}. Gauti
 motyvai nustatyti, pasinaudojus transkripcijos faktorių
-profilių duomenų baze JASPAR.
+profilių duomenų baze \emph{JASPAR}.
 
 \subsection{Sekų praturtinimo analizė}
-Tekstas.
+Pildoma...
 
 \newpage
 
@@ -286,7 +286,7 @@ Tekstas.
 % REGIONŲ SKAIČIUS MĖGINIUOSE
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Rezultatų apžvalga}
-\subsection{Regionų skaičiaus skirtumai mėginiuose}
+\subsection{Regionų skaičiaus skirtumai tarp mėginių}
 Pirmajame analizės etape kiekviename mėginyje nustatytas bendras
 regionų skaičius pavaizduotas žemiau esančioje stulpelinėje
 diagramoje.
@@ -307,20 +307,19 @@ tirtas tas pats pelių embrionų fibroblastų ląstelių kamienas, tačiau
 ląstelės veiktos tik kai kuriais faktoriais, pastebimas gradualus
 \emph{tbx5} transkripcijos faktoriaus regionų skaičiaus mažėjimas
 diagramoje \emph{mm\_4\_emb\_fibr\_r2}, \emph{mm\_4\_emb\_fibr\_r3} ir
-\emph{mm\_4\_emb\_fibr\_r4} pavaizduotuose stulpeliuose. Mėginyje,
-kuriame embrionų fibroblastai veikti tik vienu faktoriumi,
-\emph{tbx5} transkripcijos faktoriaus regionų nustatoma nedaug -
-13520.
+\emph{mm\_4\_emb\_fibr\_r4} pavaizduotuose stulpeliuose.
 
-Tai leidžia daryti išvadą, kad \emph{tbx5} transkripcijos faktoriaus
+Mėginyje, kuriame embrionų fibroblastai veikti tik vienu faktoriumi,
+\emph{tbx5} transkripcijos faktoriaus regionų nustatyta nedaug -
+13520. Tai leidžia daryti išvadą, kad \emph{tbx5} transkripcijos faktoriaus
 geno ekspresija priklauso nuo kardiogeninių faktorių buvimo.
 
 Mažiausiai regionų nustatyta mėginyje, kuriame tirta pelių
 naujagimių širdies fibroblastų, ekspresuojančių T antigeną
-ir paveiktų inhibitoriais: \emph{sb431542} ir \emph{xav939}.
+ir paveiktų inhibitoriais: sb431542 ir xav939.
 Nepaisant to, kad abu inhibitoriai skatina širdies ląstelių
 diferenciaciją, itin mažas transkripcijos faktoriaus regionų
-skaičius rodo, kad papildomas veikimas inhibitoriais daro
+skaičius rodo, kad papildomas veikimas inhibitoriais turi
 mažą įtaką transkripcijos faktoriaus pasireiškimui.
 
 \newpage
@@ -339,14 +338,14 @@ pirmoje, antroje ir penktoje chromosomose. Naminės pelės pirmoji
 chromosoma yra pati didžiausia, turinti 195 milijonų bazių porų,
 antroji chromosoma sudaryta iš 182 megabazių, penktoji chromosoma -
 152 milijonų bazių porų, todėl didesnis regionų skaičius šiose
-chromosomose yra įprastas. Kitose chromosomose regionų skaičius
-yra mažesnis. Ypač mažas regionų skaičius nustatomas devynioliktoje
-(61 Mbp), X (169 Mbp) ir Y (91 Mbp) chromosomose.
+chromosomose nėra neįprastas reiškinys. Kitose chromosomose regionų
+skaičius yra mažesnis. Ypač mažas regionų skaičius nustatytas
+devynioliktoje (61 Mbp), X (169 Mbp) ir Y (91 Mbp) chromosomose.
 
 Biologinių replikų mėginiuose didžiausias regionų skaičius
 nustatytas antroje chromosomoje. Taip pat grafikuose išsiskiria
 kontrolinis HL - 1 širdies ląstelių mėginys, kuriame didžiausias
-regionų skaičius nustatomas penktojoje chromosomoje.
+regionų skaičius nustatytas penktojoje chromosomoje.
 
 \begin{figure}[htb]
     \begin{center}
@@ -372,7 +371,7 @@ mėginių duomenų dalis persidengia.
 \end{figure}
 
 Remiantis pavaizduoto spalvų intensyvumo grafiko duomenimis,
-didžiausiausi persidengiančių regionų procentai nustatyti tarp
+didžiausi persidengiančių regionų procentai nustatyti tarp
 šių mėginių:
 \begin{itemize}
     \item \textbf{81.577 \%} - tarp mėginio, kuriame buvo tiriamos širdies
@@ -386,12 +385,16 @@ didžiausiausi persidengiančių regionų procentai nustatyti tarp
     \item \textbf{76.948 \%} - tarp trečios biologinės replikos, kurioje
             nebuvo HAND2 faktoriaus, ir antros biologinės replikos.
     \item \textbf{75.439 \%} - tarp mėginio su T antigeną ekspresuojančiomis
-            širdies fibroblastų ląstelėmis ir trečios biologinės replikomis.
+            širdies fibroblastų ląstelėmis ir trečios biologinės replikos.
   \end{itemize}
 
+\subsection{\emph{Tbx5} motyvo pasiskirstymas mėginiuose}
+Pildoma...
+
+\subsection{\emph{De novo} nustatytų motyvų biologinės funkcijos}
+Pildoma...
+
 \newpage
-
-
 % mm3_cardiac_fibr_r1 ir mm4_emb_fibr_r1
 % mm4_emb_fibr_r1 ir mm4_emb_fibr_r2
 % mm3_cardiac_fibr_r1 ir mm4_emb_fibr_r2
