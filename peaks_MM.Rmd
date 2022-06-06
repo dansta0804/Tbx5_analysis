@@ -24,9 +24,10 @@ The analysis provides the following information:\
 
 ```{r Libraries}
 library(pacman)
-p_load(data.table, rtracklayer, randomcoloR, ggplot2, ggthemes, plyranges, ggpubr,
-       BRGenomics, reshape2, plotly, heatmaply, dplyr, gplots, genomation, ggseqlogo,
-       BSgenome.Mmusculus.UCSC.mm10, BSgenome, Biostrings)
+p_load(data.table, rtracklayer, randomcoloR, ggplot2, ggthemes,
+       plyranges, ggpubr, BRGenomics, reshape2, plotly, heatmaply,
+       dplyr, gplots, genomation, ggseqlogo, BSgenome.Mmusculus.UCSC.mm10,
+       BSgenome, Biostrings)
 ```
 
 ### Total peak counts
@@ -45,7 +46,8 @@ chr_abr <- c(paste0("chr", 1:19), "chrX", "chrY")
 
 
 for (i in 1:length(bbfiles)) {
-    grl[[i]] <- import(paste0(pth, bbfiles[i])) %>% filter(seqnames %in% chr_abr)
+    grl[[i]] <- import(paste0(pth, bbfiles[i])) %>%
+                       filter(seqnames %in% chr_abr)
     names(grl)[i] <- samples$Graph_names[samples$Filename == bbfiles[i]]
 }
 
@@ -61,7 +63,8 @@ bplot1 <- ggplot(peaks, aes(x = peaks$Experiment, y = peaks$Peak_count)) +
                 geom_bar(stat = "identity", position = "dodge", width = 0.4,
                          color = "black", fill = col_fill) +
                 geom_text(aes(label = peaks$Peak_count),
-                          position = position_dodge(width = 0.9), vjust = -0.25) +
+                          position = position_dodge(width = 0.9),
+                          vjust = -0.25) +
                 labs(x = "Mėginys", y = "Regionų skaičius")
 
 png(file = "Latex/Figures/total_peak_counts.png")
@@ -119,9 +122,10 @@ peak_counts$Chromosome <- factor(peak_counts$Chromosome, levels = c(cas))
 col_fill <- randomColor(1, hue = "red", luminosity = "dark")
 
 # Pastaba: būtina pridėti 'as.numeric', nes kitu atveju Peak_count yra
-# traktuojamas kaip 'string' - stulpelių dydžiai atvaizduojami leksikografiškai -
-# gaunamas klaidingas atvaizdavimas (pvz. 67 reikšmę atvaizduojantis stulpelis yra
-# daug didesnis už stulpelį, kuris atvaizduoja 2948)!
+# traktuojamas kaip 'string' - stulpelių dydžiai atvaizduojami
+# leksikografiškai - gaunamas klaidingas atvaizdavimas (pvz. 67
+# reikšmę atvaizduojantis stulpelis yra daug didesnis už
+# stulpelį, kuris atvaizduoja 2948)!
 
 bplot2 <- ggplot(peak_counts, aes(x = Name, y = as.numeric(Peak_count))) +
             geom_bar(stat = "identity", color = "black", fill = col_fill) +
@@ -132,15 +136,19 @@ bplot2 <- ggplot(peak_counts, aes(x = Name, y = as.numeric(Peak_count))) +
             ylim(0, 20000) +
             geom_text(aes(label = paste0(as.numeric(Peak_count)),
                           y = as.numeric(Peak_count)), vjust = -1, hjust = .5,
-                          size = 2, angle = 0, color = "black")
+                          size = 2.7, angle = 0, color = "black")
 
-png(file = "Latex/Figures/peak_counts_by_chromosome.png", width = 600, height = 500)
-
+png(file = "./peak_counts_by_chromosome.png",
+    width = 600, height = 700)
+    
 bplot2 + theme_linedraw() +
-theme(axis.text.x = element_text(angle = 90, size = 6, hjust = 1),
-      axis.text.y = element_text(angle = 0, size = 6, hjust = 1),
+theme(axis.text.x = element_text(angle = 90, size = 10, hjust = 1),
+      axis.text.y = element_text(size = 10),
       axis.title.x = element_text(size = 14, colour = "black"),
-      axis.title.y = element_text(size = 14, colour = "black"))
+      axis.title.y = element_text(size = 14, colour = "black"),
+      strip.background = element_rect(fill = "white"),
+      strip.text = element_text(colour = "black", face = "bold",
+                                size = 10))
 
 dev.off()
 ```
