@@ -11,6 +11,7 @@
 \usepackage{caption}
 \usepackage{makecell}
 \usepackage[euler]{textgreek}
+\usepackage{hyperref}
 
 \usepackage{amsmath, amsthm, amssymb}
 \usepackage{graphicx}
@@ -63,7 +64,7 @@
 \bigskip
 \vskip 20pt
 
-\hskip 140pt {\large Darbo vadovas: J. Asist. Kotryna Kvederavičiūtė}
+\hskip 140pt {\large Darbo vadovas: J. m. d. Kotryna Kvederavičiūtė}
 \vskip 60pt
 \vskip 60pt
 \centerline{\large \textbf{Vilnius}}
@@ -106,24 +107,32 @@ Short summary of results.\\
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % DUOMENŲ APŽVALGA
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Duomenys}
+\section{Duomenų bazės ir duomenys}
 \subsection{GTRD duomenų bazė}
-Tyrimui naudoti duomenys atsisiųsti iš \emph{GTRD} (Gene Transcription
-Regulation Database) duomenų bazės, saugančios informaciją apie įvairių
-transkripcijos faktorių jungimosi prie DNR sekų regionus. Ši duomenų
-bazė pasirinkta dėl sistemiškai surinktų ChIP-seq eksperimentų, kurių
-metu gauti rezultatai yra unifikuotai apdoroti ir paruošti tyrėjų
-analizėms.
+Tyrimui naudoti duomenys atsisiųsti iš \emph{GTRD}
+(Gene Transcription Regulation Database)\footnote{GTRD duomenų bazė.
+Prieiga per internetą \href{http://gtrd.biouml.org/\#!}
+{http://gtrd.biouml.org/\#!} (žiūrėta 2022 m. birželio 6 d.).}
+duomenų bazės, saugančios informaciją apie transkripcijos
+sekų ir atviro chromatino regionus. Taip pat duomenų bazėje saugomi
+nekartografuojamų regionų duomenys bei potencialūs žmonių bei naminių
+pelių regionai, prie kurių gali jungtis transkripcijos faktoriai.
+
+Ši duomenų bazė pasirinkta dėl sistemiškai surinktų
+ChIP-seq eksperimentų, kurių metu gauti rezultatai yra unifikuotai
+apdoroti ir paruošti tyrėjų meta-analizėms.
 
 \emph{GTRD} duomenų bazėje duomenys saugomi binariniu anotacijų
 formatu \emph{bigBed}, leidžiančiu atvaizduoti pasirinktą
-chromosomos regioną interaktyvioje genominės informacijos
-vizualizavimo naršyklėje \emph{UCSC Genome Browser} efektyviau
-nei tekstinis \emph{BED} formatas.
+chromosomos regioną interaktyviose genominės informacijos
+vizualizavimo naršyklėse (pavyzdžiui, \emph{UCSC Genome Browser})
+efektyviau nei tekstinis \emph{BED} formatas.
 
-\subsection{Pasirinktų mėginių apžvalga}
-Žemiau esančioje lentelėje pateikta informacija apie tyrimui atlikti
-naudotus duomenis, surinktus iš Naminės pelės (lot. \emph{Mus musculus})
+\subsection{Pasirinktų mėginių charakteristika}
+Analizė atlikta, naudojantis 4 nepriklausomais eksperimentais, kuriuos
+iš viso sudarė 7 biologinės replikos.
+Pirmoje lentelėje pateikta informacija apie tyrimui atlikti
+naudotus duomenis, surinktus iš naminės pelės (lot. \emph{Mus musculus})
 ląstelių.
 
 \begin{table}[htb]
@@ -131,47 +140,92 @@ ląstelių.
     \small
     \caption*{1 lentelė. Mėginių charakteristikos}
     %\begin{tabular}{|M{2cm}|M{3.5cm}|M{3.7cm}|M{3cm}|M{3cm}|M{0.5cm}|}
-    \begin{tabular}{|c|c|c|c|c|c|}
+    \begin{tabular}{|c|c|c|c|c|c|c|}
     \hline
     %\thead{Sample\\ window}
     \textbf{GTRD ID} & \textbf{Ląstelių tipas} &
-                    \textbf{\thead{Sąlygos\\ pritaikymas}} & \textbf{Antikūnai} &
-                    \textbf{PubMed ID}\\
+        \textbf{\thead{Kamienas}} & \textbf{\thead{Poveikis}} &
+        \textbf{Antikūnai} & \textbf{PubMed ID}\\
     \hline
     EXP030898 & \thead{HL - 1\\ (širdies raumens)} &
-                \thead{Kamienas: C57BL/6J;\\ Sąlyga: TRE promotorius (2 d.)} &
+                C57BL/6J & \thead{TRE\\ promotorius (2 d.)} &
                 - & 21415370\\ 
     \hline
-    EXP058852 & Širdies prieširdžių & \thead{Kamienas: C57BL/6;\\ Vystymosi
-                stadija: p4} & \thead{Tbx5\\ (sc-17866)} & 31080136\\
+    EXP058852 & Širdies prieširdžių & C57BL/6 &
+                - & \thead{Tbx5\\ (sc-17866)} & 31080136\\
     \hline
     EXP062056 & \thead{Pelių naujagimių širdies\\ fibroblastų, 
                 ekspresuojančių\\ didelį kiekį T antigeno, linija} &
-                \thead{Kamienas: CD1;\\ Sąlyga: sb431542, xav939} &
+                CD1 & \thead{sb431542,\\ xav939} &
                 \thead{anti-TBX5\\ (sc-17866x)} & 31271750\\
     \hline
     EXP058843 & \thead{MEF\\ (embrionų fibroblastai)} &
-                \thead{Kamienas: C57BL/6;\\ Sąlyga: AGHMT (2 d.)} &
+                C57BL/6 & AGHMT (2 d.) &
                 \thead{anti-Tbx5\\ (sc-17866)} & 31080136\\
     \hline
     EXP058847 & \thead{MEF\\ (embrionų fibroblastai)} &
-                \thead{Kamienas: C57BL/6;\\ Sąlyga: GHMT (2 d.)} &
+                C57BL/6 & GHMT (2 d.) &
                 \thead{Tbx5\\ (sc-17866)} & 31080136\\
     \hline
     EXP058850 & \thead{MEF\\ (embrionų fibroblastai)} &
-                \thead{Kamienas: C57BL/6;\\ Sąlyga: GMT (2 d.)} &
+                C57BL/6 & GMT (2 d.) &
                 \thead{Tbx5\\ (sc-17866)} & 31080136\\
     \hline
     EXP058856 & \thead{MEF\\ (embrionų fibroblastai)} & 
-                \thead{Kamienas: C57BL/6;\\ Sąlyga: vienas faktorius\\ (2 d.)} &
+                C57BL/6 & \thead{vienas\\ faktorius (2 d.)} &
                 \thead{Tbx5\\ (sc-17866)} & 31080136\\
     \hline
     \end{tabular}
 \end{table}
 \newpage
 
-Tyrimui atlikti pasirinkti septynių eksperimentų duomenys:
+\subsection{Santrumpų bei pavadinimų paaiškinimai}
+\begin{itemize}
+    \item \textbf{HL - 1}: pelių širdies raumens ląstelės, išgautos
+          iš navikinių prieširdžių kardiomiocitų linijos. Šios ląstelės
+          gali betarpiškai dalintis ir spontaniškai keisti
+          savo formą, vykstant širdies raumens susitraukimo/
+          atsipalaidavimo procesams.
+    \item \textbf{MEF}: pelių embrionų fibroblastai (angl.
+          \emph{Mouse Embryonic Fibroblast}). Šiai ląstelių
+          linijai būdingas ląstelių gyvybingumo apribojimas,
+          reiškiantis, jog šios ląstelės greitai pasensta ir miršta.
+    \item \textbf{C57BL/6}: inbrydingo (angl. \emph{inbreeding}) būdu
+          išvestų naminių pelių veislė. Šios veislės pelėms
+          būdingas itin tamsus kailis, padidėjęs jautrumas garsams,
+          kvapams, skausmui ir žemai temperatūrai. Ši veislė
+          dažnai naudojama nutukimą ir imuninę sistemą tiriančiuose
+          tyrimuose.
+    \item \textbf{C57BL/6J}: prie naminių pelių veislės pavadinimo
+          pridėtos raidės patikslina, kurioje laboratorijoje veislės
+          išvestos. 'J' raidė nurodo, kad pelių veislė išvesta Meino
+          valstijoje (JAV) įsikūrusioje Džeksono laboratorijoje
+          \footnote{Jackson Laboratory (RRID:SCR\_004633).}.
+    \item \textbf{CD1}: autbrydingo (angl. \emph{outbreeding}) būdu
+          išvestų naminių pelių veislė. Šios veislės pelėms
+          būdingas baltas kailis. Taip pat CD1 pelės dažnai naudojamos
+          genetiniuose, toksikologiniuose, farmakologiniuose ir
+          senėjimo tyrimuose.
+    \item \textbf{TRE}: tetraciklino atsako elementas (angl. 
+          emph{Tetracycline Response Element}). Tai yra DNR sekos
+          fragmentas. <PAPILDYTI>
+    \item \textbf{sb431542}: stipriai veikianti, selektyvi cheminė
+          medžiaga; transformuojančio augimo faktoriaus {\textbeta}
+          (TGF-{\textbeta}) inhibitorius.
+    \item \textbf{xav939}: stipriai veikianti cheminė medžiaga;
+          tankirazės inhibitorius. Tankirazė slopina TERF1 baltymo,
+          stabdančio telomerazės veiklą, jungimąsi prie telomerinių
+          DNR sekų. <PAPILDYTI>
+    \item \textbf{AGHMT}: AKT1 - serino/treonino kinazė 1; GATA4,
+          HAND2, MEF2C, TBX5 - kardiogeniniai transkripcijos faktoriai.
+    \item \textbf{GHMT}: GATA4, HAND2, MEF2C, TBX5.
+    \item \textbf{GMT}: GATA4, MEF2C, TBX5.
+    \item \textbf{sc-17866x}:
+    \item \textbf{sc-17866}:
+\end{itemize}
 
+
+\subsection{Pasirinktų eksperimentų apžvalga}
 \begin{itemize}
     \item \textbf{EXP030898}: vienas mėginys iš septyniolikos eksperimento
         metu tirtų mėginių. Eksperimente buvo siekiama patvirtinti arba
@@ -184,8 +238,8 @@ Tyrimui atlikti pasirinkti septynių eksperimentų duomenys:
         \emph{BirA} genų ekspresiją, bei TRE promotoriumi, skatinančiu Tbx5
         transkripcijos faktoriaus geno raišką. Sąlygos taikytos 48 valandas.
     \item \textbf{EXP058852}: prieširdžių ląstelės buvo du kartus po 24
-        valandas laikytos mišinyje su retrovirusais. Papildomos sąlygos nebuvo
-        taikytos.
+        valandas laikytos mišinyje su retrovirusais. Papildomi poveikiai nebuvo
+        taikyti.
     \item \textbf{EXP062056}: eksperimente ląstelės buvo infekuotos su
         Gata4, Mef2c, ir Tbx5 transkripcijos faktorius sintetinančiais
         retrovirusais. Ląstelės augintos terpėje, kurioje buvo {Tgf\textbeta}
@@ -195,22 +249,18 @@ Tyrimui atlikti pasirinkti septynių eksperimentų duomenys:
         skatinančio progenitorinių ląstelių kardiomiogenezę.
 \end{itemize}
 
-Pasirinktų duomenų rinkinyje naudotos vieno eksperimento, kuriame buvo
+Pasirinktų duomenų rinkinyje naudoti vieno eksperimento, kuriame buvo
 tirti širdies ląstelių atsinaujinimo ir diferenciacijos mechanizmai,
-keturios biologinės replikos:
+keturiais skirtingais poveikiais tirti mėginiai:
 
 \begin{itemize}
-    \item \textbf{EXP058843}: pirma biologinė replika. Embrionų fibroblastai
-        veikti AGHMT (AKT1 - serino/treonino kinazė 1; GATA4,
-        HAND2, MEF2C, TBX5 - kardiogeniniai transkripcijos faktoriai). Esant
+    \item \textbf{EXP058843}: embrionų fibroblastai veikti AGHMT. Esant
         kardiogeniniams transkripcijos faktoriams, AKT1 skatina fibroblastų
         diferenciaciją į širdies ląsteles - kardiomiocitus.
-    \item \textbf{EXP058847}: antra biologinė replika. Neįtraukta AKT1.
-    \item \textbf{EXP058850}: trečia biologinė replika. Į kardiogeninių
-        transkripcijos faktorių mišinį neįtrauktas HAND2 transkripcijos
-        faktorius.
-    \item \textbf{EXP058856}: ketvirta biologinė replika. Ląstelės
-        veiktos tik vienu faktoriumi.
+    \item \textbf{EXP058847}: neįtraukta AKT1.
+    \item \textbf{EXP058850}: į kardiogeninių transkripcijos faktorių mišinį
+        neįtrauktas HAND2 transkripcijos faktorius.
+    \item \textbf{EXP058856}: ląstelės veiktos tik vienu faktoriumi.
   \end{itemize}
 \newpage
 
@@ -220,19 +270,34 @@ keturios biologinės replikos:
 
 \section{Tyrimo metodai}
 \emph{Tbx5} transkripcijos faktoriaus regionų tyrimo analizė atlikta
-su R programavimo kalba (4.2.0 versija). Žemiau esančiuose atskiruose
-analizės etapų skyriuose nurodomos R bibliotekos ir papildomi komandinės
-eilutės įrankiai, kuriais naudojantis pasiekti tarpiniai analizės etapų
-rezultatai.
+su R programavimo kalba\footnote{R Core Team (2022).
+R: A language and environment for statistical computing. R Foundation
+for Statistical Computing, Vienna, Austria. URL https://www.R-project.org/.}
+(4.2.0 versija).
+
+Tarpiniams analizės rezultatams pateikti naudotas komandinės eilutės
+įrankis \emph{Scikick}\footnote{Scikick. Utility for executing collections
+of computational notebooks. \\URL https://petronislab.camh.ca/pub/scikick/stable/docs/report/out\_html/introduction.html}
+(0.2.0 versija), leidžiantis generuoti \emph{R Markdown (Rmd)} ataskaitas
+\emph{html} formatu bei kurti struktūrizuotus puslapius, apjungiant
+iš daugelio \emph{Rmd} failų gautus \emph{html} ataskaitų failus.
+
+Žemiau esančiuose atskiruose analizės etapų skyriuose
+nurodomos R bibliotekos ir papildomi komandinės eilutės įrankiai, kuriais
+naudojantis pasiekti tarpiniai analizės etapų rezultatai.
 
 \subsection{Regionų skaičiaus nustatymas mėginiuose}
 \emph{Tbx5} regionų skaičius skirtinguose mėginiuose apskaičiuotas
 su standartine R ilgio funkcija \emph{length()}, kuri pritaikyta
 \emph{GRanges} objektui, aprašančiam genomines pozicijas bei su jomis
 susijusias anotacijas. Objektas sukurtas su \emph{rtracklayer}
+\footnote{M. Lawrence, R. Gentleman, V. Carey: "rtracklayer: an {R} package for
+interfacing with genome browsers". Bioinformatics 25:1841-1842.}
 bibliotekos funkcija \emph{import()}.
 Regionų skaičių mėginiuose atvaizduojanti stulpelinė diagrama
-sukurta su \emph{ggplot2} bibliotekos \emph{geom\_bar()} funkcija.
+sukurta su \emph{ggplot2}\footnote{H. Wickham. ggplot2: Elegant
+Graphics for Data Analysis. Springer-Verlag New York, 2016.}
+bibliotekos \emph{geom\_bar()} funkcija.
 
 \subsection{Regionų skaičiaus nustatymas chromosomose}
 Transkripcijos faktoriaus regionų skaičius skirtingose chromosomose
@@ -246,8 +311,46 @@ elementą - chromosomas.
 
 \subsection{Persidengiančių regionų procentinė dalis}
 Persidengiančių regionų tarp mėginių procentinė dalis nustatyta
-su sukurta \emph{Jaccard()} funkcija, apskaičiuojančia, kiek yra
-sutampančių regionų tarp dviejų mėginių poros.
+su modifikuota \emph{Jaccard()} funkcija, apskaičiuojančia,
+kiek yra sutampančių regionų tarp dviejų mėginių poros.
+Naudojantis nemodifikuota funkcija, Jaccard koeficientas
+apskaičiuojamas pagal išraišką:
+\[ J(A, B) =  \frac{|A \cap B|}{|A \cup B|} \]
+
+\emph{Jaccard} koeficientas gaunamas iš rinkiniams A ir B bendrų duomenų ilgio
+padalinus dviejų duomenų rinkinių bendrą duomenų ilgį.
+
+Modifikavus \emph{Jaccard} koeficiento gavimo funkciją, koeficientas
+apskaičiuojamas pagal išraišką:
+
+\[ J(A, B) = \frac{|A \cap B|}{|A|} \]
+
+Sutampančių A ir B rinkinių duomenų ilgis padalinamas iš A rinkinio
+ilgio.
+
+\emph{Jaccard} koeficiento skaičiavimo funkcija modifikuota, nes
+skaičiuojant koeficientą su standartine \emph{Jaccard} funkcija,
+gaunamas itin didelis regionų sąjungos skaičius, o
+persidengiančių regionų skaičius yra mažesnis, todėl
+persidengiančių regionų skaičių padalinus iš regionų sąjungos
+gaunamas itin mažas koeficientas, kurio apskaičiuota procentinė
+dalis neretai neviršijo 1\%.
+
+Tam, jog būtų galima patikimiau įvertinti, kokia pirmojo mėginio
+procentinė regionų dalis persidengia su antruoju mėginiu,
+persidengiančių regionų skaičius padalintas iš pirmojo mėginio
+regionų skaičiaus.
+
+% Koeficientų, kurie buvo gauti tarp identiškų eksperimentų, nevaizdavau.
+% Funkcijoje jaccard bendrų elementų tarp A ir B skaičių padalinu iš
+% šiek tiek pakoreguoto A pikų skaičiaus. Panaudojau reduce() funkciją,
+% nes jos nenaudojant tarp kelių identiškų eksperimentų koeficientas nebuvo
+% lygus 1, o buvo lygus truputį mažesniam dydžiui. Panagrinėjau atskirus
+% eksperimentus, rezultatus ir, pasirodo, kad keliuose eksperimentuose buvo
+% neapjungtų pikų intervalų, kurie buvo apjungiami intersect() funkcijos.
+% Panaudojus reduce() funkciją, problema išsisprendė. Jei įstrižainė būtų
+% atvaizduota, jos koeficientai būtų lygūs 1.
+
 Gauti rezultatai atvaizduoti spalvų intensyvumo grafike (angl.
 \emph{heatmap}), sukurtame su \emph{ggplot()} ir papildoma funkcija
 \emph{geom\_tile()}.
@@ -388,8 +491,13 @@ didžiausi persidengiančių regionų procentai nustatyti tarp
             širdies fibroblastų ląstelėmis ir trečios biologinės replikos.
   \end{itemize}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% TBX5 MOTYVO PROCENTINĖS DALIES NUSTATYMAS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{\emph{Tbx5} motyvo pasiskirstymas mėginiuose}
-Pildoma...
+% \emph{Tbx5}Tbx5 motyvų skaičius mėginiuose pavaizduotas sudėtinėje
+% juostinėje diagramoje, kur {spalva} žymi nustatytų \emph{Tbx5}
+% motyvų skaičių, o {spalva} žymi bendrą regionų skaičių mėginiuose.
 
 \subsection{\emph{De novo} nustatytų motyvų biologinės funkcijos}
 Pildoma...
