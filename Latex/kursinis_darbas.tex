@@ -111,8 +111,8 @@ Short summary of results.\\
 \subsection{GTRD duomenų bazė}
 Tyrimui naudoti duomenys atsisiųsti iš \emph{GTRD}
 (Gene Transcription Regulation Database)\footnote{GTRD duomenų bazė.
-Prieiga per internetą \href{http://gtrd.biouml.org/\#!}
-{http://gtrd.biouml.org/\#!} (žiūrėta 2022 m. birželio 6 d.).}
+Prieiga per internetą: http://gtrd.biouml.org/\#!
+(žiūrėta 2022 m. birželio 6 d.).}
 duomenų bazės, saugančios informaciją apie transkripcijos
 sekų ir atviro chromatino regionus. Taip pat duomenų bazėje saugomi
 nekartografuojamų regionų duomenys bei potencialūs žmonių bei naminių
@@ -125,7 +125,9 @@ apdoroti ir paruošti tyrėjų meta-analizėms.
 \emph{GTRD} duomenų bazėje duomenys saugomi binariniu anotacijų
 formatu \emph{bigBed}, leidžiančiu atvaizduoti pasirinktą
 chromosomos regioną interaktyviose genominės informacijos
-vizualizavimo naršyklėse (pavyzdžiui, \emph{UCSC Genome Browser})
+vizualizavimo naršyklėse (pavyzdžiui, \emph{UCSC Genome Browser}
+\footnote{\emph{UCSC Genome Browser}. Prieiga per internetą:
+https://genome.ucsc.edu/ (žiūrėta 2022 m. birželio 6 d.).})
 efektyviau nei tekstinis \emph{BED} formatas.
 
 \subsection{Pasirinktų mėginių charakteristika}
@@ -331,7 +333,7 @@ ilgio.
 \emph{Jaccard} koeficiento skaičiavimo funkcija modifikuota, nes
 skaičiuojant koeficientą su standartine \emph{Jaccard} funkcija,
 gaunamas itin didelis regionų sąjungos skaičius, o
-persidengiančių regionų skaičius yra mažesnis, todėl
+persidengiančių regionų skaičius gaunamas mažas, todėl
 persidengiančių regionų skaičių padalinus iš regionų sąjungos
 gaunamas itin mažas koeficientas, kurio apskaičiuota procentinė
 dalis neretai neviršijo 1\%.
@@ -341,16 +343,6 @@ procentinė regionų dalis persidengia su antruoju mėginiu,
 persidengiančių regionų skaičius padalintas iš pirmojo mėginio
 regionų skaičiaus.
 
-% Koeficientų, kurie buvo gauti tarp identiškų eksperimentų, nevaizdavau.
-% Funkcijoje jaccard bendrų elementų tarp A ir B skaičių padalinu iš
-% šiek tiek pakoreguoto A pikų skaičiaus. Panaudojau reduce() funkciją,
-% nes jos nenaudojant tarp kelių identiškų eksperimentų koeficientas nebuvo
-% lygus 1, o buvo lygus truputį mažesniam dydžiui. Panagrinėjau atskirus
-% eksperimentus, rezultatus ir, pasirodo, kad keliuose eksperimentuose buvo
-% neapjungtų pikų intervalų, kurie buvo apjungiami intersect() funkcijos.
-% Panaudojus reduce() funkciją, problema išsisprendė. Jei įstrižainė būtų
-% atvaizduota, jos koeficientai būtų lygūs 1.
-
 Gauti rezultatai atvaizduoti spalvų intensyvumo grafike (angl.
 \emph{heatmap}), sukurtame su \emph{ggplot()} ir papildoma funkcija
 \emph{geom\_tile()}.
@@ -358,23 +350,46 @@ Gauti rezultatai atvaizduoti spalvų intensyvumo grafike (angl.
 \subsection{\emph{Tbx5} motyvo nustatymas}
 Šiame etape genomines pozicijas aprašantys \emph{bigBed} formato
 failai konvertuoti į \emph{BED} formato failus, pasinaudojus
-\emph{UCSC} komandinės eilutės programa \emph{bigBedToBed}.
+\emph{UCSC} komandinės eilutės programa \emph{bigBedToBed}\footnote
+{\emph{UCSC} komandinės eilutės programa \emph{bigBedToBed}.
+Prieiga per internetą:\\ https://genome.ucsc.edu/goldenPath/help/bigBed.html.
+(žiūrėta 2022 m. birželio 6 d.).}.
+
 
 Sugeneruoti \emph{BED} formato failai panaudoti pikus atitinkančių
-sekų iš Naminės pelės genomo gavimui \emph{fasta} formatu.
+sekų iš naminės pelės genomo gavimui \emph{fasta} formatu.
 Sekos iš genomo išgautos, pasinaudojus komandinės eilutės įrankio
-\emph{BEDTools} (2.30.0 versija) programa \emph{getfasta}.
+\emph{BEDTools}\footnote{\emph{BEDTools} įrankio dokumentacija.
+Prieiga per internetą:\\ 
+https://bedtools.readthedocs.io/en/latest/content/bedtools-suite.html
+(žiūrėta 2022 m. birželio 3 d.).}.
+(2.30.0 versija) programa \emph{getfasta}\footnote{\emph{BEDTools}
+įrankio programa \emph{getfasta}. Prieiga per internetą:\\
+https://bedtools.readthedocs.io/en/latest/content/tools/getfasta.html
+(žiūrėta 2022 m. birželio 3 d.).}.
 
 Kiekviename mėginyje esančio \emph{tbx5} transkripcijos faktoriaus
 motyvo procentinė dalis apskaičiuota susumavus \emph{Biostrings}
+\footnote{Pagès H, Aboyoun P, Gentleman R, DebRoy S (2022). \_Biostrings:
+Efficient manipulation of biological strings\_. R package version
+2.64.0, <https://bioconductor.org/packages/Biostrings>.}
 bibliotekos funkcijos \emph{countPWM()} rezultatus bei gautą
 vertę padalinus iš bendro regionų skaičiaus.
 
 \subsection{Motyvų paieška \emph{de novo}}
 Praturtintų sekų radimui panaudota komandinės eilutės įrankio
-\emph{HOMER} (v4.11 versija) programa \emph{homer2}. Gauti
-motyvai nustatyti, pasinaudojus transkripcijos faktorių
-profilių duomenų baze \emph{JASPAR}.
+\emph{HOMER} \footnote{\emph{HOMER} įrankio aprašymas.
+Prieiga per internetą:\\ http://homer.ucsd.edu/homer/}
+(v4.11 versija) programa \emph{homer2}. Gauti
+motyvai identifikuoti, pasinaudojus transkripcijos faktorių
+profilių duomenų baze \emph{JASPAR}
+\footnote{Castro-Mondragon JA, Riudavets-Puig R, Rauluseviciute I,
+Berhanu Lemma R, Turchi L, Blanc-Mathieu R, Lucas J, Boddie P, Khan A,
+Manosalva Pérez N, Fornes O, Leung TY, Aguirre A, Hammal F, Schmelter D,
+Baranasic D, Ballester B, Sandelin A, Lenhard B, Vandepoele K,
+Wasserman WW, Parcy F, and Mathelier A JASPAR 2022: the 9th release of
+the open-access database of transcription factor binding profiles Nucleic
+Acids Res. 2022 Jan 7;50(D1):D165-D173.; doi: 10.1093/nar/gkab1113}.
 
 \subsection{Sekų praturtinimo analizė}
 Pildoma...
@@ -388,16 +403,16 @@ Pildoma...
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % REGIONŲ SKAIČIUS MĖGINIUOSE
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Rezultatų apžvalga}
+\section{Rezultatai ir jų aptarimas}
 \subsection{Regionų skaičiaus skirtumai tarp mėginių}
 Pirmajame analizės etape kiekviename mėginyje nustatytas bendras
-regionų skaičius pavaizduotas žemiau esančioje stulpelinėje
-diagramoje.
+regionų skaičius pavaizduotas pirmame paveiksle.
 
 \begin{figure}[htb]
     \begin{center}
         \includegraphics[width=0.7\linewidth]{Figures/total_peak_counts.png}
-        \caption*{1 pav. Regionų skaičių kiekviename mėginyje vaizduojanti diagrama}
+        \caption*{1 pav. Regionų skaičių kiekviename mėginyje
+        vaizduojanti stulpelinė diagrama}
     \end{center}
 \end{figure}
 
@@ -414,16 +429,21 @@ diagramoje \emph{mm\_4\_emb\_fibr\_r2}, \emph{mm\_4\_emb\_fibr\_r3} ir
 
 Mėginyje, kuriame embrionų fibroblastai veikti tik vienu faktoriumi,
 \emph{tbx5} transkripcijos faktoriaus regionų nustatyta nedaug -
-13520. Tai leidžia daryti išvadą, kad \emph{tbx5} transkripcijos faktoriaus
-geno ekspresija priklauso nuo kardiogeninių faktorių buvimo.
+13520.
 
 Mažiausiai regionų nustatyta mėginyje, kuriame tirta pelių
 naujagimių širdies fibroblastų, ekspresuojančių T antigeną
 ir paveiktų inhibitoriais: sb431542 ir xav939.
 Nepaisant to, kad abu inhibitoriai skatina širdies ląstelių
-diferenciaciją, itin mažas transkripcijos faktoriaus regionų
-skaičius rodo, kad papildomas veikimas inhibitoriais turi
-mažą įtaką transkripcijos faktoriaus pasireiškimui.
+diferenciaciją\footnote{Drowley L, Koonce C, Peel S, et al.
+Human Induced Pluripotent Stem Cell-Derived Cardiac Progenitor
+Cells in Phenotypic Screening: A Transforming Growth Factor-β
+Type 1 Receptor Kinase Inhibitor Induces Efficient Cardiac
+Differentiation. Stem Cells Transl Med. 2016;5(2):164-174.
+doi:10.5966/sctm.2015-0114}, itin mažas transkripcijos
+faktoriaus regionų skaičius rodo, kad papildomas veikimas
+inhibitoriais daro mažą įtaką transkripcijos faktoriaus
+jungimuisi prie DNR sekų.
 
 \newpage
 
@@ -445,17 +465,23 @@ chromosomose nėra neįprastas reiškinys. Kitose chromosomose regionų
 skaičius yra mažesnis. Ypač mažas regionų skaičius nustatytas
 devynioliktoje (61 Mbp), X (169 Mbp) ir Y (91 Mbp) chromosomose.
 
-Biologinių replikų mėginiuose didžiausias regionų skaičius
-nustatytas antroje chromosomoje. Taip pat grafikuose išsiskiria
-kontrolinis HL - 1 širdies ląstelių mėginys, kuriame didžiausias
-regionų skaičius nustatytas penktojoje chromosomoje.
-
 \begin{figure}[htb]
     \begin{center}
         \includegraphics[width=0.8\linewidth]{Figures/peak_counts_by_chromosome.png}
         \caption*{2 pav. Regionų pasiskirstymas chromosomose}
     \end{center}
 \end{figure}
+
+Biologinių replikų mėginiuose didžiausias regionų skaičius
+nustatytas antroje chromosomoje. Taip pat grafikuose išsiskiria
+kontrolinis HL - 1 širdies ląstelių mėginys, kuriame didžiausias
+regionų skaičius nustatytas penktojoje chromosomoje.
+
+Remiantis pavaizduotomis regionų skaičiaus pasiskirstymo
+chromosomose stulpelinėmis diagramomis, itin išsiskiriantis
+atrankumas chromosomų atžvilgiu nenustatytas, todėl galima
+teigti, jog šiame analizės etape duomenų problematiškumas
+nepastebimas arba jo nėra.
 
 \newpage
 
@@ -478,17 +504,17 @@ didžiausi persidengiančių regionų procentai nustatyti tarp
 šių mėginių:
 \begin{itemize}
     \item \textbf{81.577 \%} - tarp mėginio, kuriame buvo tiriamos širdies
-            fibroblastų ląstelės, ekspresuojančios T antigeną, ir pirmos
-            biologinės replikos, kurioje tirti embrionų fibroblastai,
-            veikiant AGHMT.
-    \item \textbf{81.092 \%} - tarp pirmos biologinės replikos ir antros
-            biologinės replikos, kurioje nebuvo AKT1.
+            fibroblastų ląstelės, ekspresuojančios T antigeną, ir mėginio,
+            kuriame tirti embrionų fibroblastai, veikiant AGHMT.
+    \item \textbf{81.092 \%} - tarp mėginio, kuriame tirti embrionų
+            fibroblastai ir mėginio, kuriame nebuvo AKT1.
     \item \textbf{77.827 \%} - tarp mėginio su T antigeną ekspresuojančiomis
-            širdies fibroblastų ląstelėmis ir antros biologinės replikos.
-    \item \textbf{76.948 \%} - tarp trečios biologinės replikos, kurioje
-            nebuvo HAND2 faktoriaus, ir antros biologinės replikos.
+            širdies fibroblastų ląstelėmis ir mėginio, kuriame nebuvo AKT1.
+    \item \textbf{76.948 \%} - tarp mėginio, kuriame nebuvo HAND2
+            faktoriaus, ir mėginio, kuriame nebuvo AKT1.
     \item \textbf{75.439 \%} - tarp mėginio su T antigeną ekspresuojančiomis
-            širdies fibroblastų ląstelėmis ir trečios biologinės replikos.
+            širdies fibroblastų ląstelėmis ir tarp mėginio, kuriame nebuvo HAND2
+            faktoriaus.
   \end{itemize}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
