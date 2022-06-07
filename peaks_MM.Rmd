@@ -117,7 +117,9 @@ count_peaks <- function(name, objects) {
 peak_counts <- lapply(names(grl), count_peaks, objects = grl) %>% bind_rows()
 
 cas <- unique(peak_counts$Chromosome)
-peak_counts$Chromosome <- factor(peak_counts$Chromosome, levels = c(cas))
+#peak_counts$Chromosome <- factor(peak_counts$Chromosome, levels = c(cas))
+peak_counts$Name <- factor(peak_counts$Name, levels = unique(peak_counts$Name))
+print(peak_counts)
 
 col_fill <- randomColor(1, hue = "red", luminosity = "dark")
 
@@ -202,5 +204,113 @@ overlaps <- ggplot(melt_coef_mat, aes(x = Var2, y = Var1, fill = value)) +
 
 png(file = "Latex/Figures/peak_overlaps_between_samples.png", width = 600)
 overlaps
+dev.off()
+```
+
+
+### Motif determination using PWM matrix
+The following analysis is focused on analysing the sequences based on the
+peaks and trying to determine Tbx5 motif hits in sequences using PWM matrix.
+
+```{r}
+mpwm <- read.table("TBX5_MOUSE.H11MO.0.D.pwm")
+mpwm <- t(mpwm)
+rownames(mpwm) <- c("A","C","G","T")
+#mpwm
+#ggseqlogo(mpwm)
+
+# Calculating Tbx5 hits within fetched fasta files of peaks:
+pth_fasta <- "../FASTA/"
+peak_sequences <- list.files(path = pth_fasta, "*fasta")
+
+hit_vec <- c()
+tbx5_hits <- data.frame(matrix(ncol = 3, nrow = 0)) %>%
+                setNames(., c("Sample", "Peak_count", "Tbx5_hits"))
+
+# Function that calculates Tbx5 motif hits in each sample:
+find_motif_hits <- function(sequences) {
+    for (i in 1:length(sequences)) {
+        hits <- countPWM(as.matrix(mpwm), sequences[[i]], min.score="75%")
+        if (hits == 0) { next }
+        else { hit_vec <- c(hit_vec, hits) }
+    }
+    return(sum(hit_vec))
+}
+
+# Function that calculates total peak count in each sample:
+calculate_peaks <- function(filename) {
+    name <- paste0(tools::file_path_sans_ext(filename), ".bb")
+    file <- import(paste0("../BigBed/", name)) %>%
+                    filter(seqnames %in% chr_abr)
+    region_count <- length(file)
+    return(region_count)
+}
+
+# Creating a new dataframe that stores data:
+#   - generated sample name (used in plots);
+#   - Tbx5 motif hit count;
+#   - Total peak count;
+#   - Tbx5 motif percentage.
+
+# # TEMPORARY COMMENTED!
+# columns <- c("Sample", "Motif_count", "Peak_count", "Percentage") 
+# tbx5_motif <- data.frame(matrix(nrow = 0, ncol = length(columns))) 
+ 
+# colnames(tbx5_motif) <- columns
+
+# for (i in 1:length(peak_sequences)) {
+#     filename <- peak_sequences[i]
+#     bb_file <- paste0(tools::file_path_sans_ext(filename), ".bb")
+#     samples_plot_name <- samples$Graph_names[samples$Filename == bb_file]
+
+#     seq <- readDNAStringSet(paste0(pth_fasta, filename))
+#     motif <- find_motif_hits(seq)
+#     peaks <- calculate_peaks(filename)
+#     percentage <- round((motif / peaks) * 100, 2)
+
+#     data_row <- c(samples_plot_name, motif, peaks, paste0(percentage, "%"))
+#     tbx5_motif[nrow(tbx5_motif) + 1, ] <- data_row
+# }
+
+# write.csv(tbx5_motif, "tbx5_motif_data.csv")
+# # THE END OF THE COMMENT
+
+motif_data <- read.csv(file = "tbx5_motif_data.csv")
+motif_data$Sample <- factor(motif_data$Sample, levels = motif_data$Sample)
+
+tf_percent <- ggplot(data = motif_data, aes(x = Sample, y = Peak_count)) + 
+                geom_bar(position = 'dodge', stat = "identity",
+                         fill = "#d88f2f", colour = "#bb4d0d") +
+                geom_bar(position = 'dodge', data = motif_data,
+                         aes(x = Sample, y = Motif_count), stat = "identity",
+                         fill = "#661a03", colour = "#53210a") +
+                geom_text(aes(label = Percentage), size = 4, vjust = -.5,
+                         position = position_dodge(width = 0.9)) +
+                labs(title = "", x = "Mėginys", y = "TF/Regionų skaičius") +
+                theme(axis.text = element_text(size = 10, colour = "black"),
+                      axis.text.x = element_text(angle = 45, hjust = 0.5,
+                                                 vjust = 0.5),
+                      axis.title.x = element_text(size = 14, colour = "black"),
+                      axis.title.y = element_text(size = 14, colour = "black"),
+                      panel.grid.major = element_line(color = "#eeeeee"),
+                      plot.title = element_text(hjust = 0.5, size = 16,
+                                                face = "bold"),
+                      panel.background = element_rect(fill = "#eeeef1",
+                                                      colour = "#4c0001"),
+                      panel.grid.major.y = element_line(colour = "#cab5b5",
+                                                        size = 0.3,
+                                                        linetype = "dashed"),
+                      panel.grid.minor.y = element_line(colour = "#cab5b5",
+                                                        size = 0.3,
+                                                        linetype = "dashed"),
+                      panel.grid.major.x = element_line(colour = "#cab5b5",
+                                                        size = 0.2,
+                                                        linetype = "longdash"),
+                      panel.grid.minor.x = element_line(colour = "#cab5b5",
+                                                        size = 0.2,
+                                                        linetype = "longdash"))
+
+png(file = "Latex/Figures/tf_hit_percentage.png", width = 500)
+tf_percent 
 dev.off()
 ```

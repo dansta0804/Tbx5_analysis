@@ -355,7 +355,6 @@ failai konvertuoti į \emph{BED} formato failus, pasinaudojus
 Prieiga per internetą:\\ https://genome.ucsc.edu/goldenPath/help/bigBed.html.
 (žiūrėta 2022 m. birželio 6 d.).}.
 
-
 Sugeneruoti \emph{BED} formato failai panaudoti pikus atitinkančių
 sekų iš naminės pelės genomo gavimui \emph{fasta} formatu.
 Sekos iš genomo išgautos, pasinaudojus komandinės eilutės įrankio
@@ -368,13 +367,17 @@ https://bedtools.readthedocs.io/en/latest/content/bedtools-suite.html
 https://bedtools.readthedocs.io/en/latest/content/tools/getfasta.html
 (žiūrėta 2022 m. birželio 3 d.).}.
 
-Kiekviename mėginyje esančio \emph{tbx5} transkripcijos faktoriaus
+Kiekviename mėginyje esančio \emph{Tbx5} transkripcijos faktoriaus
 motyvo procentinė dalis apskaičiuota susumavus \emph{Biostrings}
 \footnote{Pagès H, Aboyoun P, Gentleman R, DebRoy S (2022). \_Biostrings:
 Efficient manipulation of biological strings\_. R package version
 2.64.0, <https://bioconductor.org/packages/Biostrings>.}
 bibliotekos funkcijos \emph{countPWM()} rezultatus bei gautą
 vertę padalinus iš bendro regionų skaičiaus.
+
+Gauta \emph{Tbx5} transkripcijos faktoriaus procentinė dalis
+vizualizuota su pagrindinėmis \emph{ggplot()} ir \emph{geom\_bar()}
+funkcijomis.
 
 \subsection{Motyvų paieška \emph{de novo}}
 Praturtintų sekų radimui panaudota komandinės eilutės įrankio
@@ -521,9 +524,19 @@ didžiausi persidengiančių regionų procentai nustatyti tarp
 % TBX5 MOTYVO PROCENTINĖS DALIES NUSTATYMAS
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{\emph{Tbx5} motyvo pasiskirstymas mėginiuose}
-% \emph{Tbx5}Tbx5 motyvų skaičius mėginiuose pavaizduotas sudėtinėje
-% juostinėje diagramoje, kur {spalva} žymi nustatytų \emph{Tbx5}
-% motyvų skaičių, o {spalva} žymi bendrą regionų skaičių mėginiuose.
+Ketvirtajame grafike vaizduojama, kokia procentinė \emph{Tbx5}
+motyvo dalis nustatyta skirtinguose mėginiuose.
+
+Ruda spalva žymi Tbx5 motyvo atitikimo skaičių, šviesiai ruda -
+bendrą regionų skaičių atskirame mėginyje.
+
+\begin{figure}[htb]
+    \begin{center}
+        \includegraphics[width=0.8\linewidth]{Figures/tf_hit_percentage.png}
+        \caption*{4 pav. \emph{Tbx5} motyvo procentinę dalį mėginiuose
+                  iliustruojanti sudėtinė diagrama}
+    \end{center}
+\end{figure}
 
 \subsection{\emph{De novo} nustatytų motyvų biologinės funkcijos}
 Pildoma...
