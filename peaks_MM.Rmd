@@ -284,7 +284,7 @@ melted_df <- melt(subset_df)
 tf_percent <- ggplot(melted_df, aes(x = Sample, y = value, fill = variable,
                                     label = value)) + 
                 geom_bar(stat = "identity", colour = "#35170450", size = 0.5) +
-                scale_fill_manual(values = c("#d3984c", "#bb4d0d"),
+                scale_fill_manual(values = c("#ebc28e", "#d18558"),
                                   labels = c("Tbx5 motyvų skaičius",
                                              "Regionų skaičius")) +
                 guides(fill = guide_legend(title = "Spalvų paaiškinimas")) +
@@ -311,7 +311,8 @@ tf_percent <- ggplot(melted_df, aes(x = Sample, y = value, fill = variable,
                                                         linetype = "longdash"),
                       panel.grid.minor.x = element_line(colour = "#cab5b5",
                                                         size = 0.2,
-                                                        linetype = "longdash"))
+                                                        linetype = "longdash"),
+                      legend.position = c(0.777, 0.788))
 
 png(file = "Latex/Figures/tf_hit_percentage.png", width = 500)
 tf_percent 
