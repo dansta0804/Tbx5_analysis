@@ -18,6 +18,9 @@
 \usepackage{setspace}
 \usepackage{verbatim}
 \usepackage[left=3cm,top=2cm,right=1.5cm,bottom=2cm]{geometry}
+\usepackage{floatrow}
+\newfloatcommand{capbtabbox}{table}[][\FBwidth]
+\usepackage{blindtext}
 
 \onehalfspacing
 
@@ -520,33 +523,55 @@ didžiausi persidengiančių regionų procentai nustatyti tarp
             faktoriaus.
   \end{itemize}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% TBX5 MOTYVO PROCENTINĖS DALIES NUSTATYMAS
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% TBX5 MOTYVO NUSTATYMAS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{\emph{Tbx5} motyvo pasiskirstymas mėginiuose}
-Ketvirtajame grafike vaizduojama, kokia procentinė \emph{Tbx5}
-motyvo dalis nustatyta skirtinguose mėginiuose.
-
-Ruda spalva žymi Tbx5 motyvo atitikimo skaičių, šviesiai ruda -
-bendrą regionų skaičių atskirame mėginyje.
+Ketvirtajame grafike vaizduojama, kiek \emph{Tbx5}
+motyvo atitikimų nustatyta skirtinguose mėginiuose.
 
 \begin{figure}[htb]
     \begin{center}
-        \includegraphics[width=0.8\linewidth]{Figures/tf_hit_percentage.png}
-        \caption*{4 pav. \emph{Tbx5} motyvo procentinę dalį mėginiuose
-                  iliustruojanti sudėtinė diagrama}
+        \includegraphics[width=0.7\linewidth]{Figures/tf_hit_percentage.png}
+        \caption*{4 pav. \emph{Tbx5} motyvų atitikimų skaičiaus palyginimo
+                  sudėtinė diagrama}
     \end{center}
 \end{figure}
+
+Antroje lentelėje (2 lentelė) nurodoma, kokią procentinę dalį
+tarp visų mėginių regionų sudaro Tbx5 motyvai.
+
+\begin{table}[htb]
+    \newcolumntype{M}[1]{>{\centering\arraybackslash}m{#1}}
+    \small
+    \caption*{2 lentelė. Mėginių charakteristikos}
+    \begin{tabular}{|c|c|}
+    \hline
+    \textbf{Mėginys} & \textbf{Procentinė dalis}\\
+    \hline
+        \emph{mm\_2\_cardiac\_muscle\_r1} & 8.32\%\\ 
+    \hline
+        \emph{mm\_4\_emb\_fibr\_r1} & 17.59\%\\
+    \hline
+        \emph{mm\_4\_emb\_fibr\_r2} & 12.26\%\\
+    \hline
+        \emph{mm\_4\_emb\_fibr\_r3} & 13.64\%\\
+    \hline
+        \emph{mm\_1\_heart\_r1} & 10.61\%\\
+    \hline
+        \emph{mm\_4\_emb\_fibr\_r4} & 5.98\%\\
+    \hline
+        \emph{mm\_3\_cardiac\_fibr\_r1} & 11.98\%\\
+    \hline
+    \end{tabular}
+\end{table}
+
+\newpage
 
 \subsection{\emph{De novo} nustatytų motyvų biologinės funkcijos}
 Pildoma...
 
 \newpage
-% mm3_cardiac_fibr_r1 ir mm4_emb_fibr_r1
-% mm4_emb_fibr_r1 ir mm4_emb_fibr_r2
-% mm3_cardiac_fibr_r1 ir mm4_emb_fibr_r2
-% mm4_emb_fibr_r3 ir mm4_emb_fibr_r2
-% mm3_cardiac_fibr_r1 ir mm4_emb_fibr_r3
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % LITERATŪROS ŠALTINIAI
