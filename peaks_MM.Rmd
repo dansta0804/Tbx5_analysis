@@ -278,14 +278,17 @@ calculate_peaks <- function(filename) {
 motif_data <- read.csv(file = "tbx5_motif_data.csv")
 motif_data$Sample <- factor(motif_data$Sample, levels = motif_data$Sample)
 
-tf_percent <- ggplot(data = motif_data, aes(x = Sample, y = Peak_count)) + 
-                geom_bar(position = 'dodge', stat = "identity",
-                         fill = "#d88f2f", colour = "#bb4d0d") +
-                geom_bar(position = 'dodge', data = motif_data,
-                         aes(x = Sample, y = Motif_count), stat = "identity",
-                         fill = "#661a03", colour = "#53210a") +
-                geom_text(aes(label = Percentage), size = 4, vjust = -.5,
-                         position = position_dodge(width = 0.9)) +
+subset_df <- motif_data[, 2:5]
+melted_df <- melt(subset_df)
+
+tf_percent <- ggplot(melted_df, aes(x = Sample, y = value, fill = variable,
+                                    label = value)) + 
+                geom_bar(stat = "identity", colour = "#35170450", size = 0.5) +
+                scale_fill_manual(values = c("#d3984c", "#bb4d0d"),
+                                  labels = c("Tbx5 motyvų skaičius",
+                                             "Regionų skaičius")) +
+                guides(fill = guide_legend(title = "Spalvų paaiškinimas")) +
+                geom_text(size = 4, position = position_stack(vjust = 0.5)) +
                 labs(title = "", x = "Mėginys", y = "TF/Regionų skaičius") +
                 theme(axis.text = element_text(size = 10, colour = "black"),
                       axis.text.x = element_text(angle = 45, hjust = 0.5,
