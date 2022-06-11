@@ -318,3 +318,45 @@ png(file = "Latex/Figures/tf_hit_percentage.png", width = 500)
 tf_percent 
 dev.off()
 ```
+
+The bar chart below visualizes total identified motif count
+for each sample.
+
+```{r}
+identified_motifs <- read.csv(file = "identified_motifs.csv")
+identified_motifs
+
+library(ggplot2)
+
+
+barplot(identified_motifs$Motif_count, names.arg = identified_motifs$Sample)
+
+
+identified_motifs$Sample <- factor(identified_motifs$Sample, levels = identified_motifs$Sample)
+ggplot(identified_motifs, aes(x = Sample, y = Motif_count)) +
+    geom_bar(stat = "identity")+
+    theme(axis.text = element_text(size = 10, colour = "black"),
+                      axis.text.x = element_text(angle = 45, hjust = 0.5,
+                                                 vjust = 0.5),
+                      axis.title.x = element_text(size = 14, colour = "black"),
+                      axis.title.y = element_text(size = 14, colour = "black"),
+                      panel.grid.major = element_line(color = "#eeeeee"),
+                      plot.title = element_text(hjust = 0.5, size = 16,
+                                                face = "bold"),
+                      panel.background = element_rect(fill = "#eeeef1",
+                                                      colour = "#4c0001"),
+                      panel.grid.major.y = element_line(colour = "#cab5b5",
+                                                        size = 0.3,
+                                                        linetype = "dashed"),
+                      panel.grid.minor.y = element_line(colour = "#cab5b5",
+                                                        size = 0.3,
+                                                        linetype = "dashed"),
+                      panel.grid.major.x = element_line(colour = "#cab5b5",
+                                                        size = 0.2,
+                                                        linetype = "longdash"),
+                      panel.grid.minor.x = element_line(colour = "#cab5b5",
+                                                        size = 0.2,
+                                                        linetype = "longdash"),
+                      legend.position = c(0.777, 0.788))
+ 
+```
