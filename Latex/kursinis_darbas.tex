@@ -93,7 +93,7 @@
 \section*{Santrauka}
 Darbo santrauka.\\
 
-\textbf{Raktiniai žodžiai: TF, ChIP-seq, regionas?}
+\textbf{Raktiniai žodžiai: ChIP-seq, TF, Tbx5, regionas, motyvas, R}
 \newpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -102,7 +102,7 @@ Darbo santrauka.\\
 \section*{Summary}
 Short summary of results.\\
 
-\textbf{Keywords: TF, ChIP-seq, peak?}
+\textbf{Keywords: ChIP-seq, TF, Tbx5, peak, motif, R}
 \newpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -116,10 +116,8 @@ Short summary of results.\\
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Duomenų bazės ir duomenys}
 \subsection{GTRD duomenų bazė}
-Tyrimui naudoti duomenys atsisiųsti iš \emph{GTRD}
-(Gene Transcription Regulation Database)\footnote{GTRD duomenų bazė.
-Prieiga per internetą: http://gtrd.biouml.org/\#!
-(žiūrėta 2022 m. birželio 6 d.).}
+Tyrimui naudoti duomenys atsisiųsti iš GTRD
+(Gene Transcription Regulation Database)\cite{GTRD}
 duomenų bazės, saugančios informaciją apie transkripcijos
 sekų ir atviro chromatino regionus. Taip pat duomenų bazėje saugomi
 nekartografuojamų regionų duomenys bei potencialūs žmonių bei naminių
@@ -129,25 +127,23 @@ pelių regionai, prie kurių gali jungtis transkripcijos faktoriai.
 ChIP-seq eksperimentų, kurių metu gauti rezultatai yra unifikuotai
 apdoroti ir paruošti tyrėjų meta-analizėms.
 
-\emph{GTRD} duomenų bazėje duomenys saugomi binariniu anotacijų
+GTRD duomenų bazėje duomenys saugomi binariniu anotacijų
 formatu \emph{bigBed}, leidžiančiu atvaizduoti pasirinktą
 chromosomos regioną interaktyviose genominės informacijos
-vizualizavimo naršyklėse (pavyzdžiui, \emph{UCSC Genome Browser}
-\footnote{\emph{UCSC Genome Browser}. Prieiga per internetą:
-https://genome.ucsc.edu/ (žiūrėta 2022 m. birželio 6 d.).})
-efektyviau nei tekstinis \emph{BED} formatas.
+vizualizavimo naršyklėse (pavyzdžiui, UCSC Genome Browser\cite{UCSCGB})
+efektyviau nei tekstinis BED formatas.
 
 \subsection{Pasirinktų mėginių charakteristika}
 Analizė atlikta, naudojantis 4 nepriklausomais eksperimentais, kuriuos
 iš viso sudarė 7 biologinės replikos.
 Pirmoje lentelėje pateikta informacija apie tyrimui atlikti
-naudotus duomenis, surinktus iš naminės pelės (lot. \emph{Mus musculus})
+naudotus duomenis, surinktus iš naminės pelės (\emph{lot. Mus musculus})
 ląstelių.
 
 \begin{table}[htb]
     \newcolumntype{M}[1]{>{\centering\arraybackslash}m{#1}}
     \small
-    \caption*{1 lentelė. Mėginių charakteristikos}
+    \caption*{\textbf{1 lentelė.} \emph{Mėginių charakteristikos}}
     \begin{tabular}{|c|c|c|c|c|c|c|}
     \hline
     %\thead{Sample\\ window}
@@ -157,31 +153,31 @@ ląstelių.
     \hline
     EXP030898 & \thead{HL - 1\\ (širdies raumens)} &
                 C57BL/6J & \thead{TRE\\ promotorius (2 d.)} &
-                - & 21415370\\ 
+                - & 21415370\cite{ARTCL1}\\ 
     \hline
     EXP058852 & Širdies prieširdžių & C57BL/6 &
-                - & \thead{Tbx5\\ (sc-17866)} & 31080136\\
+                - & \thead{Tbx5\\ (sc-17866)} & 31080136\cite{ARTCL2}\\
     \hline
     EXP062056 & \thead{Pelių naujagimių širdies\\ fibroblastų, 
                 ekspresuojančių\\ didelį kiekį T antigeno, linija} &
                 CD1 & \thead{sb431542,\\ xav939} &
-                \thead{anti-TBX5\\ (sc-17866x)} & 31271750\\
+                \thead{anti-TBX5\\ (sc-17866x)} & 31271750\cite{ARTCL3}\\
     \hline
     EXP058843 & \thead{MEF\\ (embrionų fibroblastai)} &
                 C57BL/6 & AGHMT (2 d.) &
-                \thead{anti-Tbx5\\ (sc-17866)} & 31080136\\
+                \thead{anti-Tbx5\\ (sc-17866)} & 31080136\cite{ARTCL2}\\
     \hline
     EXP058847 & \thead{MEF\\ (embrionų fibroblastai)} &
                 C57BL/6 & GHMT (2 d.) &
-                \thead{Tbx5\\ (sc-17866)} & 31080136\\
+                \thead{Tbx5\\ (sc-17866)} & 31080136\cite{ARTCL2}\\
     \hline
     EXP058850 & \thead{MEF\\ (embrionų fibroblastai)} &
                 C57BL/6 & GMT (2 d.) &
-                \thead{Tbx5\\ (sc-17866)} & 31080136\\
+                \thead{Tbx5\\ (sc-17866)} & 31080136\cite{ARTCL2}\\
     \hline
     EXP058856 & \thead{MEF\\ (embrionų fibroblastai)} & 
                 C57BL/6 & \thead{vienas\\ faktorius (2 d.)} &
-                \thead{Tbx5\\ (sc-17866)} & 31080136\\
+                \thead{Tbx5\\ (sc-17866)} & 31080136\cite{ARTCL2}\\
     \hline
     \end{tabular}
 \end{table}
@@ -194,11 +190,11 @@ ląstelių.
           gali betarpiškai dalintis ir spontaniškai keisti
           savo formą, vykstant širdies raumens susitraukimo/
           atsipalaidavimo procesams.
-    \item \textbf{MEF}: pelių embrionų fibroblastai (angl.
-          \emph{Mouse Embryonic Fibroblast}). Šiai ląstelių
+    \item \textbf{MEF}: pelių embrionų fibroblastai (\emph{angl.}
+          Mouse Embryonic Fibroblast). Šiai ląstelių
           linijai būdingas ląstelių gyvybingumo apribojimas,
           reiškiantis, jog šios ląstelės greitai pasensta ir miršta.
-    \item \textbf{C57BL/6}: inbrydingo (angl. \emph{inbreeding}) būdu
+    \item \textbf{C57BL/6}: inbrydingo (\emph{angl.} inbreeding) būdu
           išvestų naminių pelių veislė. Šios veislės pelėms
           būdingas itin tamsus kailis, padidėjęs jautrumas garsams,
           kvapams, skausmui ir žemai temperatūrai. Ši veislė
@@ -207,29 +203,31 @@ ląstelių.
     \item \textbf{C57BL/6J}: prie naminių pelių veislės pavadinimo
           pridėtos raidės patikslina, kurioje laboratorijoje veislės
           išvestos. 'J' raidė nurodo, kad pelių veislė išvesta Meino
-          valstijoje (JAV) įsikūrusioje Džeksono laboratorijoje
-          \footnote{Jackson Laboratory (RRID:SCR\_004633).}.
-    \item \textbf{CD1}: autbrydingo (angl. \emph{outbreeding}) būdu
+          valstijoje (JAV) įsikūrusioje Džeksono laboratorijoje\cite{JCKSLAB}.
+    \item \textbf{CD1}: autbrydingo (\emph{angl.} outbreeding) būdu
           išvestų naminių pelių veislė. Šios veislės pelėms
           būdingas baltas kailis. Taip pat CD1 pelės dažnai naudojamos
           genetiniuose, toksikologiniuose, farmakologiniuose ir
           senėjimo tyrimuose.
-    \item \textbf{TRE}: tetraciklino atsako elementas (angl. 
-          emph{Tetracycline Response Element}). Tai yra DNR sekos
-          fragmentas. <PAPILDYTI>
+    \item \textbf{TRE}: tetraciklino atsako elementas (\emph{angl.} 
+          Tetracycline Response Element). Tai yra 7 DNR sekos fragmentai,
+          sudaryti iš 19 nukleotidų ir atskirti trumpesniais sekų
+          fragmentais.
     \item \textbf{sb431542}: stipriai veikianti, selektyvi cheminė
           medžiaga; transformuojančio augimo faktoriaus {\textbeta}
           (TGF-{\textbeta}) inhibitorius.
     \item \textbf{xav939}: stipriai veikianti cheminė medžiaga;
           tankirazės inhibitorius. Tankirazė slopina TERF1 baltymo,
           stabdančio telomerazės veiklą, jungimąsi prie telomerinių
-          DNR sekų. <PAPILDYTI>
+          DNR sekų.
     \item \textbf{AGHMT}: AKT1 - serino/treonino kinazė 1; GATA4,
-          HAND2, MEF2C, TBX5 - kardiogeniniai transkripcijos faktoriai.
-    \item \textbf{GHMT}: GATA4, HAND2, MEF2C, TBX5.
-    \item \textbf{GMT}: GATA4, MEF2C, TBX5.
-    \item \textbf{sc-17866x}:
-    \item \textbf{sc-17866}:
+          HAND2, MEF2C, \emph{Tbx5} - kardiogeniniai transkripcijos faktoriai.
+    \item \textbf{GHMT}: GATA4, HAND2, MEF2C, TBX5 transkripcijos
+          faktorių komplektas.
+    \item \textbf{GMT}: GATA4, MEF2C, \emph{Tbx5}  transkripcijos
+          faktorių komplektas.
+    \item \textbf{sc-17866x/ sc-17866}: iš ožkų išskirti antikūnai,
+    \     atpažįstantys žmonių, pelių ir žiurkių \emph{Tbx5} antigeną.
 \end{itemize}
 
 
@@ -237,19 +235,20 @@ ląstelių.
 \begin{itemize}
     \item \textbf{EXP030898}: vienas mėginys iš septyniolikos eksperimento
         metu tirtų mėginių. Eksperimente buvo siekiama patvirtinti arba
-        atmesti hipotezę apie širdies stipriklių (angl. \emph{enhancer})
+        atmesti hipotezę apie širdies stipriklių (\emph{angl.} enhancer)
         identifikiavimą prie chromatino jungiantis keliems transkripcijos
         faktoriams.
 
         HL - 1 širdies raumens ląstelės buvo infekuotos
-        su adenovirusu, ekspresuojančiu troponiną T, kuris skatina \emph{rtTA} ir
-        \emph{BirA} genų ekspresiją, bei TRE promotoriumi, skatinančiu Tbx5
-        transkripcijos faktoriaus geno raišką. Sąlygos taikytos 48 valandas.
+        su adenovirusu, ekspresuojančiu troponiną T, kuris skatina
+        \emph{rtTA} ir \emph{BirA} genų ekspresiją, bei TRE promotoriumi,
+        skatinančiu \emph{Tbx5} transkripcijos faktoriaus geno raišką.
+        Sąlygos taikytos 48 valandas.
     \item \textbf{EXP058852}: prieširdžių ląstelės buvo du kartus po 24
-        valandas laikytos mišinyje su retrovirusais. Papildomi poveikiai nebuvo
-        taikyti.
+        valandas laikytos mišinyje su retrovirusais. Papildomi poveikiai
+        nebuvo taikyti.
     \item \textbf{EXP062056}: eksperimente ląstelės buvo infekuotos su
-        Gata4, Mef2c, ir Tbx5 transkripcijos faktorius sintetinančiais
+        GATA4, Mef2c, ir \emph{Tbx5} transkripcijos faktorius sintetinančiais
         retrovirusais. Ląstelės augintos terpėje, kurioje buvo {Tgf\textbeta}
         inhibitoriaus sb431542, skatinančio kardiomiocitų diferenciaciją
         iš pliuripotentinių kamieninių ląstelių, ir Wnt inhibitoriaus
@@ -265,10 +264,11 @@ keturiais skirtingais poveikiais tirti mėginiai:
     \item \textbf{EXP058843}: embrionų fibroblastai veikti AGHMT. Esant
         kardiogeniniams transkripcijos faktoriams, AKT1 skatina fibroblastų
         diferenciaciją į širdies ląsteles - kardiomiocitus.
-    \item \textbf{EXP058847}: neįtraukta AKT1.
+    \item \textbf{EXP058847}: neįtraukta AKT1 serino/treonino kinazė 1.
     \item \textbf{EXP058850}: į kardiogeninių transkripcijos faktorių mišinį
         neįtrauktas HAND2 transkripcijos faktorius.
-    \item \textbf{EXP058856}: ląstelės veiktos tik vienu faktoriumi.
+    \item \textbf{EXP058856}: ląstelės veiktos tik vienu faktoriumi, kuris
+        straipsnyje nebuvo specifikuotas.
   \end{itemize}
 \newpage
 
@@ -278,34 +278,23 @@ keturiais skirtingais poveikiais tirti mėginiai:
 
 \section{Tyrimo metodai}
 \emph{Tbx5} transkripcijos faktoriaus regionų tyrimo analizė atlikta
-su R programavimo kalba\footnote{R Core Team (2022).
-R: A language and environment for statistical computing. R Foundation
-for Statistical Computing, Vienna, Austria. URL https://www.R-project.org/.}
-(4.2.0 versija).
+su R programavimo kalba\cite{R} (4.2.0 versija).
 
 Tarpiniams analizės rezultatams pateikti naudotas komandinės eilutės
-įrankis \emph{Scikick}\footnote{Scikick. Utility for executing collections
-of computational notebooks. \\URL https://petronislab.camh.ca/pub/scikick/stable/docs/report/out\_html/introduction.html}
-(0.2.0 versija), leidžiantis generuoti \emph{R Markdown (Rmd)} ataskaitas
-\emph{html} formatu bei kurti struktūrizuotus puslapius, apjungiant
-iš daugelio \emph{Rmd} failų gautus \emph{html} ataskaitų failus.
-
-Žemiau esančiuose atskiruose analizės etapų skyriuose
-nurodomos R bibliotekos ir papildomi komandinės eilutės įrankiai, kuriais
-naudojantis pasiekti tarpiniai analizės etapų rezultatai.
+įrankis Scikick\cite{SCIK} (0.2.0 versija), leidžiantis generuoti
+R Markdown (Rmd) ataskaitas \emph{html} formatu bei kurti
+struktūrizuotus puslapius, apjungiant iš daugelio Rmd failų
+gautus HTML ataskaitų failus.
 
 \subsection{Regionų skaičiaus nustatymas mėginiuose}
 \emph{Tbx5} regionų skaičius skirtinguose mėginiuose apskaičiuotas
 su standartine R ilgio funkcija \emph{length()}, kuri pritaikyta
 \emph{GRanges} objektui, aprašančiam genomines pozicijas bei su jomis
-susijusias anotacijas. Objektas sukurtas su \emph{rtracklayer}
-\footnote{M. Lawrence, R. Gentleman, V. Carey: "rtracklayer: an {R} package for
-interfacing with genome browsers". Bioinformatics 25:1841-1842.}
+susijusias anotacijas. Objektas sukurtas su \emph{rtracklayer}\cite{R_TRACK}
 bibliotekos funkcija \emph{import()}.
 Regionų skaičių mėginiuose atvaizduojanti stulpelinė diagrama
-sukurta su \emph{ggplot2}\footnote{H. Wickham. ggplot2: Elegant
-Graphics for Data Analysis. Springer-Verlag New York, 2016.}
-bibliotekos \emph{geom\_bar()} funkcija.
+sukurta su \emph{ggplot2}\cite{R_GGPLOT} bibliotekos
+\emph{geom\_bar()} funkcija.
 
 \subsection{Regionų skaičiaus nustatymas chromosomose}
 Transkripcijos faktoriaus regionų skaičius skirtingose chromosomose
@@ -329,12 +318,10 @@ apskaičiuojamas pagal išraišką:
 padalinus dviejų duomenų rinkinių bendrą duomenų ilgį.
 
 Modifikavus \emph{Jaccard} koeficiento gavimo funkciją, koeficientas
-apskaičiuojamas pagal išraišką:
+apskaičiuojamas pagal išraišką, kur sutampančių A ir B rinkinių
+duomenų ilgis padalinamas iš A rinkinio ilgio:
 
 \[ J(A, B) = \frac{|A \cap B|}{|A|} \]
-
-Sutampančių A ir B rinkinių duomenų ilgis padalinamas iš A rinkinio
-ilgio.
 
 \emph{Jaccard} koeficiento skaičiavimo funkcija modifikuota, nes
 skaičiuojant koeficientą su standartine \emph{Jaccard} funkcija,
@@ -349,35 +336,24 @@ procentinė regionų dalis persidengia su antruoju mėginiu,
 persidengiančių regionų skaičius padalintas iš pirmojo mėginio
 regionų skaičiaus.
 
-Gauti rezultatai atvaizduoti spalvų intensyvumo grafike (angl.
-\emph{heatmap}), sukurtame su \emph{ggplot()} ir papildoma funkcija
+Gauti rezultatai atvaizduoti spalvų intensyvumo grafike (\emph{angl.}
+heatmap), sukurtame su \emph{ggplot()} ir papildoma funkcija
 \emph{geom\_tile()}.
 
 \subsection{\emph{Tbx5} motyvo nustatymas}
 Šiame etape genomines pozicijas aprašantys \emph{bigBed} formato
-failai konvertuoti į \emph{BED} formato failus, pasinaudojus
-\emph{UCSC} komandinės eilutės programa \emph{bigBedToBed}\footnote
-{\emph{UCSC} komandinės eilutės programa \emph{bigBedToBed}.
-Prieiga per internetą:\\ https://genome.ucsc.edu/goldenPath/help/bigBed.html.
-(žiūrėta 2022 m. birželio 6 d.).}.
+failai konvertuoti į BED formato failus, pasinaudojus
+UCSC komandinės eilutės programa \emph{bigBedToBed}\cite
+{BBTOBED}.
 
-Sugeneruoti \emph{BED} formato failai panaudoti pikus atitinkančių
-sekų iš naminės pelės genomo gavimui \emph{fasta} formatu.
+Sugeneruoti BED formato failai panaudoti pikus atitinkančių
+sekų iš naminės pelės genomo gavimui FASTA formatu.
 Sekos iš genomo išgautos, pasinaudojus komandinės eilutės įrankio
-\emph{BEDTools}\footnote{\emph{BEDTools} įrankio dokumentacija.
-Prieiga per internetą:\\ 
-https://bedtools.readthedocs.io/en/latest/content/bedtools-suite.html
-(žiūrėta 2022 m. birželio 3 d.).}.
-(2.30.0 versija) programa \emph{getfasta}\footnote{\emph{BEDTools}
-įrankio programa \emph{getfasta}. Prieiga per internetą:\\
-https://bedtools.readthedocs.io/en/latest/content/tools/getfasta.html
-(žiūrėta 2022 m. birželio 3 d.).}.
+BEDTools\cite{BEDTOOLS}.
+(2.30.0 versija) programa \emph{getfasta}\cite{GET_FASTA}.
 
 Kiekviename mėginyje esančio \emph{Tbx5} transkripcijos faktoriaus
-motyvo procentinė dalis apskaičiuota susumavus \emph{Biostrings}
-\footnote{Pagès H, Aboyoun P, Gentleman R, DebRoy S (2022). \_Biostrings:
-Efficient manipulation of biological strings\_. R package version
-2.64.0, <https://bioconductor.org/packages/Biostrings>.}
+motyvo procentinė dalis apskaičiuota susumavus \emph{Biostrings}\cite{BIOSTR}
 bibliotekos funkcijos \emph{countPWM()} rezultatus bei gautą
 vertę padalinus iš bendro regionų skaičiaus.
 
@@ -387,28 +363,20 @@ funkcijomis.
 
 \subsection{Motyvų paieška \emph{de novo}}
 Praturtintų sekų radimui panaudota komandinės eilutės įrankio
-\emph{HOMER} \footnote{\emph{HOMER} įrankio aprašymas.
-Prieiga per internetą:\\ http://homer.ucsd.edu/homer/}
-(v4.11 versija) programa \emph{findMotifsGenome.pl},
-analizuojanti \emph{BED} formato failus (faile specifikuotas
+HOMER\cite{HOMER} (v4.11 versija) programa
+\emph{findMotifsGenome.pl},
+analizuojanti BED formato failus (faile specifikuotas
 pozicijas), ir ieškanti praturtintų sekų atitikimo anotuotame
 naminės pelės \emph{mm10} referentiniame genome.
-<PAPILDYTI>
+Tarp mėginių persidengiantys motyvai nustatyti, naudojantis
+R biblioteka \emph{UpSetR}\cite{UPSETR}.
 
 \subsection{Praturtintų sekų biologinių funkcijų nustatymas}
 Identifikuotų motyvų biologinės funkcijos nustatytos, pasinaudojus
-\emph{MEME} programų paketo \footnote{Timothy L. Bailey, James Johnson,
-Charles E. Grant, William S. Noble, "The MEME Suite", Nucleic Acids
-Research, 43(W1):W39-W49, 2015.} programa \emph{GOMo}
-\footnote{Fabian A. Buske, Mikael Bodén, Denis C. Bauer and Timothy
-L. Bailey, "Assigning roles to DNA regulatory motifs using
-comparative genomics", Bioinformatics, 26(7), 860-866, 2010.}, kuri
-naudodamasi pateiktomis motyvų nukleotidų sekomis, analizuoja sekų
-promotorius, saugomus \emph{GOMo} sekų duomenų bazėje, ir nustato,
-ar pateikti motyvai yra susiję su genais, susietais su vienu ar
-keliais genų ontologijos (\emph{angl.} Gene Ontology (GO))
+UniProt\cite{UNIPROT} duomenų bazės genų ontologijos
+(\emph{angl.} Gene Ontology (GO))
 biologinių procesų, ląstelinių komponentų ir molekulinių funkcijų
-apibūdinimais.
+klasifikacija.
 
 \newpage
 
@@ -422,41 +390,37 @@ apibūdinimais.
 \section{Rezultatai ir jų aptarimas}
 \subsection{Regionų skaičiaus skirtumai tarp mėginių}
 Pirmajame analizės etape kiekviename mėginyje nustatytas bendras
-regionų skaičius pavaizduotas pirmame paveiksle.
+regionų skaičius pavaizduotas pirmoje stulpelinėje diagramoje
+(1 pav.).
 
 \begin{figure}[htb]
     \begin{center}
         \includegraphics[width=0.7\linewidth]{Figures/total_peak_counts.png}
-        \caption*{1 pav. Regionų skaičių kiekviename mėginyje
-        vaizduojanti stulpelinė diagrama}
+        \caption*{\textbf{1 pav.} \emph{Regionų skaičių kiekviename mėginyje
+        vaizduojanti stulpelinė diagrama}}
     \end{center}
 \end{figure}
 
-Remiantis diagrama didžiausias \emph{tbx5} transkripcijos faktoriaus
-regionų skaičius nustatytas eksperimento \emph{(mm\_4\_emb\_fibr\_r1)}
+Remiantis diagrama didžiausias \emph{Tbx5} transkripcijos faktoriaus
+regionų skaičius nustatytas eksperimento \textbf{mm\_4\_emb\_fibr\_r1}
 biologinėje replikoje, kurioje pelių embrionų fibroblastų ląstelės
 dvi dienas veiktos AGHMT faktoriais.
 Šį rezultatą palyginus su kitomis biologinėmis replikomis, kuriose
 tirtas tas pats pelių embrionų fibroblastų ląstelių kamienas, tačiau
 ląstelės veiktos tik kai kuriais faktoriais, pastebimas gradualus
-\emph{tbx5} transkripcijos faktoriaus regionų skaičiaus mažėjimas
-diagramoje \emph{mm\_4\_emb\_fibr\_r2}, \emph{mm\_4\_emb\_fibr\_r3} ir
-\emph{mm\_4\_emb\_fibr\_r4} pavaizduotuose stulpeliuose.
+\emph{Tbx5} transkripcijos faktoriaus regionų skaičiaus mažėjimas
+diagramoje \textbf{mm\_4\_emb\_fibr\_r2}, \textbf{mm\_4\_emb\_fibr\_r3} ir
+\textbf{mm\_4\_emb\_fibr\_r4} pavaizduotuose stulpeliuose.
 
 Mėginyje, kuriame embrionų fibroblastai veikti tik vienu faktoriumi,
-\emph{tbx5} transkripcijos faktoriaus regionų nustatyta nedaug -
+\emph{Tbx5} transkripcijos faktoriaus regionų nustatyta nedaug -
 13520.
 
 Mažiausiai regionų nustatyta mėginyje, kuriame tirta pelių
 naujagimių širdies fibroblastų, ekspresuojančių T antigeną
 ir paveiktų inhibitoriais: sb431542 ir xav939.
 Nepaisant to, kad abu inhibitoriai skatina širdies ląstelių
-diferenciaciją\footnote{Drowley L, Koonce C, Peel S, et al.
-Human Induced Pluripotent Stem Cell-Derived Cardiac Progenitor
-Cells in Phenotypic Screening: A Transforming Growth Factor-β
-Type 1 Receptor Kinase Inhibitor Induces Efficient Cardiac
-Differentiation. Stem Cells Transl Med. 2016;5(2):164-174.
-doi:10.5966/sctm.2015-0114}, itin mažas transkripcijos
+diferenciaciją\cite{HEART_CELL_DIFF_ARTCL}, itin mažas transkripcijos
 faktoriaus regionų skaičius rodo, kad papildomas veikimas
 inhibitoriais daro mažą įtaką transkripcijos faktoriaus
 jungimuisi prie DNR sekų.
@@ -467,12 +431,12 @@ jungimuisi prie DNR sekų.
 % REGIONŲ SKAIČIUS ATSKIROSE CHROMOSOMOSE
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Regionų pasiskirstymas chromosomose}
-Nustačius \emph{tbx5} transkripcijos faktoriaus regionų
+Nustačius \emph{Tbx5} transkripcijos faktoriaus regionų
 pasiskirstymą eksperimentų mėginiuose, kitame analizės etape
 patikrinta, kaip faktoriaus regionai pasiskirstę atskirose
 chromosomose.
 
-Vaizduojamuose grafikuose didžiausias regionų skaičius nustatomas
+Vaizduojamuose grafikuose (2 pav.) didžiausias regionų skaičius nustatomas
 pirmoje, antroje ir penktoje chromosomose. Naminės pelės pirmoji
 chromosoma yra pati didžiausia, turinti 195 milijonų bazių porų,
 antroji chromosoma sudaryta iš 182 megabazių, penktoji chromosoma -
@@ -484,7 +448,7 @@ devynioliktoje (61 Mbp), X (169 Mbp) ir Y (91 Mbp) chromosomose.
 \begin{figure}[htb]
     \begin{center}
         \includegraphics[width=0.8\linewidth]{Figures/peak_counts_by_chromosome.png}
-        \caption*{2 pav. Regionų pasiskirstymas chromosomose}
+        \caption*{\textbf{2 pav.} \emph{Regionų pasiskirstymas chromosomose}}
     \end{center}
 \end{figure}
 
@@ -511,13 +475,14 @@ mėginių duomenų dalis persidengia.
 \begin{figure}[htb]
     \begin{center}
         \includegraphics[width=0.8\linewidth]{Figures/peak_overlaps_between_samples.png}
-        \caption*{3 pav. Persidengiančių regionų procentinės dalies vaizdavimas}
+        \caption*{\textbf{3 pav.} \emph{Persidengiančių regionų procentinės
+                  dalies vaizdavimas}}
     \end{center}
 \end{figure}
 
-Remiantis pavaizduoto spalvų intensyvumo grafiko duomenimis,
-didžiausi persidengiančių regionų procentai nustatyti tarp
-šių mėginių:
+Remiantis pavaizduoto spalvų intensyvumo grafiko (3 pav.)
+duomenimis, didžiausi persidengiančių regionų procentai
+nustatyti tarp šių mėginių:
 \begin{itemize}
     \item \textbf{81.577 \%} - tarp mėginio, kuriame buvo tiriamos širdies
             fibroblastų ląstelės, ekspresuojančios T antigeną, ir mėginio,
@@ -537,14 +502,15 @@ didžiausi persidengiančių regionų procentai nustatyti tarp
 % TBX5 MOTYVO NUSTATYMAS
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{\emph{Tbx5} motyvo pasiskirstymas mėginiuose}
-Ketvirtajame grafike vaizduojama, kiek \emph{Tbx5}
+Ketvirtajame grafike (4 pav.) vaizduojama, kiek \emph{Tbx5}
 motyvo atitikimų nustatyta skirtinguose mėginiuose.
+<PAPILDYTI, NURODANT, KOKS TBX5 MOTYVAS BUVO NUSTATYTAS IR PAN.>
 
 \begin{figure}[htb]
     \begin{center}
         \includegraphics[width=0.7\linewidth]{Figures/tf_hit_percentage.png}
-        \caption*{4 pav. \emph{Tbx5} motyvų atitikimų skaičiaus palyginimo
-                  sudėtinė diagrama}
+        \caption*{\textbf{4 pav.} \emph{Tbx5 motyvų atitikimų skaičiaus palyginimo
+                  sudėtinė diagrama}}
     \end{center}
 \end{figure}
 
@@ -554,24 +520,24 @@ tarp visų mėginių regionų sudaro \emph{Tbx5} motyvai.
 \begin{table}[htb]
     \newcolumntype{M}[1]{>{\centering\arraybackslash}m{#1}}
     \small
-    \caption*{2 lentelė. Mėginių charakteristikos}
+    \caption*{\textbf{2 lentelė.} \emph{Mėginių charakteristikos}}
     \begin{tabular}{|c|c|}
     \hline
     \textbf{Mėginys} & \textbf{Procentinė dalis}\\
     \hline
-        \emph{mm\_2\_cardiac\_muscle\_r1} & 8.32\%\\ 
+        \textbf{mm\_2\_cardiac\_muscle\_r1} & 8.32\%\\ 
     \hline
-        \emph{mm\_4\_emb\_fibr\_r1} & 17.59\%\\
+        \textbf{mm\_4\_emb\_fibr\_r1} & 17.59\%\\
     \hline
-        \emph{mm\_4\_emb\_fibr\_r2} & 12.26\%\\
+        \textbf{mm\_4\_emb\_fibr\_r2} & 12.26\%\\
     \hline
-        \emph{mm\_4\_emb\_fibr\_r3} & 13.64\%\\
+        \textbf{mm\_4\_emb\_fibr\_r3} & 13.64\%\\
     \hline
-        \emph{mm\_1\_heart\_r1} & 10.61\%\\
+        \textbf{mm\_1\_heart\_r1} & 10.61\%\\
     \hline
-        \emph{mm\_4\_emb\_fibr\_r4} & 5.98\%\\
+        \textbf{mm\_4\_emb\_fibr\_r4} & 5.98\%\\
     \hline
-        \emph{mm\_3\_cardiac\_fibr\_r1} & 11.98\%\\
+        \textbf{mm\_3\_cardiac\_fibr\_r1} & 11.98\%\\
     \hline
     \end{tabular}
 \end{table}
@@ -581,14 +547,14 @@ tarp visų mėginių regionų sudaro \emph{Tbx5} motyvai.
 \subsection{\emph{De novo} identifikuoti motyvai}
 \emph{De novo} motyvų paieškos programos įvykdymas buvo
 ilgiausiai trukęs analizės etapas, lyginat su kitais 
-tyrimo žingsniais. Šio etapo metu buvo sugeneruoti \emph{html}
+tyrimo žingsniais. Šio etapo metu buvo sugeneruoti HTML
 formato failai, kuriuose buvo pateiktas identifikuotų motyvų sąrašas,
 išrikiuotas pagal p-vertę didėjančia tvarka, motyvų sekų logotipai,
 nuorodos į puslapius su pozicinėmis motyvų svorių matricomis bei
 identifikuotų motyvų procentinę dalį visame mėginio sekų rinkinyje,
-pateiktame \emph{fasta} formatu.
+pateiktame FASTA formatu.
 
-Trečioje lentelėje (lentelė 3) kiekvienam mėginiui pavaizduoti trys
+Trečioje lentelėje (3 lentelė) kiekvienam mėginiui pavaizduoti trys
 motyvai, turintys mažiausią p-vertę bei apimantys didžiausią mėginių
 pilno sekų rinkinio dalį (procentiškai). Penktame trečios lentelės
 stulpelyje nurodyta, kokią procentinę dalį mėginyje sudaro
@@ -597,7 +563,7 @@ identifikuotas \emph{Tbx5} motyvas.
 \begin{table}[htb]
     \newcolumntype{M}[1]{>{\centering\arraybackslash}m{#1}}
     \small
-    \caption*{3 lentelė. Identifikuotų motyvų pavyzdžiai}
+    \caption*{\textbf{3 lentelė.} \emph{Identifikuotų motyvų pavyzdžiai}}
     \begin{tabular}{|c|c|c|c|c|}
     \hline
     \textbf{Mėginys} & \textbf{Pavadinimas} & \textbf{p vertė} &
@@ -637,8 +603,8 @@ identifikuotas \emph{Tbx5} motyvas.
     \multirow{3}{*}{\textbf{mm\_4\_emb\_fibr\_r4}} &
                     TRPS1(Zf) & 1e-1404 & 63.53\% &
                     \multirow{3}{*}{-}\\
-    \cline{2-4}              & Gata3(Zf) & 1e-1271 & 52.43\% & \\
-    \cline{2-4}              & Gata4(Zf) & 1e-1024 & 38.94\% & \\
+    \cline{2-4}              & GATA3(Zf) & 1e-1271 & 52.43\% & \\
+    \cline{2-4}              & GATA4(Zf) & 1e-1024 & 38.94\% & \\
     \hlineB{2.5}
     \multirow{3}{*}{\textbf{mm\_3\_cardiac\_fibr\_r1}} &
                     Tbx6(T-box) & 1e-1431 & 38.28\% &
@@ -655,34 +621,199 @@ kad identifikuoti motyvai atsitiktiniai, yra labai maža, todėl
 gauti duomenys yra statistiškai reišmingi - juos galima toliau
 analizuoti.
 
-Pirmajame ir paskutiniame mėginyje, kurie atitinkamai pažymėti
-\emph{mm\_2\_cardiac\_muscle\_r1} ir \emph{mm\_3\_cardiac\_fibr\_r1},
-\emph{Tbx5} motyvo \emph{p} vertės buvo mažiausios, o procentinė
-dalis - didžiausia. Palyginus šių mėginių rezultatus su 4.4
-dalyje gautais tų pačių mėginių rezultatais pastebimas didelis
-procentinės dalies neatitikimas, tačiau šie procentai
-apskaičiuoti, naudojantis skirtingais metodais. Taip pat 4.4
-dalyje naudota pozicinė svorių matrica neatitinka šioje dalyje
-identifikuoto \emph{Tbx5} motyvo pozicinės svorių matricos.
+Pirmajame ir paskutiniame mėginiuose, kurie lentelėje 
+pažymėti \textbf{mm\_2\_cardiac\_muscle\_r1} ir
+\textbf{mm\_3\_cardiac\_fibr\_r1}, \emph{Tbx5} motyvo \emph{p}
+vertės buvo mažiausios, o procentinė dalis - didžiausia. Palyginus
+šių mėginių rezultatus su 4.4 dalyje gautais tų pačių mėginių
+rezultatais pastebimas didelis procentinės dalies neatitikimas,
+tačiau šie procentai apskaičiuoti, naudojantis skirtingais
+metodais. Taip pat 4.4 dalyje naudota pozicinė svorių
+matrica neatitinka šioje dalyje identifikuoto \emph{Tbx5}
+motyvo pozicinės svorių matricos.
 
-Ketvirtoje lentelėje (lentelė 4) nurodytas bendras identifikuotų
-motyvų skaičius kiekvienam mėginiui.
+Penktoje stulpelinėje diagramoje (5 pav.) vaizduojamas
+bendras identifikuotų motyvų skaičius kiekvienam mėginiui.
 
-\begin{table}[htb]
-    \newcolumntype{M}[1]{>{\centering\arraybackslash}m{#1}}
-    \small
-    \caption*{4 lentelė. Identifikuotų motyvų skaičius mėginiuose}
-    \begin{tabular}{|c|c|c|c|c|}
-    \hline
-    \textbf{Mėginys} & \textbf{Pavadinimas} & \textbf{p vertė} &
-                       \textbf{\thead{Procentinė\\ dalis}} &
-                       \textbf{\emph{Tbx5} motyvas}\\
-    \hlineB{2.5}
-    \end{tabular}
-\end{table}
+\begin{figure}[htb]
+    \begin{center}
+        \includegraphics[width=0.7\linewidth]{Figures/motifs_in_samples.png}
+        \caption*{\textbf{5 pav.} \emph{Identifikuotų motyvų skaičius mėginiuose}}
+    \end{center}
+\end{figure}
+
+Nėra neįprasta, kad paskutinių mėginių (\textbf{mm\_4\_emb\_fibr\_r4} ir
+\textbf{mm\_3\_cardiac\_fibr\_r1}) identifikuotų motyvų skaičius yra pats
+mažiausias - šie mėginiai turi mažiausią regionų skaičių bei 
+mažiausią juos atitinkančių sekų rinkinį.
+
+Nepaisant šio atitikimo, mėginys \textbf{mm\_1\_heart\_r1}, turintis
+mažiausią regionų skaičių po \textbf{mm\_4\_emb\_fibr\_r4} ir
+\textbf{mm\_3\_cardiac\_fibr\_r1} mėginių, turi didžiausią identifikuotų
+motyvų skaičių (345 motyvai). Nustatyti motyvai yra \( \sim \)12
+nukleotidų ilgio.
+
+Toliau pateikiamame grafike (6 pav.) vaizduojama, kiek vienodų
+motyvų buvo nustatyta skirtinguose mėginiuose.
+
+\newpage
+
+\begin{figure}[htb]
+    \begin{center}
+        \includegraphics[width=1\linewidth]{Figures/motif_intersections.png}
+        \caption*{\textbf{6 pav.} \emph{Tarp mėginių persidengiantys motyvai}}
+    \end{center}
+\end{figure}
+
+Remiantis gautu grafiku, galima pastebėti, kad tarp mėginių porų
+buvo nustatytas didelis visiems mėginiams būdingų motyvų skaičius.
+Patikrinus, kiek motyvų aptinkami visuose mėginiuose, buvo nustatyta,
+kad 131 motyvas yra būdingas visiems analizuojamiems mėginiams.
 
 \subsection{\emph{De novo} nustatytų motyvų biologinės funkcijos}
-\emph{MEME} programų paketo programa 
+Išsiaiškinus, kiek motyvų pateiktų mėginių regionų failuose buvo
+identifikuota, buvo nustatytos su šiais motyvais susijusių genų
+funkcijos.
+
+Pateiktame funkcijų sąraše akronimas \textbf{MF} nurodo molekulinę
+funkciją, \textbf{BP} - biologinį procesą, \textbf{CC} - ląstelės
+komponentą. Naudojantis UniProtKB\cite{UNIPROTKB} duomenų bazės rezultatais,
+visi trečioje lentelėje (3 lentelė) pateikti motyvai:
+
+\begin{itemize}
+    \item \textbf{MF:} atlieka jungimosi prie DNR funkciją bei
+    dalyvauja transkripcijos procese.
+    \item \textbf{BP:} dalyvauja ląstelių diferenciacijos
+    procesuose.
+    \item \textbf{CC:} yra aptinkami branduolyje.
+\end{itemize}
+
+\newpage
+
+Unikalios motyvų funkcijos aprašytos sąraše:
+
+\begin{enumerate}
+    \item \textbf{Tbx6(T-box)\cite{TBX6} - T-box transkripcijos faktorius 6}
+        \begin{itemize}
+            \item \textbf{BP:} dalyvauja ląstelių proliferacijos
+            ir organizacijos procesuose, signalinių kelių valdyme,
+            kardioblastų diferenciacijoje.
+            \item \textbf{CC:} nėra prisijungęs prie membranų,  
+            aptinkamas branduolyje.
+        \end{itemize}
+
+    \item \textbf{Tbet(T-box)\cite{TBET} - T-box transkripcijos faktorius 21}
+        \begin{itemize}
+            \item \textbf{BP:} dalyvauja imuninės sistemos,
+            baltymų metabolinių kelių procesuose. Taip pat
+            pasireiškia organizmui reaguojant į dirgiklius.
+            \item \textbf{CC:} aptinkamas branduolyje, neuroninių ląstelių kūne.
+        \end{itemize}
+
+    \item \textbf{Eomes(T-box)\cite{EOMES} - Eomesoderminas}
+        \begin{itemize}
+            \item \textbf{BP:} dalyvauja įvairių ląstelių (pavyzdžiui,
+            kardiomiocitų) diferenciacijoje,
+            neurogenezėje, kamieninių ląstelių populiacijos palaikyme
+            \item \textbf{CC:} aptinkamas branduolyje, chromatine.
+        \end{itemize}
+
+    \item \textbf{Mef2b(MADS)\cite{MEF2B} - Miocitams specifiškas transkripcijos
+                  aktyvatorius 2B}
+        \begin{itemize}
+            \item \textbf{BP:} dalyvauja įvairių ląstelių
+            diferenciacijoje, transkripcijos proceso aktyvavime.
+            \item \textbf{CC:} aptinkamas citozolyje, branduolyje,
+            nukleoplazmoje, ląstelių jungtyse.
+        \end{itemize}
+
+    \item \textbf{Mef2c(MADS)\cite{MEF2C} - Miocitams specifiškas transkripcijos
+                  aktyvatorius 2C}
+        \begin{itemize}
+            \item \textbf{BP:} dalyvauja ląstelių apoptozėje,
+            kraujagyslių formavimęsi, pradinės embrionų
+            širdies vystymęsi.
+            \item \textbf{CC:} aptinkamas citozolyje, branduolyje,
+            nukleoplazmoje, sarkomerose, sarkoplazmoje.
+        \end{itemize}
+
+    \item \textbf{Mef2d(MADS)\cite{MEF2D} - Miocitams specifiškas transkripcijos
+                  aktyvatorius 2D}
+        \begin{itemize}
+            \item \textbf{BP:} dalyvauja suaugusių organizmų širdies
+            vystymęsi, kremzlinių bei kaulinių ląstelių diferenciacijoje.
+            \item \textbf{CC:} aptinkamas citoplazmoje, branduolyje,
+            nukleoplazmoje.
+        \end{itemize}
+
+    \item \textbf{TRPS1(Zf)\cite{TRPS1} - Cinko „pirštelio” transkripcijos
+                  faktorius}
+        \begin{itemize}
+            \item \textbf{BP:} dalyvauja kremzlinių ląstelių
+            diferenciacijoje, skeleto vystymęsi, būdingas
+            neigiamas transkripcijos reguliavimas.
+            \item \textbf{CC:} aptinkamas branduolyje, nukleoplazmoje,
+            chromatine, baltymų kompleksuose.
+        \end{itemize}
+
+    \item \textbf{GATA3(Zf)\cite{GATA3} - T ląstelėms specifiškas transkripcijos
+                  faktorius GATA-3}
+        \begin{itemize}
+            \item \textbf{BP:} dalyvauja aortos vožtuvų formavimęsi,
+            širdies prieširdžių morfogenezėje, embrionų organų
+            vystymęsi, eritrocitų diferenciacijoje.
+            \item \textbf{CC:} aptinkamas branduolyje, nukleoplazmoje,
+            chromatine.
+        \end{itemize}
+
+    \item \textbf{GATA4(Zf)\cite{GATA4} - Transkripcijos faktorius GATA-4}
+        \begin{itemize}
+            \item \textbf{BP:} dalyvauja širdies ląstelių
+            diferenciacijoje, širdies raumens regeneracijoje,
+            embrionų širdies formavimęsi.
+            \item \textbf{CC:} aptinkamas branduolyje, nukleoplazmoje,
+            chromatine.
+        \end{itemize}
+
+    \item \textbf{Fos(bZIP)\cite{FOS} - AP-1 transkripcijos
+                  faktoriaus subvienetas}
+        \begin{itemize}
+            \item \textbf{BP:} dalyvauja atsako į jonus (kadmio,
+            kalcio), citokinus bei progesteroną procesuose. Taip
+            pat aktyvus nervų sistemos vystymosi metu.
+            \item \textbf{CC:} aptinkamas citozolyje, branduolyje,
+            nukleoplazmoje, endoplazminiame tinkle, sinaptosomose.
+        \end{itemize}
+
+    \item \textbf{Fra1(bZIP)\cite{FRA1} - Onkogenas, AP-1 transkripcijos
+                  faktoriaus subvienetas}
+        \begin{itemize}
+            \item \textbf{BP:} dalyvauja ląstelės ciklo valdyme,
+            apoptoziniuose procesuose bei embrionų vystymosi
+            gimdoje procesuose.
+            \item \textbf{CC:} aptinkamas citozolyje, branduolyje,
+            nukleoplazmoje, presinapsinėje membranoje.
+        \end{itemize}
+
+    \item \textbf{Fra2(bZIP)\cite{FRA2} - AP-1 transkripcijos
+                  faktoriaus subvienetas}
+        \begin{itemize}
+            \item \textbf{BP:} dalyvauja teigiamoje fibroblastų
+            proliferacijoje, atsako į estradiolio - moteriško
+            lytinio hormono - procesuose. Taip pat būdinga
+            teigiamas transkripcijos reguliavimas.
+            \item \textbf{CC:} aptinkamas branduolyje ir
+            nukleoplazmoje.
+        \end{itemize}
+\end{enumerate}
+
+\newpage
+
+%%%%%%%%%%%%%
+% IŠVADOS
+%%%%%%%%%%%%%
+
+\section{Išvados}
 
 \newpage
 
@@ -692,10 +823,132 @@ motyvų skaičius kiekvienam mėginiui.
 
 \bibliographystyle{plain}
 \begin{thebibliography}{99}
-% \emph{bigBedToBed} aprašymas: https://genome.ucsc.edu/goldenPath/help/bigBed.html
-% \emph{BEDTools} paketo dokumentacija: https://bedtools.readthedocs.io/en/latest/content/bedtools-suite.html
-% \emph{getfasta} funkcijos dokumentacija: https://bedtools.readthedocs.io/en/latest/content/tools/getfasta.html
+
+\bibitem{GTRD} GTRD: an integrated view of transcription regulation.
+Kolmykov S, Yevshin I, Kulyashov M, Sharipov R, Kondrakhin Y, Makeev VJ,
+Kulakovskiy IV, Kel A, Kolpakov F Nucleic Acids Res. 2021 Jan 8;49(D1):D104-D111.
+
+\bibitem{UCSCGB} UCSC Genome Browser: Kent WJ, Sugnet CW, Furey TS, Roskin KM,
+Pringle TH, Zahler AM, Haussler D. The human genome browser at UCSC. Genome Res.
+2002 Jun;12(6):996-1006.
+
+\bibitem{ARTCL1} He A, Kong SW, Ma Q, Pu WT. Co-occupancy by multiple cardiac
+transcription factors identifies transcriptional enhancers active in heart.
+Proc Natl Acad Sci U S A. 2011 Apr 5;108(14):5632-7. doi: 10.1073/pnas.1016959108.
+Epub 2011 Mar 17. PMID: 21415370; PMCID: PMC3078411.
+
+\bibitem{ARTCL2} Hashimoto H, Wang Z, Garry GA, Malladi VS, Botten GA, Ye W,
+Zhou H, Osterwalder M, Dickel DE, Visel A, Liu N, Bassel-Duby R, Olson EN.
+Cardiac Reprogramming Factors Synergistically Activate Genome-wide Cardiogenic
+Stage-Specific Enhancers. Cell Stem Cell. 2019 Jul 3;25(1):69-86.e5.
+doi: 10.1016/j.stem.2019.03.022. Epub 2019 May 9. PMID: 31080136;
+PMCID: PMC6754266.
+
+\bibitem{ARTCL3} Stone NR, Gifford CA, Thomas R, Pratt KJB, Samse-Knapp K,
+Mohamed TMA, Radzinsky EM, Schricker A, Ye L, Yu P, van Bemmel JG, Ivey KN,
+Pollard KS, Srivastava D. Context-Specific Transcription Factor Functions
+Regulate Epigenomic and Transcriptional Dynamics during Cardiac Reprogramming.
+Cell Stem Cell. 2019 Jul 3;25(1):87-102.e9. doi: 10.1016/j.stem.2019.06.012.
+PMID: 31271750; PMCID: PMC6632093.
+
+\bibitem{JCKSLAB} Jackson Laboratory (RRID:SCR\_004633).
+
+\bibitem{R} R Core Team (2022).
+R: A language and environment for statistical computing. R Foundation
+for Statistical Computing, Vienna, Austria. URL https://www.R-project.org/.
+
+\bibitem{SCIK}Scikick. Utility for executing collections
+of computational notebooks.\\
+URL https://petronislab.camh.ca/pub/scikick/stable/docs/report/out\_html/introduction.html
+
+\bibitem{R_TRACK} M. Lawrence, R. Gentleman, V. Carey: "rtracklayer: an {R}
+package for interfacing with genome browsers". Bioinformatics 25:1841-1842.
+
+\bibitem{R_GGPLOT} H. Wickham. ggplot2: Elegant
+Graphics for Data Analysis. Springer-Verlag New York, 2016.
+
+\bibitem{BBTOBED} BigWig and BigBed tools: Kent WJ, Zweig AS, Barber G,
+Hinrichs AS, Karolchik D. BigWig and BigBed: enabling browsing of large
+distributed data sets. Bioinformatics. 2010 Sep 1;26(17):2204-7.
+
+\bibitem{BEDTOOLS} Quinlan AR, Hall IM. BEDTools: a flexible suite of
+utilities for comparing genomic features. Bioinformatics. 2010 Mar
+15;26(6):841-2. doi: 10.1093/bioinformatics/btq033. Epub 2010 Jan 28.
+PMID: 20110278; PMCID: PMC2832824.
+
+\bibitem{GET_FASTA} BEDTools komandinės eilutės įrankis.
+Programų rinkinio programa \emph{getfasta}.\\
+Prieiga per https://bedtools.readthedocs.io/en/latest/content/tools/getfasta.html
+[žiūrėta 2022-06-03].
+
+\bibitem{BIOSTR} Pagès H, Aboyoun P, Gentleman R, DebRoy S (2022). \_Biostrings:
+Efficient manipulation of biological strings\_. R package version
+2.64.0, <https://bioconductor.org/packages/Biostrings>.
+
+\bibitem{HOMER} Heinz S, Benner C, Spann N, Bertolino E et al.
+Simple Combinations of Lineage-Determining Transcription Factors
+Prime cis-Regulatory Elements Required for Macrophage and B Cell
+Identities. Mol Cell 2010 May 28;38(4):576-589. PMID: 20513432.
+
+\bibitem{UPSETR} Jake R. Conway, Alexander
+Lex, Nils Gehlenborg. UpSetR: An R Package For The
+Visualization Of Intersecting Sets And Their Properties
+Bioinformatics, 33(18): 2938-2940,
+doi:10.1093/bioinformatics/btx364, 2017.
+
+\bibitem{UNIPROT} The UniProt Consortium
+UniProt: the universal protein knowledgebase in 2021
+Nucleic Acids Res. 49:D1 (2021).
+
+\bibitem{UNIPROTKB} Boutet E, Lieberherr D, Tognolli M,
+Schneider M, Bairoch A. UniProtKB/Swiss-Prot
+Methods Mol. Biol. 406:89-112 (2007)
+
+\bibitem{HEART_CELL_DIFF_ARTCL} Drowley L, Koonce C, Peel S, et al.
+Human Induced Pluripotent Stem Cell-Derived Cardiac Progenitor
+Cells in Phenotypic Screening: A Transforming Growth Factor-β
+Type 1 Receptor Kinase Inhibitor Induces Efficient Cardiac
+Differentiation. Stem Cells Transl Med. 2016;5(2):164-174.
+doi:10.5966/sctm.2015-0114
+
+\bibitem{TBX6} UniProtKB duomenų bazė. \emph{Tbx6 aprašymas} (2022).\\
+Prieiga per https://www.uniprot.org/uniprot/P70327 [žiūrėta 2022-06-12].
+
+\bibitem{TBET} UniProtKB duomenų bazė. \emph{Tbet aprašymas} (2022).\\
+Prieiga per https://www.uniprot.org/uniprot/Q9JKD8 [žiūrėta 2022-06-12].
+
+\bibitem{EOMES} UniProtKB duomenų bazė. \emph{Eomes aprašymas} (2022).\\
+Prieiga per https://www.uniprot.org/uniprot/O54839 [žiūrėta 2022-06-12].
+
+\bibitem{MEF2B} UniProtKB duomenų bazė. \emph{Mef2b aprašymas} (2022).\\
+Prieiga per https://www.uniprot.org/uniprot/O55087 [žiūrėta 2022-06-12].
+
+\bibitem{MEF2C} UniProtKB duomenų bazė. \emph{Mef2c aprašymas} (2022).\\
+Prieiga per https://www.uniprot.org/uniprot/Q8CFN5 [žiūrėta 2022-06-12].
+
+\bibitem{MEF2D} UniProtKB duomenų bazė. \emph{Mef2d aprašymas} (2022).\\
+Prieiga per https://www.uniprot.org/uniprot/Q63943 [žiūrėta 2022-06-12].
+
+\bibitem{TRPS1} UniProtKB duomenų bazė. \emph{TRPS1 aprašymas} (2022).\\
+Prieiga per https://www.uniprot.org/uniprot/Q925H1 [žiūrėta 2022-06-12].
+
+\bibitem{GATA3} UniProtKB duomenų bazė. \emph{GATA3 aprašymas} (2022).\\
+Prieiga per https://www.uniprot.org/uniprot/P23772 [žiūrėta 2022-06-12].
+
+\bibitem{GATA4} UniProtKB duomenų bazė. \emph{GATA4 aprašymas} (2022).\\
+Prieiga per https://www.uniprot.org/uniprot/Q08369 [žiūrėta 2022-06-12].
+
+\bibitem{FOS} UniProtKB duomenų bazė. \emph{Fos aprašymas} (2022).\\
+Prieiga per https://www.uniprot.org/uniprot/P01101 [žiūrėta 2022-06-12].
+
+\bibitem{FRA1} UniProtKB duomenų bazė. \emph{Fra1 aprašymas} (2022).\\
+Prieiga per https://www.uniprot.org/uniprot/P48755 [žiūrėta 2022-06-12].
+
+\bibitem{FRA2} UniProtKB duomenų bazė. \emph{Fra2 aprašymas} (2022).\\
+Prieiga per https://www.uniprot.org/uniprot/P47930 [žiūrėta 2022-06-12].
+
 \end{thebibliography}
+
 \newpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -703,5 +956,18 @@ motyvų skaičius kiekvienam mėginiui.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Priedas}
+
+Priedų sąraše pateikiamos tarpinių rezultatų puslapio, sugeneruoto
+su Scikick, bei Git repozitorijos, kurioje saugomi analizei naudoti
+duomenų failai, parašyti skriptai bei pagrindinė R programa, nuorodos.
+
+\begin{itemize}
+    \item \textbf{Tarpinių rezultatų Scikick puslapis:}\\
+        https://karklas.mif.vu.lt/\(\sim\)dast6577/KursinisDarbas/v1.1/peaks\_MM.html
+    \item \textbf{Analizės Git repozitorija:}\\
+        https://github.com/dansta0804/TF\_analysis.git
+  \end{itemize}
+
+
 
 \end{document}
