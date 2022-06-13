@@ -36,10 +36,10 @@ four different types of *Mus musculus* cells.
 
 ```{r fig, fig.width = 6, fig.height = 7, fig.align = "center"}
 # Creating Sample Key table:
-samples <- read.csv(file = "sample_key.csv")
+samples <- read.csv(file = "/home/daniele/Desktop/III_course/II_semester/Kursinis_darbas/TF_analysis/Generated_files/sample_key.csv")
 
 # Importing BigBed format files:
-pth <- "../BigBed/"
+pth <- "../Inputs/BigBed/"
 bbfiles <- list.files(path = pth, "*bb")
 grl <- GRangesList()
 chr_abr <- c(paste0("chr", 1:19), "chrX", "chrY")
@@ -67,7 +67,7 @@ bplot1 <- ggplot(peaks, aes(x = peaks$Experiment, y = peaks$Peak_count)) +
                           vjust = -0.25) +
                 labs(x = "Mėginys", y = "Regionų skaičius")
 
-png(file = "Latex/Figures/total_peak_counts.png")
+png(file = "../Figures/total_peak_counts.png")
 
 bplot1 + theme(
     panel.background = element_rect(fill = "#eeeef1", colour = "#4c0001"),
@@ -140,7 +140,7 @@ bplot2 <- ggplot(peak_counts, aes(x = Name, y = as.numeric(Peak_count))) +
                           y = as.numeric(Peak_count)), vjust = -1, hjust = .5,
                           size = 2.7, angle = 0, color = "black")
 
-png(file = "./peak_counts_by_chromosome.png",
+png(file = "../Figures/peak_counts_by_chromosome.png",
     width = 600, height = 700)
     
 bplot2 + theme_linedraw() +
@@ -202,7 +202,7 @@ overlaps <- ggplot(melt_coef_mat, aes(x = Var2, y = Var1, fill = value)) +
                       plot.title = element_text(hjust = 0.5, size = 16,
                       face = "bold"))
 
-png(file = "Latex/Figures/peak_overlaps_between_samples.png", width = 600)
+png(file = "../Figures/peak_overlaps_between_samples.png", width = 600)
 overlaps
 dev.off()
 ```
@@ -213,14 +213,21 @@ The following analysis is focused on analysing the sequences based on the
 peaks and trying to determine Tbx5 motif hits in sequences using PWM matrix.
 
 ```{r}
-mpwm <- read.table("TBX5_MOUSE.H11MO.0.D.pwm")
+library(ggseqlogo)
+library(dplyr)
+library(Biostrings)
+library(rtracklayer)
+PATH <- "/home/daniele/Desktop/III_course/II_semester/Kursinis_darbas/TF_analysis"
+mpwm <- read.table(paste0(PATH, "/Generated_files/TBX5_MOUSE.H11MO.0.D.pwm"))
 mpwm <- t(mpwm)
 rownames(mpwm) <- c("A","C","G","T")
-#mpwm
-#ggseqlogo(mpwm)
+tbx5_motif <- ggseqlogo(mpwm)
+png(file = paste0(PATH, "/Figures/tbx5_motif.png"), height = 320)
+tbx5_motif
+dev.off()
 
 # Calculating Tbx5 hits within fetched fasta files of peaks:
-pth_fasta <- "../FASTA/"
+pth_fasta <- paste0(PATH, "/Inputs/FASTA/")
 peak_sequences <- list.files(path = pth_fasta, "*fasta")
 
 hit_vec <- c()
@@ -232,7 +239,8 @@ find_motif_hits <- function(sequences) {
     for (i in 1:length(sequences)) {
         hits <- countPWM(as.matrix(mpwm), sequences[[i]], min.score="75%")
         if (hits == 0) { next }
-        else { hit_vec <- c(hit_vec, hits) }
+        else { hit_vec <- c(hit_vec, hits)
+        print(matchPWM(as.matrix(mpwm), sequences[[i]])) }
     }
     return(sum(hit_vec))
 }
@@ -240,7 +248,7 @@ find_motif_hits <- function(sequences) {
 # Function that calculates total peak count in each sample:
 calculate_peaks <- function(filename) {
     name <- paste0(tools::file_path_sans_ext(filename), ".bb")
-    file <- import(paste0("../BigBed/", name)) %>%
+    file <- import(paste0("../Inputs/BigBed/", name)) %>%
                     filter(seqnames %in% chr_abr)
     region_count <- length(file)
     return(region_count)
@@ -253,30 +261,31 @@ calculate_peaks <- function(filename) {
 #   - Tbx5 motif percentage.
 
 # # TEMPORARY COMMENTED!
-# columns <- c("Sample", "Motif_count", "Peak_count", "Percentage") 
-# tbx5_motif <- data.frame(matrix(nrow = 0, ncol = length(columns))) 
+columns <- c("Sample", "Motif_count", "Peak_count", "Percentage") 
+tbx5_motifs <- data.frame(matrix(nrow = 0, ncol = length(columns))) 
  
-# colnames(tbx5_motif) <- columns
+colnames(tbx5_motifs) <- columns
 
-# for (i in 1:length(peak_sequences)) {
-#     filename <- peak_sequences[i]
-#     bb_file <- paste0(tools::file_path_sans_ext(filename), ".bb")
-#     samples_plot_name <- samples$Graph_names[samples$Filename == bb_file]
+for (i in 1:length(peak_sequences)) {
+    filename <- peak_sequences[i]
+    bb_file <- paste0(tools::file_path_sans_ext(filename), ".bb")
+    samples_plot_name <- samples$Graph_names[samples$Filename == bb_file]
 
-#     seq <- readDNAStringSet(paste0(pth_fasta, filename))
-#     motif <- find_motif_hits(seq)
-#     peaks <- calculate_peaks(filename)
-#     percentage <- round((motif / peaks) * 100, 2)
+    seq <- readDNAStringSet(paste0(pth_fasta, filename))
+    motif <- find_motif_hits(seq)
+    peaks <- calculate_peaks(filename)
+    percentage <- round((motif / peaks) * 100, 2)
 
-#     data_row <- c(samples_plot_name, motif, peaks, paste0(percentage, "%"))
-#     tbx5_motif[nrow(tbx5_motif) + 1, ] <- data_row
-# }
+    data_row <- c(samples_plot_name, motif, peaks, paste0(percentage, "%"))
+    tbx5_motifs[nrow(tbx5_motifs) + 1, ] <- data_row
+}
 
 # write.csv(tbx5_motif, "tbx5_motif_data.csv")
 # # THE END OF THE COMMENT
 library(reshape2)
+library(ggplot2)
 
-motif_data <- read.csv(file = "tbx5_motif_data.csv")
+motif_data <- read.csv(file = paste0(PATH, "/Generated_files/tbx5_motif_data.csv"))
 motif_data$Sample <- factor(motif_data$Sample, levels = motif_data$Sample)
 
 subset_df <- motif_data[, 2:5]
@@ -284,16 +293,17 @@ melted_df <- melt(subset_df)
 
 tf_percent <- ggplot(melted_df, aes(x = Sample, y = value, fill = variable,
                                     label = value)) + 
-                geom_bar(stat = "identity", colour = "#35170450", size = 0.5) +
-                scale_fill_manual(values = c("#eca087", "#be4e31"),
+                geom_bar(stat = "identity", colour = "#35170450", size = 0.5,
+                         width = 0.8) +
+                scale_fill_manual(values = c("#e3a15e", "#c7633b"),
                                   labels = c("Tbx5 motyvų skaičius",
                                              "Regionų skaičius")) +
                 guides(fill = guide_legend(title = "Spalvų paaiškinimas")) +
                 geom_text(size = 4, position = position_stack(vjust = 0.5),
-                        color = "black") +
+                          color = "black") +
                 labs(title = "", x = "Mėginys", y = "TF/Regionų skaičius") +
                 theme(axis.text = element_text(size = 10, colour = "black"),
-                      axis.text.x = element_text(angle = 45, hjust = 0.5,
+                      axis.text.x = element_text(angle = 60, hjust = 0.5,
                                                  vjust = 0.5),
                       axis.title.x = element_text(size = 14, colour = "black"),
                       axis.title.y = element_text(size = 14, colour = "black"),
@@ -316,7 +326,7 @@ tf_percent <- ggplot(melted_df, aes(x = Sample, y = value, fill = variable,
                                                         linetype = "longdash"),
                       legend.position = c(0.777, 0.788))
 
-png(file = "Latex/Figures/tf_hit_percentage.png", width = 500)
+png(file = paste0(PATH, "/Figures/tf_hit_percentage.png"), width = 400)
 tf_percent
 dev.off()
 ```
@@ -326,7 +336,7 @@ for each sample.
 
 ```{r}
 library(ggplot2)
-identified_motifs <- read.csv(file = "identified_motifs.csv")
+identified_motifs <- read.csv(file = "../Generated_files/identified_motifs.csv")
 
 motif_counts <- data.frame(Motif_count = colSums(!is.na(identified_motifs)))
 rownames(motif_counts) <- NULL
@@ -367,7 +377,7 @@ motifs <- ggplot(motif_counts, aes(x = Sample, y = Motif_count)) +
                                                         linetype = "longdash"),
                       legend.position = c(0.777, 0.788))
 
-png(file = "Latex/Figures/motifs_in_samples.png", width = 500)
+png(file = "../Figures/motifs_in_samples.png", width = 500)
 motifs
 dev.off()
 ```
@@ -421,7 +431,7 @@ motif_intersects <- upset(fromExpression(inte), nsets = 7,
                           text.scale = 1.5, matrix.color = "#5f260f",
                           point.size = 3)
 
-png(file = "Latex/Figures/motif_intersections.png", width = 900)
+png(file = "../Figures/motif_intersections.png", width = 900)
 motif_intersects
 dev.off()
 

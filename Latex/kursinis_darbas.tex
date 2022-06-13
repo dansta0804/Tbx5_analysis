@@ -58,7 +58,8 @@
     {\bf \LARGE \emph{tbx5} ir \emph{tcf21} genų įtakos regeneracijai tyrimai}
 \end{center}
 \begin{center}
-    {\bf \Large Research of the \emph{tbx5} and \emph{tcf21} genes' functions in regeneration}
+    {\bf \Large Research of the \emph{tbx5} and \emph{tcf21}
+     genes' functions in regeneration}
 \end{center}
 \vskip 20pt
 \centerline{\bf \large \textbf{Kursinis darbas}}
@@ -109,6 +110,43 @@ Short summary of results.\\
 % ĮVADO PUSLAPIS
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Įvadas}
+
+\textbf{Darbo temos aktualumas}
+
+Spartėjanti mokslo raida, įvairūs atradimai bei išradimai stipriai
+paspartino ir pagerino įvairių ligų diagnostikos bei prevencijos
+tyrimus, praplėtė žinias ląstelės biologijos, genetikos, fiziologijos
+ir kitose srityse. Viena iš medicinos sričių, kuri pradėta tyrinėti dar
+XVIII a., kai buvo nustatyta, kad kai kurie organizmai geba atsiauginti
+prarastas arba sužeistas galūnes bei kitus kūno audinius\cite{REGENERATION},
+yra organizmų audinių bei organų regeneracija.
+
+Šiais laikais regeneracijos tyrimai atliekami su hidromis, planarijomis,
+tritonais bei zebražuvėmis\cite{ORGANISMS}, siekiant išsiaiškinti šių
+organizmų audinių regeneracijos mechanizmus bei pritaikyti žmonėms,
+patyrusiems traumas ar turintiems specifinių kūno audinių pažeidimų.
+Regeneracijos procese pagrindinę funkciją atlieka kamieninės ląstelės
+bei įvairūs transkripcijos reguliavimo faktoriai, gebantys prisijungti
+prie DNR chromatino ir skatinti arba slopinti specifinių genų transkripciją.
+
+Sėkmingam regeneracijos procesų mechanizmų supratimui būtina išsiaiškinti,
+kokie transkripcijos faktoriai dalyvauja šiame procese bei kokias funkcijas
+jie atlieka.
+\hfill \break
+
+\textbf{Darbo tikslas}
+
+Pagrindinis šio darbo tikslas yra palyginti Tbx5 transkripcijos faktoriaus
+regionų skirtumus skirtinguose \emph{Mus musculus} ląstelių mėginiuose,
+gautuose pritaikius ChIP-seq metodą.
+\hfill \break
+
+\textbf{Uždaviniai}
+\begin{itemize}
+    \item
+\end{itemize}
+
+
 \newpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -181,6 +219,7 @@ ląstelių.
     \hline
     \end{tabular}
 \end{table}
+
 \newpage
 
 \subsection{Santrumpų bei pavadinimų paaiškinimai}
@@ -221,13 +260,13 @@ ląstelių.
           stabdančio telomerazės veiklą, jungimąsi prie telomerinių
           DNR sekų.
     \item \textbf{AGHMT}: AKT1 - serino/treonino kinazė 1; GATA4,
-          HAND2, MEF2C, \emph{Tbx5} - kardiogeniniai transkripcijos faktoriai.
+          HAND2, MEF2C, Tbx5 - kardiogeniniai transkripcijos faktoriai.
     \item \textbf{GHMT}: GATA4, HAND2, MEF2C, TBX5 transkripcijos
           faktorių komplektas.
-    \item \textbf{GMT}: GATA4, MEF2C, \emph{Tbx5}  transkripcijos
+    \item \textbf{GMT}: GATA4, MEF2C, Tbx5 transkripcijos
           faktorių komplektas.
     \item \textbf{sc-17866x/ sc-17866}: iš ožkų išskirti antikūnai,
-    \     atpažįstantys žmonių, pelių ir žiurkių \emph{Tbx5} antigeną.
+    \     atpažįstantys žmonių, pelių ir žiurkių Tbx5 antigeną.
 \end{itemize}
 
 
@@ -242,13 +281,13 @@ ląstelių.
         HL - 1 širdies raumens ląstelės buvo infekuotos
         su adenovirusu, ekspresuojančiu troponiną T, kuris skatina
         \emph{rtTA} ir \emph{BirA} genų ekspresiją, bei TRE promotoriumi,
-        skatinančiu \emph{Tbx5} transkripcijos faktoriaus geno raišką.
+        skatinančiu Tbx5 transkripcijos faktoriaus geno raišką.
         Sąlygos taikytos 48 valandas.
     \item \textbf{EXP058852}: prieširdžių ląstelės buvo du kartus po 24
         valandas laikytos mišinyje su retrovirusais. Papildomi poveikiai
         nebuvo taikyti.
     \item \textbf{EXP062056}: eksperimente ląstelės buvo infekuotos su
-        GATA4, Mef2c, ir \emph{Tbx5} transkripcijos faktorius sintetinančiais
+        GATA4, Mef2c, ir Tbx5 transkripcijos faktorius sintetinančiais
         retrovirusais. Ląstelės augintos terpėje, kurioje buvo {Tgf\textbeta}
         inhibitoriaus sb431542, skatinančio kardiomiocitų diferenciaciją
         iš pliuripotentinių kamieninių ląstelių, ir Wnt inhibitoriaus
@@ -277,7 +316,7 @@ keturiais skirtingais poveikiais tirti mėginiai:
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Tyrimo metodai}
-\emph{Tbx5} transkripcijos faktoriaus regionų tyrimo analizė atlikta
+Tbx5 transkripcijos faktoriaus regionų tyrimo analizė atlikta
 su R programavimo kalba\cite{R} (4.2.0 versija).
 
 Tarpiniams analizės rezultatams pateikti naudotas komandinės eilutės
@@ -301,7 +340,7 @@ Transkripcijos faktoriaus regionų skaičius skirtingose chromosomose
 kiekvienam mėginiui apskaičiuotas, naudojantis standartine R
 funkcija \emph{length()}, pritaikyta atskiroms chromosomoms,
 kurių pozicijos aprašytos \emph{GRanges} objekte.
-Kiekvieno mėginio \emph{Tbx5} transkripcijos faktoriaus pasiskirstymas
+Kiekvieno mėginio Tbx5 transkripcijos faktoriaus pasiskirstymas
 chromosomose atvaizduotas su \emph{ggplot()} ir papildoma funkcija
 \emph{facet\_wrap()}, sukuriančia atskirus grafikus pagal pasirinktą
 elementą - chromosomas.
@@ -349,16 +388,34 @@ UCSC komandinės eilutės programa \emph{bigBedToBed}\cite
 Sugeneruoti BED formato failai panaudoti pikus atitinkančių
 sekų iš naminės pelės genomo gavimui FASTA formatu.
 Sekos iš genomo išgautos, pasinaudojus komandinės eilutės įrankio
-BEDTools\cite{BEDTOOLS}.
-(2.30.0 versija) programa \emph{getfasta}\cite{GET_FASTA}.
+BEDTools\cite{BEDTOOLS} (2.30.0 versija) programa
+\emph{getfasta}\cite{GET_FASTA}.
 
-Kiekviename mėginyje esančio \emph{Tbx5} transkripcijos faktoriaus
+Kiekviename mėginyje esančio Tbx5 transkripcijos faktoriaus
 motyvo procentinė dalis apskaičiuota susumavus \emph{Biostrings}\cite{BIOSTR}
-bibliotekos funkcijos \emph{countPWM()} rezultatus bei gautą
-vertę padalinus iš bendro regionų skaičiaus.
+bibliotekos funkcijos \emph{countPWM()} rezultatus. Funkcijai
+\emph{countPWM()} kaip argumentas pateikta Tbx5 transkripcijos
+faktoriaus pozicinė svorių matrica bei mėginio nukleotidų
+sekų rinkinys FASTA formatu. Gauta funkcijos reikšmė padalinta
+iš bendro regionų skaičiaus.
 
-Gauta \emph{Tbx5} transkripcijos faktoriaus procentinė dalis
-vizualizuota su pagrindinėmis \emph{ggplot()} ir \emph{geom\_bar()}
+Pozicinė svorių matrica atsisiųsta iš HOCOMOCO\cite{HOCOMOCO} (11.0 versija)
+(\emph{angl.} HOmo sapiens COmprehensive MOdel COllection)
+duomenų bazės \emph{Homo sapiens} ir \emph{Mus musculus}
+organizmų transkripcijos faktorių kolekcijos. Pozicinę svorių
+matricą atitinkantis sekos logotipas vaizduojamas
+pirmame paveiksle (1 pav.).
+
+\begin{figure}[htb]
+    \begin{center}
+        \includegraphics[width=0.5\linewidth]{../Figures/tbx5_motif.png}
+        \caption*{\textbf{1 pav.} \emph{Tbx5 transkripcijos faktoriaus
+                                        sekos logotipas}}
+    \end{center}
+\end{figure}
+
+Identifikuotų Tbx5 transkripcijos faktoriaus motyvų skaičius
+vizualizuotas su pagrindinėmis \emph{ggplot()} ir \emph{geom\_bar()}
 funkcijomis.
 
 \subsection{Motyvų paieška \emph{de novo}}
@@ -391,29 +448,29 @@ klasifikacija.
 \subsection{Regionų skaičiaus skirtumai tarp mėginių}
 Pirmajame analizės etape kiekviename mėginyje nustatytas bendras
 regionų skaičius pavaizduotas pirmoje stulpelinėje diagramoje
-(1 pav.).
+(2 pav.).
 
 \begin{figure}[htb]
     \begin{center}
-        \includegraphics[width=0.7\linewidth]{Figures/total_peak_counts.png}
-        \caption*{\textbf{1 pav.} \emph{Regionų skaičių kiekviename mėginyje
+        \includegraphics[width=0.7\linewidth]{../Figures/total_peak_counts.png}
+        \caption*{\textbf{2 pav.} \emph{Regionų skaičių kiekviename mėginyje
         vaizduojanti stulpelinė diagrama}}
     \end{center}
 \end{figure}
 
-Remiantis diagrama didžiausias \emph{Tbx5} transkripcijos faktoriaus
-regionų skaičius nustatytas eksperimento \textbf{mm\_4\_emb\_fibr\_r1}
+Remiantis diagrama didžiausias Tbx5 transkripcijos faktoriaus
+regionų skaičius nustatytas eksperimento mm\_4\_emb\_fibr\_r1
 biologinėje replikoje, kurioje pelių embrionų fibroblastų ląstelės
 dvi dienas veiktos AGHMT faktoriais.
 Šį rezultatą palyginus su kitomis biologinėmis replikomis, kuriose
 tirtas tas pats pelių embrionų fibroblastų ląstelių kamienas, tačiau
 ląstelės veiktos tik kai kuriais faktoriais, pastebimas gradualus
-\emph{Tbx5} transkripcijos faktoriaus regionų skaičiaus mažėjimas
-diagramoje \textbf{mm\_4\_emb\_fibr\_r2}, \textbf{mm\_4\_emb\_fibr\_r3} ir
-\textbf{mm\_4\_emb\_fibr\_r4} pavaizduotuose stulpeliuose.
+Tbx5 transkripcijos faktoriaus regionų skaičiaus mažėjimas
+diagramoje mm\_4\_emb\_fibr\_r2, mm\_4\_emb\_fibr\_r3 ir
+mm\_4\_emb\_fibr\_r4 pavaizduotuose stulpeliuose.
 
 Mėginyje, kuriame embrionų fibroblastai veikti tik vienu faktoriumi,
-\emph{Tbx5} transkripcijos faktoriaus regionų nustatyta nedaug -
+Tbx5 transkripcijos faktoriaus regionų nustatyta nedaug -
 13520.
 
 Mažiausiai regionų nustatyta mėginyje, kuriame tirta pelių
@@ -431,12 +488,12 @@ jungimuisi prie DNR sekų.
 % REGIONŲ SKAIČIUS ATSKIROSE CHROMOSOMOSE
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Regionų pasiskirstymas chromosomose}
-Nustačius \emph{Tbx5} transkripcijos faktoriaus regionų
+Nustačius Tbx5 transkripcijos faktoriaus regionų
 pasiskirstymą eksperimentų mėginiuose, kitame analizės etape
 patikrinta, kaip faktoriaus regionai pasiskirstę atskirose
 chromosomose.
 
-Vaizduojamuose grafikuose (2 pav.) didžiausias regionų skaičius nustatomas
+Vaizduojamuose grafikuose (3 pav.) didžiausias regionų skaičius nustatomas
 pirmoje, antroje ir penktoje chromosomose. Naminės pelės pirmoji
 chromosoma yra pati didžiausia, turinti 195 milijonų bazių porų,
 antroji chromosoma sudaryta iš 182 megabazių, penktoji chromosoma -
@@ -447,8 +504,8 @@ devynioliktoje (61 Mbp), X (169 Mbp) ir Y (91 Mbp) chromosomose.
 
 \begin{figure}[htb]
     \begin{center}
-        \includegraphics[width=0.8\linewidth]{Figures/peak_counts_by_chromosome.png}
-        \caption*{\textbf{2 pav.} \emph{Regionų pasiskirstymas chromosomose}}
+        \includegraphics[width=0.8\linewidth]{../Figures/peak_counts_by_chromosome.png}
+        \caption*{\textbf{3 pav.} \emph{Regionų pasiskirstymas chromosomose}}
     \end{center}
 \end{figure}
 
@@ -474,15 +531,16 @@ mėginių duomenų dalis persidengia.
 
 \begin{figure}[htb]
     \begin{center}
-        \includegraphics[width=0.8\linewidth]{Figures/peak_overlaps_between_samples.png}
-        \caption*{\textbf{3 pav.} \emph{Persidengiančių regionų procentinės
+        \includegraphics[width=0.7\linewidth]{../Figures/peak_overlaps_between_samples.png}
+        \caption*{\textbf{4 pav.} \emph{Persidengiančių regionų procentinės
                   dalies vaizdavimas}}
     \end{center}
 \end{figure}
 
-Remiantis pavaizduoto spalvų intensyvumo grafiko (3 pav.)
+Remiantis pavaizduoto spalvų intensyvumo grafiko (4 pav.)
 duomenimis, didžiausi persidengiančių regionų procentai
 nustatyti tarp šių mėginių:
+
 \begin{itemize}
     \item \textbf{81.577 \%} - tarp mėginio, kuriame buvo tiriamos širdies
             fibroblastų ląstelės, ekspresuojančios T antigeną, ir mėginio,
@@ -502,45 +560,37 @@ nustatyti tarp šių mėginių:
 % TBX5 MOTYVO NUSTATYMAS
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{\emph{Tbx5} motyvo pasiskirstymas mėginiuose}
-Ketvirtajame grafike (4 pav.) vaizduojama, kiek \emph{Tbx5}
-motyvo atitikimų nustatyta skirtinguose mėginiuose.
-<PAPILDYTI, NURODANT, KOKS TBX5 MOTYVAS BUVO NUSTATYTAS IR PAN.>
+Penktajame grafike (5 pav.) pavaizduota, kiek Tbx5 motyvo
+atitikimų nustatyta skirtinguose mėginiuose.
 
 \begin{figure}[htb]
     \begin{center}
-        \includegraphics[width=0.7\linewidth]{Figures/tf_hit_percentage.png}
-        \caption*{\textbf{4 pav.} \emph{Tbx5 motyvų atitikimų skaičiaus palyginimo
+        \includegraphics[width=0.6\linewidth]{../Figures/tf_hit_percentage.png}
+        \caption*{\textbf{5 pav.} \emph{Tbx5 motyvų atitikimų skaičiaus palyginimo
                   sudėtinė diagrama}}
     \end{center}
 \end{figure}
 
-Antroje lentelėje (2 lentelė) nurodoma, kokią procentinę dalį
-tarp visų mėginių regionų sudaro \emph{Tbx5} motyvai.
+Daugiausiai Tbx5 motyvo sekos (AGGTGTCA) atitikimų (39820)
+nustatyta mėginyje, kuriame embrionų fibroblastai veikti
+serino/treonino kinaze 1 (Akt1) bei keliais transkripcijos
+faktoriais (GATA4, HAND2, MEF2C, Tbx5).
 
-\begin{table}[htb]
-    \newcolumntype{M}[1]{>{\centering\arraybackslash}m{#1}}
-    \small
-    \caption*{\textbf{2 lentelė.} \emph{Mėginių charakteristikos}}
-    \begin{tabular}{|c|c|}
-    \hline
-    \textbf{Mėginys} & \textbf{Procentinė dalis}\\
-    \hline
-        \textbf{mm\_2\_cardiac\_muscle\_r1} & 8.32\%\\ 
-    \hline
-        \textbf{mm\_4\_emb\_fibr\_r1} & 17.59\%\\
-    \hline
-        \textbf{mm\_4\_emb\_fibr\_r2} & 12.26\%\\
-    \hline
-        \textbf{mm\_4\_emb\_fibr\_r3} & 13.64\%\\
-    \hline
-        \textbf{mm\_1\_heart\_r1} & 10.61\%\\
-    \hline
-        \textbf{mm\_4\_emb\_fibr\_r4} & 5.98\%\\
-    \hline
-        \textbf{mm\_3\_cardiac\_fibr\_r1} & 11.98\%\\
-    \hline
-    \end{tabular}
-\end{table}
+Mažiausias Tbx5 motyvo sekų skaičius nustatytas mėginiuose,
+kuriuose embrionų fibroblastai veikti tik vienu transkripcijos
+faktoriumi (mm\_4\_emb\_fibr\_r4), ir mėginyje, kuriame
+pelių naujagimių širdies fibroblastai veikti sb431542 ir
+xav939 inhibitoriais (mm\_3\_cardiac\_fibr\_r1).
+Nepaisant to, kad šiuose mėginiuose motyvų skaičius mažiausias,
+remiantis procentine motyvų mėginiuose dalimi, mėginys
+(mm\_3\_cardiac\_fibr\_r1) Tbx5 motyvo sekos fragmentų turi
+daug (1610), atsižvelgus į bendrą šio mėginio sekų kiekį.
+
+Mėginio, kuriame tirtos širdies raumens ląstelės
+(mm\_2\_cardiac\_muscle\_r1), Tbx5 motyvų sekų nustatyta
+mažai, palyginus identifikuoto transkripcijos faktoriaus
+motyvo sekų skaičių su bendru šio mėginio sekų rinkinio
+dydžiu.
 
 \newpage
 
@@ -558,7 +608,7 @@ Trečioje lentelėje (3 lentelė) kiekvienam mėginiui pavaizduoti trys
 motyvai, turintys mažiausią p-vertę bei apimantys didžiausią mėginių
 pilno sekų rinkinio dalį (procentiškai). Penktame trečios lentelės
 stulpelyje nurodyta, kokią procentinę dalį mėginyje sudaro
-identifikuotas \emph{Tbx5} motyvas.
+identifikuotas Tbx5 motyvas.
 
 \begin{table}[htb]
     \newcolumntype{M}[1]{>{\centering\arraybackslash}m{#1}}
@@ -618,50 +668,50 @@ identifikuotas \emph{Tbx5} motyvas.
 Remiantis trečios lentelės duomenimis bei naudojantis statistinių
 hipotezių testavimu itin mažos \emph{p} vertės rodo, jog tikimybė,
 kad identifikuoti motyvai atsitiktiniai, yra labai maža, todėl
-gauti duomenys yra statistiškai reišmingi - juos galima toliau
-analizuoti.
+gauti duomenys yra statistiškai reikšmingi - juos galima toliau
+analizuoti ir daryti įvairias išvadas.
 
 Pirmajame ir paskutiniame mėginiuose, kurie lentelėje 
-pažymėti \textbf{mm\_2\_cardiac\_muscle\_r1} ir
-\textbf{mm\_3\_cardiac\_fibr\_r1}, \emph{Tbx5} motyvo \emph{p}
+pažymėti mm\_2\_cardiac\_muscle\_r1 ir
+mm\_3\_cardiac\_fibr\_r1, Tbx5 motyvo \emph{p}
 vertės buvo mažiausios, o procentinė dalis - didžiausia. Palyginus
 šių mėginių rezultatus su 4.4 dalyje gautais tų pačių mėginių
 rezultatais pastebimas didelis procentinės dalies neatitikimas,
 tačiau šie procentai apskaičiuoti, naudojantis skirtingais
 metodais. Taip pat 4.4 dalyje naudota pozicinė svorių
-matrica neatitinka šioje dalyje identifikuoto \emph{Tbx5}
+matrica neatitinka šioje dalyje identifikuoto Tbx5
 motyvo pozicinės svorių matricos.
 
-Penktoje stulpelinėje diagramoje (5 pav.) vaizduojamas
+Pateiktoje stulpelinėje diagramoje (6 pav.) vaizduojamas
 bendras identifikuotų motyvų skaičius kiekvienam mėginiui.
 
 \begin{figure}[htb]
     \begin{center}
-        \includegraphics[width=0.7\linewidth]{Figures/motifs_in_samples.png}
-        \caption*{\textbf{5 pav.} \emph{Identifikuotų motyvų skaičius mėginiuose}}
+        \includegraphics[width=0.7\linewidth]{../Figures/motifs_in_samples.png}
+        \caption*{\textbf{6 pav.} \emph{Identifikuotų motyvų skaičius mėginiuose}}
     \end{center}
 \end{figure}
 
-Nėra neįprasta, kad paskutinių mėginių (\textbf{mm\_4\_emb\_fibr\_r4} ir
-\textbf{mm\_3\_cardiac\_fibr\_r1}) identifikuotų motyvų skaičius yra pats
+Nėra neįprasta, kad paskutinių mėginių (mm\_4\_emb\_fibr\_r4 ir
+mm\_3\_cardiac\_fibr\_r1) identifikuotų motyvų skaičius yra pats
 mažiausias - šie mėginiai turi mažiausią regionų skaičių bei 
 mažiausią juos atitinkančių sekų rinkinį.
 
-Nepaisant šio atitikimo, mėginys \textbf{mm\_1\_heart\_r1}, turintis
-mažiausią regionų skaičių po \textbf{mm\_4\_emb\_fibr\_r4} ir
-\textbf{mm\_3\_cardiac\_fibr\_r1} mėginių, turi didžiausią identifikuotų
-motyvų skaičių (345 motyvai). Nustatyti motyvai yra \( \sim \)12
+Nepaisant šio atitikimo, mėginys mm\_1\_heart\_r1, turintis
+mažiausią regionų skaičių po mm\_4\_emb\_fibr\_r4 ir
+mm\_3\_cardiac\_fibr\_r1 mėginių, turi didžiausią identifikuotų
+motyvų skaičių (345 motyvai). Nustatyti motyvai yra \(\sim\)12
 nukleotidų ilgio.
 
-Toliau pateikiamame grafike (6 pav.) vaizduojama, kiek vienodų
+Toliau pateikiamame grafike (7 pav.) vaizduojama, kiek vienodų
 motyvų buvo nustatyta skirtinguose mėginiuose.
 
 \newpage
 
 \begin{figure}[htb]
     \begin{center}
-        \includegraphics[width=1\linewidth]{Figures/motif_intersections.png}
-        \caption*{\textbf{6 pav.} \emph{Tarp mėginių persidengiantys motyvai}}
+        \includegraphics[width=1\linewidth]{../Figures/motif_intersections.png}
+        \caption*{\textbf{7 pav.} \emph{Tarp mėginių persidengiantys motyvai}}
     \end{center}
 \end{figure}
 
@@ -824,6 +874,15 @@ Unikalios motyvų funkcijos aprašytos sąraše:
 \bibliographystyle{plain}
 \begin{thebibliography}{99}
 
+\bibitem{REGENERATION} Kate MacCord, Jane Maienschein (2019) Philosophy of
+Biology: Understanding regeneration at different scales eLife 8:e46569
+https://doi.org/10.7554/eLife.46569
+
+\bibitem{ORGANISMS} Mehta AS, Singh A. Insights into regeneration tool box:
+An animal model approach. Dev Biol. 2019 Sep 15;453(2):111-129.
+doi: 10.1016/j.ydbio.2019.04.006. Epub 2019 Apr 13. PMID: 30986388;
+PMCID: PMC6684456.
+
 \bibitem{GTRD} GTRD: an integrated view of transcription regulation.
 Kolmykov S, Yevshin I, Kulyashov M, Sharipov R, Kondrakhin Y, Makeev VJ,
 Kulakovskiy IV, Kel A, Kolpakov F Nucleic Acids Res. 2021 Jan 8;49(D1):D104-D111.
@@ -884,6 +943,14 @@ Prieiga per https://bedtools.readthedocs.io/en/latest/content/tools/getfasta.htm
 \bibitem{BIOSTR} Pagès H, Aboyoun P, Gentleman R, DebRoy S (2022). \_Biostrings:
 Efficient manipulation of biological strings\_. R package version
 2.64.0, <https://bioconductor.org/packages/Biostrings>.
+
+\bibitem{HOCOMOCO} HOCOMOCO: towards a complete collection of transcription
+factor binding models for human and mouse via large-scale ChIP-Seq analysis
+Ivan V. Kulakovskiy; Ilya E. Vorontsov; Ivan S. Yevshin; Ruslan N. Sharipov;
+Alla D. Fedorova; Eugene I. Rumynskiy; Yulia A. Medvedeva; Arturo Magana-Mora;
+Vladimir B. Bajic; Dmitry A. Papatsenko; Fedor A. Kolpakov; Vsevolod J. Makeev
+Nucl. Acids Res., Database issue, gkx1106 (11 November 2017)
+doi: 10.1093/nar/gkx1106
 
 \bibitem{HOMER} Heinz S, Benner C, Spann N, Bertolino E et al.
 Simple Combinations of Lineage-Determining Transcription Factors
