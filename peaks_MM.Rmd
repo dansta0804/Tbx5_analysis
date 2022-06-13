@@ -274,6 +274,7 @@ calculate_peaks <- function(filename) {
 
 # write.csv(tbx5_motif, "tbx5_motif_data.csv")
 # # THE END OF THE COMMENT
+library(reshape2)
 
 motif_data <- read.csv(file = "tbx5_motif_data.csv")
 motif_data$Sample <- factor(motif_data$Sample, levels = motif_data$Sample)
@@ -284,11 +285,12 @@ melted_df <- melt(subset_df)
 tf_percent <- ggplot(melted_df, aes(x = Sample, y = value, fill = variable,
                                     label = value)) + 
                 geom_bar(stat = "identity", colour = "#35170450", size = 0.5) +
-                scale_fill_manual(values = c("#ebc28e", "#d18558"),
+                scale_fill_manual(values = c("#eca087", "#be4e31"),
                                   labels = c("Tbx5 motyvų skaičius",
                                              "Regionų skaičius")) +
                 guides(fill = guide_legend(title = "Spalvų paaiškinimas")) +
-                geom_text(size = 4, position = position_stack(vjust = 0.5)) +
+                geom_text(size = 4, position = position_stack(vjust = 0.5),
+                        color = "black") +
                 labs(title = "", x = "Mėginys", y = "TF/Regionų skaičius") +
                 theme(axis.text = element_text(size = 10, colour = "black"),
                       axis.text.x = element_text(angle = 45, hjust = 0.5,
@@ -315,7 +317,7 @@ tf_percent <- ggplot(melted_df, aes(x = Sample, y = value, fill = variable,
                       legend.position = c(0.777, 0.788))
 
 png(file = "Latex/Figures/tf_hit_percentage.png", width = 500)
-tf_percent 
+tf_percent
 dev.off()
 ```
 
@@ -323,19 +325,25 @@ The bar chart below visualizes total identified motif count
 for each sample.
 
 ```{r}
-identified_motifs <- read.csv(file = "identified_motifs.csv")
-identified_motifs
-
 library(ggplot2)
+identified_motifs <- read.csv(file = "identified_motifs.csv")
 
+motif_counts <- data.frame(Motif_count = colSums(!is.na(identified_motifs)))
+rownames(motif_counts) <- NULL
+motif_counts['Sample'] <- colnames(identified_motifs)
+motif_counts <- motif_counts[, c(2, 1)]
 
-barplot(identified_motifs$Motif_count, names.arg = identified_motifs$Sample)
+motif_counts$Sample <- factor(motif_counts$Sample, levels = motif_counts$Sample)
 
-
-identified_motifs$Sample <- factor(identified_motifs$Sample, levels = identified_motifs$Sample)
-ggplot(identified_motifs, aes(x = Sample, y = Motif_count)) +
-    geom_bar(stat = "identity")+
-    theme(axis.text = element_text(size = 10, colour = "black"),
+motifs <- ggplot(motif_counts, aes(x = Sample, y = Motif_count)) +
+                geom_bar(stat = "identity", fill = "#6b1313",
+                            color = "#4a1004", width = .7) +
+                labs(title = "", x = "Mėginys",
+                         y = "Nustatytų motyvų skaičius") +
+                ylim(0, 400) +
+                geom_text(aes(label = Motif_count), color = "#030101",
+                              vjust = -1, size = 4.5) +
+                theme(axis.text = element_text(size = 10, colour = "black"),
                       axis.text.x = element_text(angle = 45, hjust = 0.5,
                                                  vjust = 0.5),
                       axis.title.x = element_text(size = 14, colour = "black"),
@@ -344,7 +352,7 @@ ggplot(identified_motifs, aes(x = Sample, y = Motif_count)) +
                       plot.title = element_text(hjust = 0.5, size = 16,
                                                 face = "bold"),
                       panel.background = element_rect(fill = "#eeeef1",
-                                                      colour = "#4c0001"),
+                                                      colour = "#3a1010"),
                       panel.grid.major.y = element_line(colour = "#cab5b5",
                                                         size = 0.3,
                                                         linetype = "dashed"),
@@ -358,5 +366,70 @@ ggplot(identified_motifs, aes(x = Sample, y = Motif_count)) +
                                                         size = 0.2,
                                                         linetype = "longdash"),
                       legend.position = c(0.777, 0.788))
- 
+
+png(file = "Latex/Figures/motifs_in_samples.png", width = 500)
+motifs
+dev.off()
+```
+
+The following graph shows motif overlaps between samples.
+
+```{r}
+library(UpSetR)
+intersects <- c()
+
+for (i in 1:7) {
+    for (y in i:7) {
+        motif_intersect <- as.numeric(
+                            length(intersect(na.omit(identified_motifs[, i]),
+                                             na.omit(identified_motifs[, y]))))
+        result <- paste0(colnames(identified_motifs[i]), "&",
+                         colnames(identified_motifs[y]), " = ",
+                         motif_intersect)
+        print(result)
+    }
+}
+
+inte <- c("mm_2_cardiac_muscle_r1&mm_4_emb_fibr_r1" = 246,
+                "mm_2_cardiac_muscle_r1&mm_4_emb_fibr_r2" = 248,
+                "mm_2_cardiac_muscle_r1&mm_4_emb_fibr_r3" = 253,
+                "mm_2_cardiac_muscle_r1&mm_1_heart_r1" = 247,
+                "mm_2_cardiac_muscle_r1&mm_4_emb_fibr_r4" = 165,
+                "mm_2_cardiac_muscle_r1&mm_3_cardiac_fibr_r1" = 201,
+                "mm_4_emb_fibr_r1&mm_4_emb_fibr_r2" = 310,
+                "mm_4_emb_fibr_r1&mm_4_emb_fibr_r3" = 301,
+                "mm_4_emb_fibr_r1&mm_1_heart_r1" = 297,
+                "mm_4_emb_fibr_r1&mm_4_emb_fibr_r4" = 197,
+                "mm_4_emb_fibr_r1&mm_3_cardiac_fibr_r1" = 213,
+                "mm_4_emb_fibr_r2&mm_4_emb_fibr_r3" = 307,
+                "mm_4_emb_fibr_r2&mm_1_heart_r1" = 300,
+                "mm_4_emb_fibr_r2&mm_4_emb_fibr_r4" = 203,
+                "mm_4_emb_fibr_r2&mm_3_cardiac_fibr_r1" = 218,
+                "mm_4_emb_fibr_r3&mm_1_heart_r1" = 298,
+                "mm_4_emb_fibr_r3&mm_4_emb_fibr_r4" = 200,
+                "mm_4_emb_fibr_r3&mm_3_cardiac_fibr_r1" = 213,
+                "mm_1_heart_r1&mm_4_emb_fibr_r4" = 187,
+                "mm_1_heart_r1&mm_3_cardiac_fibr_r1" = 216,
+                "mm_4_emb_fibr_r4&mm_3_cardiac_fibr_r1" = 140)
+
+motif_intersects <- upset(fromExpression(inte), nsets = 7,
+                          nintersects = 21, group.by = "degree",
+                          main.bar.color = "#9e1d1d",
+                          sets.bar.color = "#ce6a6a",
+                          mainbar.y.label = "Persidengiančių motyvų skaičius",
+                          sets.x.label = "Mėginių motyvų skaičius",
+                          text.scale = 1.5, matrix.color = "#5f260f",
+                          point.size = 3)
+
+png(file = "Latex/Figures/motif_intersections.png", width = 900)
+motif_intersects
+dev.off()
+
+length(Reduce(intersect, list(na.omit(identified_motifs[, 1]),
+                       na.omit(identified_motifs[, 2]),
+                       na.omit(identified_motifs[, 3]),
+                       na.omit(identified_motifs[, 4]),
+                       na.omit(identified_motifs[, 5]),
+                       na.omit(identified_motifs[, 6]),
+                       na.omit(identified_motifs[, 7]))))
 ```
