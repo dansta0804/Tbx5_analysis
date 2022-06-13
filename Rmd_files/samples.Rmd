@@ -1,0 +1,10 @@
+### Samples
+```{r samples}
+library(pacman)
+p_load(data.table, dplyr, ggplot2, DT) 
+
+samples <- fread("../inputs/Samples.txt") %>% 
+  setnames(., c("Method", "Organism", "Cells", "Treatment", "Antibody", "GTRD ID", "GSE", "GSM", "PMID"))
+
+DT::datatable(samples)
+```

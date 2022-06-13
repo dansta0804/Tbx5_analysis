@@ -1,0 +1,435 @@
+## Tbx5 gene expression analysis
+### Introduction
+
+This part of the work provides the analysis that was performed using the
+data from eight ChIP-seq experiments which analyzed gene expression of 
+*Tbx5* transcription factor in *Mus musculus* organism.\
+
+The experiments that were used for *Mus musculus* *Tbx5* gene expression
+analysis are listed below.\
+
+***Mus musculus:***\
+
+ - [1. EXP058852 ](https://gtrd.biouml.org/#!table/gtrd_current.experiments/Details/ID=EXP058852)(*heart ventricle*)\
+ - [2. EXP030898 ](https://gtrd.biouml.org/#!table/gtrd_current.experiments/Details/ID=EXP030898)(*HL-1 (cardiac muscle cells)*)\
+ - [3. EXP062056 ](https://gtrd.biouml.org/#!table/gtrd_current.experiments/Details/ID=EXP062056)(*neonatal cardiac fibroblast cells line expressing large T antigen*)\
+ - [4. EXP058843 ](https://gtrd.biouml.org/#!table/gtrd_current.experiments/Details/ID=EXP058843)(*mouse embryonic fibroblasts*)\
+ - [5. EXP058847 ](https://gtrd.biouml.org/#!table/gtrd_current.experiments/Details/ID=EXP058847)(*mouse embryonic fibroblasts*)\
+ - [6. EXP058850 ](https://gtrd.biouml.org/#!table/gtrd_current.experiments/Details/ID=EXP058850)(*mouse embryonic fibroblasts*)\
+ - [7. EXP058856 ](https://gtrd.biouml.org/#!table/gtrd_current.experiments/Details/ID=EXP058856)(*mouse embryonic fibroblasts*)\
+
+The analysis provides the following information:\
+ **1.** Total peak counts of each performed experiment;\
+ **2.** Peak count distribution within different chromosomes.\
+
+```{r Libraries}
+library(pacman)
+p_load(data.table, rtracklayer, randomcoloR, ggplot2, ggthemes,
+       plyranges, ggpubr, BRGenomics, reshape2, plotly, heatmaply,
+       dplyr, gplots, genomation, ggseqlogo, BSgenome.Mmusculus.UCSC.mm10,
+       BSgenome, Biostrings)
+```
+
+### Total peak counts
+The barplot below shows how many *Tbx5* gene peaks were detected while analyzing
+four different types of *Mus musculus* cells.
+
+```{r fig, fig.width = 6, fig.height = 7, fig.align = "center"}
+# Creating Sample Key table:
+samples <- read.csv(file = "sample_key.csv")
+
+# Importing BigBed format files:
+pth <- "../BigBed/"
+bbfiles <- list.files(path = pth, "*bb")
+grl <- GRangesList()
+chr_abr <- c(paste0("chr", 1:19), "chrX", "chrY")
+
+
+for (i in 1:length(bbfiles)) {
+    grl[[i]] <- import(paste0(pth, bbfiles[i])) %>%
+                       filter(seqnames %in% chr_abr)
+    names(grl)[i] <- samples$Graph_names[samples$Filename == bbfiles[i]]
+}
+
+peaks <- lapply(grl, length) %>%
+            as.data.table()  %>%
+            melt() %>%
+            as.data.frame()  %>%
+            setnames(., c("Experiment", "Peak_count"))
+
+col_fill <- randomColor(1, hue = "red", luminosity = "dark")
+
+bplot1 <- ggplot(peaks, aes(x = peaks$Experiment, y = peaks$Peak_count)) +
+                geom_bar(stat = "identity", position = "dodge", width = 0.4,
+                         color = "black", fill = col_fill) +
+                geom_text(aes(label = peaks$Peak_count),
+                          position = position_dodge(width = 0.9),
+                          vjust = -0.25) +
+                labs(x = "Mėginys", y = "Regionų skaičius")
+
+png(file = "Latex/Figures/total_peak_counts.png")
+
+bplot1 + theme(
+    panel.background = element_rect(fill = "#eeeef1", colour = "#4c0001"),
+    panel.grid.major.y = element_line(colour = "#cab5b5", size = 0.3,
+                                      linetype = "dashed"),
+    panel.grid.minor.y = element_line(colour = "#cab5b5", size = 0.3,
+                                      linetype = "dashed"),
+    panel.grid.major.x = element_line(colour = "#cab5b5", size = 0.2,
+                                      linetype = "longdash"),
+    panel.grid.minor.x = element_line(colour = "#cab5b5", size = 0.2,
+                                      linetype = "longdash"),
+    axis.text.x = element_text(angle = 45, hjust = 0.5, vjust = 0.5),
+    plot.title = element_text(hjust = 0.5, face = "bold"))
+
+dev.off()
+
+# Determining which experiment has a maximum peak count:
+max_count <- peaks[which.max(peaks$Peak_count), ]
+min_count <- peaks[which.min(peaks$Peak_count), ]
+```
+
+According to the barchart, the greatest number of *Tbx5* gene expression peaks was
+detected in the cells that were analyzed in
+***```r max_count```*** experiment.
+The smallest number of *Tbx5* gene peaks was observed in the dataset that was
+retrieved from ***```r min_count```*** experiment.
+
+### Peak counts by chromosome
+
+The barcharts below show how peak counts are distributed within
+different chromosomes. Each bar represents separate experiment.
+
+```{r fig2, fig2.align = "center"}
+peak_counts <- data.frame(matrix(ncol = 3, nrow = 0)) %>%
+                    setNames(., c("Name", "Chromosome", "Peak_count"))
+
+count_peaks <- function(name, objects) {
+    for (chr in chr_abr) {
+        peaks <- objects[[name]] %>%
+                    filter(seqnames == chr) %>%
+                    length()
+        peak_counts[nrow(peak_counts) + 1,] = c(name, chr, peaks)
+    }
+    return(peak_counts)
+}
+
+peak_counts <- lapply(names(grl), count_peaks, objects = grl) %>% bind_rows()
+
+cas <- unique(peak_counts$Chromosome)
+#peak_counts$Chromosome <- factor(peak_counts$Chromosome, levels = c(cas))
+peak_counts$Name <- factor(peak_counts$Name, levels = unique(peak_counts$Name))
+print(peak_counts)
+
+col_fill <- randomColor(1, hue = "red", luminosity = "dark")
+
+# Pastaba: būtina pridėti 'as.numeric', nes kitu atveju Peak_count yra
+# traktuojamas kaip 'string' - stulpelių dydžiai atvaizduojami
+# leksikografiškai - gaunamas klaidingas atvaizdavimas (pvz. 67
+# reikšmę atvaizduojantis stulpelis yra daug didesnis už
+# stulpelį, kuris atvaizduoja 2948)!
+
+bplot2 <- ggplot(peak_counts, aes(x = Name, y = as.numeric(Peak_count))) +
+            geom_bar(stat = "identity", color = "black", fill = col_fill) +
+            facet_wrap(~ Chromosome) +
+            theme(legend.position = "none") +
+            ylab("Regionų skaičius") +
+            xlab("") +
+            ylim(0, 20000) +
+            geom_text(aes(label = paste0(as.numeric(Peak_count)),
+                          y = as.numeric(Peak_count)), vjust = -1, hjust = .5,
+                          size = 2.7, angle = 0, color = "black")
+
+png(file = "./peak_counts_by_chromosome.png",
+    width = 600, height = 700)
+    
+bplot2 + theme_linedraw() +
+theme(axis.text.x = element_text(angle = 90, size = 10, hjust = 1),
+      axis.text.y = element_text(size = 10),
+      axis.title.x = element_text(size = 14, colour = "black"),
+      axis.title.y = element_text(size = 14, colour = "black"),
+      strip.background = element_rect(fill = "white"),
+      strip.text = element_text(colour = "black", face = "bold",
+                                size = 10))
+
+dev.off()
+```
+
+### Peak overlaps between samples
+The heatmap below helps to indicate the biggest number of peak overlaps between 7
+experiments.\
+
+```{r}
+coef_matrix <- matrix(nrow = length(grl), ncol = length(grl))
+
+jaccard <- function(a, b) {
+    len <- reduce(c(grl[[a]], grl[[a]])) %>% length()
+    return((length(GenomicRanges::intersect(grl[[a]], grl[[b]])) / len) * 100)
+}
+
+for (i in 1:length(grl)) {
+    for (y in 1:length(grl)) {
+        coef_matrix[i, y] = jaccard(i, y)
+    }
+}
+
+colnames(coef_matrix) <- names(grl)
+rownames(coef_matrix) <- names(grl)
+
+coef_mat1 <- coef_matrix
+coef_mat2 <- coef_matrix
+
+coef_mat1[lower.tri(coef_mat1, diag = TRUE)] <- NA
+coef_mat2[upper.tri(coef_mat2, diag = TRUE)] <- NA
+
+coef_mat_bind = rbind(data.matrix(coef_mat1), data.matrix(coef_mat2))
+melt_coef_mat <- melt(coef_mat_bind, na.rm = TRUE)
+
+overlaps <- ggplot(melt_coef_mat, aes(x = Var2, y = Var1, fill = value)) +
+                geom_tile(color = "black") +
+                geom_text(aes(label = round(value, digits = 3)),
+                          color = "#030101", size = 4) +
+                labs(x = "Mėginys", y = "Mėginys") +
+                scale_fill_gradient(low = "#ffee8e", high = "#ab1f1f") +
+                guides(fill = guide_colourbar(title = "Koeficientas",
+                       face = "bold")) +
+                theme(axis.text = element_text(size = 10, colour = "black"),
+                      axis.text.x = element_text(angle = 45, hjust = 0.5,
+                                                 vjust = 0.5),
+                      axis.title.x = element_text(size = 14, colour = "black"),
+                      axis.title.y = element_text(size = 14, colour = "black"),
+                      panel.grid.major = element_line(color = "#eeeeee"),
+                      plot.title = element_text(hjust = 0.5, size = 16,
+                      face = "bold"))
+
+png(file = "Latex/Figures/peak_overlaps_between_samples.png", width = 600)
+overlaps
+dev.off()
+```
+
+
+### Motif determination using PWM matrix
+The following analysis is focused on analysing the sequences based on the
+peaks and trying to determine Tbx5 motif hits in sequences using PWM matrix.
+
+```{r}
+mpwm <- read.table("TBX5_MOUSE.H11MO.0.D.pwm")
+mpwm <- t(mpwm)
+rownames(mpwm) <- c("A","C","G","T")
+#mpwm
+#ggseqlogo(mpwm)
+
+# Calculating Tbx5 hits within fetched fasta files of peaks:
+pth_fasta <- "../FASTA/"
+peak_sequences <- list.files(path = pth_fasta, "*fasta")
+
+hit_vec <- c()
+tbx5_hits <- data.frame(matrix(ncol = 3, nrow = 0)) %>%
+                setNames(., c("Sample", "Peak_count", "Tbx5_hits"))
+
+# Function that calculates Tbx5 motif hits in each sample:
+find_motif_hits <- function(sequences) {
+    for (i in 1:length(sequences)) {
+        hits <- countPWM(as.matrix(mpwm), sequences[[i]], min.score="75%")
+        if (hits == 0) { next }
+        else { hit_vec <- c(hit_vec, hits) }
+    }
+    return(sum(hit_vec))
+}
+
+# Function that calculates total peak count in each sample:
+calculate_peaks <- function(filename) {
+    name <- paste0(tools::file_path_sans_ext(filename), ".bb")
+    file <- import(paste0("../BigBed/", name)) %>%
+                    filter(seqnames %in% chr_abr)
+    region_count <- length(file)
+    return(region_count)
+}
+
+# Creating a new dataframe that stores data:
+#   - generated sample name (used in plots);
+#   - Tbx5 motif hit count;
+#   - Total peak count;
+#   - Tbx5 motif percentage.
+
+# # TEMPORARY COMMENTED!
+# columns <- c("Sample", "Motif_count", "Peak_count", "Percentage") 
+# tbx5_motif <- data.frame(matrix(nrow = 0, ncol = length(columns))) 
+ 
+# colnames(tbx5_motif) <- columns
+
+# for (i in 1:length(peak_sequences)) {
+#     filename <- peak_sequences[i]
+#     bb_file <- paste0(tools::file_path_sans_ext(filename), ".bb")
+#     samples_plot_name <- samples$Graph_names[samples$Filename == bb_file]
+
+#     seq <- readDNAStringSet(paste0(pth_fasta, filename))
+#     motif <- find_motif_hits(seq)
+#     peaks <- calculate_peaks(filename)
+#     percentage <- round((motif / peaks) * 100, 2)
+
+#     data_row <- c(samples_plot_name, motif, peaks, paste0(percentage, "%"))
+#     tbx5_motif[nrow(tbx5_motif) + 1, ] <- data_row
+# }
+
+# write.csv(tbx5_motif, "tbx5_motif_data.csv")
+# # THE END OF THE COMMENT
+library(reshape2)
+
+motif_data <- read.csv(file = "tbx5_motif_data.csv")
+motif_data$Sample <- factor(motif_data$Sample, levels = motif_data$Sample)
+
+subset_df <- motif_data[, 2:5]
+melted_df <- melt(subset_df)
+
+tf_percent <- ggplot(melted_df, aes(x = Sample, y = value, fill = variable,
+                                    label = value)) + 
+                geom_bar(stat = "identity", colour = "#35170450", size = 0.5) +
+                scale_fill_manual(values = c("#eca087", "#be4e31"),
+                                  labels = c("Tbx5 motyvų skaičius",
+                                             "Regionų skaičius")) +
+                guides(fill = guide_legend(title = "Spalvų paaiškinimas")) +
+                geom_text(size = 4, position = position_stack(vjust = 0.5),
+                        color = "black") +
+                labs(title = "", x = "Mėginys", y = "TF/Regionų skaičius") +
+                theme(axis.text = element_text(size = 10, colour = "black"),
+                      axis.text.x = element_text(angle = 45, hjust = 0.5,
+                                                 vjust = 0.5),
+                      axis.title.x = element_text(size = 14, colour = "black"),
+                      axis.title.y = element_text(size = 14, colour = "black"),
+                      panel.grid.major = element_line(color = "#eeeeee"),
+                      plot.title = element_text(hjust = 0.5, size = 16,
+                                                face = "bold"),
+                      panel.background = element_rect(fill = "#eeeef1",
+                                                      colour = "#4c0001"),
+                      panel.grid.major.y = element_line(colour = "#cab5b5",
+                                                        size = 0.3,
+                                                        linetype = "dashed"),
+                      panel.grid.minor.y = element_line(colour = "#cab5b5",
+                                                        size = 0.3,
+                                                        linetype = "dashed"),
+                      panel.grid.major.x = element_line(colour = "#cab5b5",
+                                                        size = 0.2,
+                                                        linetype = "longdash"),
+                      panel.grid.minor.x = element_line(colour = "#cab5b5",
+                                                        size = 0.2,
+                                                        linetype = "longdash"),
+                      legend.position = c(0.777, 0.788))
+
+png(file = "Latex/Figures/tf_hit_percentage.png", width = 500)
+tf_percent
+dev.off()
+```
+
+The bar chart below visualizes total identified motif count
+for each sample.
+
+```{r}
+library(ggplot2)
+identified_motifs <- read.csv(file = "identified_motifs.csv")
+
+motif_counts <- data.frame(Motif_count = colSums(!is.na(identified_motifs)))
+rownames(motif_counts) <- NULL
+motif_counts['Sample'] <- colnames(identified_motifs)
+motif_counts <- motif_counts[, c(2, 1)]
+
+motif_counts$Sample <- factor(motif_counts$Sample, levels = motif_counts$Sample)
+
+motifs <- ggplot(motif_counts, aes(x = Sample, y = Motif_count)) +
+                geom_bar(stat = "identity", fill = "#6b1313",
+                            color = "#4a1004", width = .7) +
+                labs(title = "", x = "Mėginys",
+                         y = "Nustatytų motyvų skaičius") +
+                ylim(0, 400) +
+                geom_text(aes(label = Motif_count), color = "#030101",
+                              vjust = -1, size = 4.5) +
+                theme(axis.text = element_text(size = 10, colour = "black"),
+                      axis.text.x = element_text(angle = 45, hjust = 0.5,
+                                                 vjust = 0.5),
+                      axis.title.x = element_text(size = 14, colour = "black"),
+                      axis.title.y = element_text(size = 14, colour = "black"),
+                      panel.grid.major = element_line(color = "#eeeeee"),
+                      plot.title = element_text(hjust = 0.5, size = 16,
+                                                face = "bold"),
+                      panel.background = element_rect(fill = "#eeeef1",
+                                                      colour = "#3a1010"),
+                      panel.grid.major.y = element_line(colour = "#cab5b5",
+                                                        size = 0.3,
+                                                        linetype = "dashed"),
+                      panel.grid.minor.y = element_line(colour = "#cab5b5",
+                                                        size = 0.3,
+                                                        linetype = "dashed"),
+                      panel.grid.major.x = element_line(colour = "#cab5b5",
+                                                        size = 0.2,
+                                                        linetype = "longdash"),
+                      panel.grid.minor.x = element_line(colour = "#cab5b5",
+                                                        size = 0.2,
+                                                        linetype = "longdash"),
+                      legend.position = c(0.777, 0.788))
+
+png(file = "Latex/Figures/motifs_in_samples.png", width = 500)
+motifs
+dev.off()
+```
+
+The following graph shows motif overlaps between samples.
+
+```{r}
+library(UpSetR)
+intersects <- c()
+
+for (i in 1:7) {
+    for (y in i:7) {
+        motif_intersect <- as.numeric(
+                            length(intersect(na.omit(identified_motifs[, i]),
+                                             na.omit(identified_motifs[, y]))))
+        result <- paste0(colnames(identified_motifs[i]), "&",
+                         colnames(identified_motifs[y]), " = ",
+                         motif_intersect)
+        print(result)
+    }
+}
+
+inte <- c("mm_2_cardiac_muscle_r1&mm_4_emb_fibr_r1" = 246,
+                "mm_2_cardiac_muscle_r1&mm_4_emb_fibr_r2" = 248,
+                "mm_2_cardiac_muscle_r1&mm_4_emb_fibr_r3" = 253,
+                "mm_2_cardiac_muscle_r1&mm_1_heart_r1" = 247,
+                "mm_2_cardiac_muscle_r1&mm_4_emb_fibr_r4" = 165,
+                "mm_2_cardiac_muscle_r1&mm_3_cardiac_fibr_r1" = 201,
+                "mm_4_emb_fibr_r1&mm_4_emb_fibr_r2" = 310,
+                "mm_4_emb_fibr_r1&mm_4_emb_fibr_r3" = 301,
+                "mm_4_emb_fibr_r1&mm_1_heart_r1" = 297,
+                "mm_4_emb_fibr_r1&mm_4_emb_fibr_r4" = 197,
+                "mm_4_emb_fibr_r1&mm_3_cardiac_fibr_r1" = 213,
+                "mm_4_emb_fibr_r2&mm_4_emb_fibr_r3" = 307,
+                "mm_4_emb_fibr_r2&mm_1_heart_r1" = 300,
+                "mm_4_emb_fibr_r2&mm_4_emb_fibr_r4" = 203,
+                "mm_4_emb_fibr_r2&mm_3_cardiac_fibr_r1" = 218,
+                "mm_4_emb_fibr_r3&mm_1_heart_r1" = 298,
+                "mm_4_emb_fibr_r3&mm_4_emb_fibr_r4" = 200,
+                "mm_4_emb_fibr_r3&mm_3_cardiac_fibr_r1" = 213,
+                "mm_1_heart_r1&mm_4_emb_fibr_r4" = 187,
+                "mm_1_heart_r1&mm_3_cardiac_fibr_r1" = 216,
+                "mm_4_emb_fibr_r4&mm_3_cardiac_fibr_r1" = 140)
+
+motif_intersects <- upset(fromExpression(inte), nsets = 7,
+                          nintersects = 21, group.by = "degree",
+                          main.bar.color = "#9e1d1d",
+                          sets.bar.color = "#ce6a6a",
+                          mainbar.y.label = "Persidengiančių motyvų skaičius",
+                          sets.x.label = "Mėginių motyvų skaičius",
+                          text.scale = 1.5, matrix.color = "#5f260f",
+                          point.size = 3)
+
+png(file = "Latex/Figures/motif_intersections.png", width = 900)
+motif_intersects
+dev.off()
+
+length(Reduce(intersect, list(na.omit(identified_motifs[, 1]),
+                       na.omit(identified_motifs[, 2]),
+                       na.omit(identified_motifs[, 3]),
+                       na.omit(identified_motifs[, 4]),
+                       na.omit(identified_motifs[, 5]),
+                       na.omit(identified_motifs[, 6]),
+                       na.omit(identified_motifs[, 7]))))
+```
