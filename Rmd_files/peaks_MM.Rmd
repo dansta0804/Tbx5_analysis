@@ -34,7 +34,7 @@ p_load(data.table, rtracklayer, randomcoloR, ggplot2, ggthemes,
 The barplot below shows how many *Tbx5* gene peaks were detected while analyzing
 four different types of *Mus musculus* cells.
 
-```{r fig, fig.width = 6, fig.height = 7, fig.align = "center"}
+```{r fig, fig.width = 4, fig.height = 7, fig.align = "center"}
 # Creating Sample Key table:
 samples <- read.csv(file = "/home/daniele/Desktop/III_course/II_semester/Kursinis_darbas/TF_analysis/Generated_files/sample_key.csv")
 
@@ -43,7 +43,6 @@ pth <- "../Inputs/BigBed/"
 bbfiles <- list.files(path = pth, "*bb")
 grl <- GRangesList()
 chr_abr <- c(paste0("chr", 1:19), "chrX", "chrY")
-
 
 for (i in 1:length(bbfiles)) {
     grl[[i]] <- import(paste0(pth, bbfiles[i])) %>%
@@ -59,15 +58,15 @@ peaks <- lapply(grl, length) %>%
 
 col_fill <- randomColor(1, hue = "red", luminosity = "dark")
 
-bplot1 <- ggplot(peaks, aes(x = peaks$Experiment, y = peaks$Peak_count)) +
-                geom_bar(stat = "identity", position = "dodge", width = 0.4,
-                         color = "black", fill = col_fill) +
-                geom_text(aes(label = peaks$Peak_count),
-                          position = position_dodge(width = 0.9),
-                          vjust = -0.25) +
-                labs(x = "Mėginys", y = "Regionų skaičius")
+bplot1 <- ggplot(peaks, aes(x = Experiment, y = Peak_count)) +
+                geom_bar(stat = "identity", position = "dodge", width = 0.5,
+                         color = "black", fill = "#930d1f") +
+                labs(x = "", y = "Regionų skaičius", size = 5) +
+                ylim(0, 200000) +
+                scale_y_continuous(labels = label_number(suffix = " K",
+                                scale = 1e-3))
 
-png(file = "../Figures/total_peak_counts.png")
+png(file = "../Figures/total_peak_counts.png", width = 400)
 
 bplot1 + theme(
     panel.background = element_rect(fill = "#eeeef1", colour = "#4c0001"),
@@ -79,7 +78,11 @@ bplot1 + theme(
                                       linetype = "longdash"),
     panel.grid.minor.x = element_line(colour = "#cab5b5", size = 0.2,
                                       linetype = "longdash"),
-    axis.text.x = element_text(angle = 45, hjust = 0.5, vjust = 0.5),
+    axis.text.x = element_text(angle = 45, hjust = 1, vjust = 1, size = 11,
+                               face = "bold", color = "black"),
+    axis.text.y = element_text(size = 11, face = "bold", color = "black"),
+    axis.title.x = element_text(size = 2),
+    axis.title.y = element_text(size = 16),
     plot.title = element_text(hjust = 0.5, face = "bold"))
 
 dev.off()
@@ -115,9 +118,11 @@ count_peaks <- function(name, objects) {
 }
 
 peak_counts <- lapply(names(grl), count_peaks, objects = grl) %>% bind_rows()
+peak_counts
+
 
 cas <- unique(peak_counts$Chromosome)
-#peak_counts$Chromosome <- factor(peak_counts$Chromosome, levels = c(cas))
+peak_counts$Chromosome <- factor(peak_counts$Chromosome, levels = c(cas))
 peak_counts$Name <- factor(peak_counts$Name, levels = unique(peak_counts$Name))
 print(peak_counts)
 
@@ -131,27 +136,22 @@ col_fill <- randomColor(1, hue = "red", luminosity = "dark")
 
 bplot2 <- ggplot(peak_counts, aes(x = Name, y = as.numeric(Peak_count))) +
             geom_bar(stat = "identity", color = "black", fill = col_fill) +
-            facet_wrap(~ Chromosome) +
+            facet_wrap(~ Chromosome, ncol = 7) +
             theme(legend.position = "none") +
             ylab("Regionų skaičius") +
             xlab("") +
-            ylim(0, 20000) +
-            geom_text(aes(label = paste0(as.numeric(Peak_count)),
-                          y = as.numeric(Peak_count)), vjust = -1, hjust = .5,
-                          size = 2.7, angle = 0, color = "black")
+            scale_y_continuous(labels = label_number(suffix = " K",
+                               scale = 1e-3))
 
-png(file = "../Figures/peak_counts_by_chromosome.png",
-    width = 600, height = 700)
+png(file = "../Figures/peak_counts_by_chr.png", width = 1200, height = 500)
     
 bplot2 + theme_linedraw() +
-theme(axis.text.x = element_text(angle = 90, size = 10, hjust = 1),
-      axis.text.y = element_text(size = 10),
+theme(axis.text.x = element_text(angle = 90, size = 12, vjust = 0.5),
+      axis.text.y = element_text(size = 14, face = "bold"),
       axis.title.x = element_text(size = 14, colour = "black"),
-      axis.title.y = element_text(size = 14, colour = "black"),
+      axis.title.y = element_text(size = 20, colour = "black"),
       strip.background = element_rect(fill = "white"),
-      strip.text = element_text(colour = "black", face = "bold",
-                                size = 10))
-
+      strip.text = element_text(colour = "black", face = "bold", size = 16))
 dev.off()
 ```
 
@@ -186,23 +186,25 @@ coef_mat_bind = rbind(data.matrix(coef_mat1), data.matrix(coef_mat2))
 melt_coef_mat <- melt(coef_mat_bind, na.rm = TRUE)
 
 overlaps <- ggplot(melt_coef_mat, aes(x = Var2, y = Var1, fill = value)) +
-                geom_tile(color = "black") +
-                geom_text(aes(label = round(value, digits = 3)),
-                          color = "#030101", size = 4) +
-                labs(x = "Mėginys", y = "Mėginys") +
-                scale_fill_gradient(low = "#ffee8e", high = "#ab1f1f") +
-                guides(fill = guide_colourbar(title = "Koeficientas",
-                       face = "bold")) +
-                theme(axis.text = element_text(size = 10, colour = "black"),
-                      axis.text.x = element_text(angle = 45, hjust = 0.5,
-                                                 vjust = 0.5),
-                      axis.title.x = element_text(size = 14, colour = "black"),
-                      axis.title.y = element_text(size = 14, colour = "black"),
-                      panel.grid.major = element_line(color = "#eeeeee"),
-                      plot.title = element_text(hjust = 0.5, size = 16,
-                      face = "bold"))
+                 geom_tile(color = "black") +
+                 geom_text(aes(label = round(value, digits = 3)),
+                           color = "#030101", size = 4.5) +
+                 labs(x = "", y = "") +
+                 scale_fill_gradient(low = "#ffee8e", high = "#ab1f1f") +
+                 guides(fill = guide_colourbar(title = "Koeficientas",
+                        face = "bold")) +
+                 theme(axis.text = element_text(size = 12, colour = "black",
+                       face = "bold"),
+                       axis.text.x = element_text(angle = 45, hjust = 1,
+                                                  vjust = 1),
+                       axis.title.x = element_text(size = 14, colour = "black"),
+                       axis.title.y = element_text(size = 14, colour = "black"),
+                       panel.grid.major = element_line(color = "#eeeeee"),
+                       plot.title = element_text(hjust = 0.5, size = 16,
+                       face = "bold"),
+                       legend.position="bottom")
 
-png(file = "../Figures/peak_overlaps_between_samples.png", width = 600)
+png(file = "../Figures/peak_overlaps.png", width = 450)
 overlaps
 dev.off()
 ```
@@ -260,28 +262,28 @@ calculate_peaks <- function(filename) {
 #   - Total peak count;
 #   - Tbx5 motif percentage.
 
-# # TEMPORARY COMMENTED!
-columns <- c("Sample", "Motif_count", "Peak_count", "Percentage") 
-tbx5_motifs <- data.frame(matrix(nrow = 0, ncol = length(columns))) 
+# TEMPORARY COMMENTED!
+# columns <- c("Sample", "Motif_count", "Peak_count", "Percentage") 
+# tbx5_motifs <- data.frame(matrix(nrow = 0, ncol = length(columns))) 
  
-colnames(tbx5_motifs) <- columns
+# colnames(tbx5_motifs) <- columns
 
-for (i in 1:length(peak_sequences)) {
-    filename <- peak_sequences[i]
-    bb_file <- paste0(tools::file_path_sans_ext(filename), ".bb")
-    samples_plot_name <- samples$Graph_names[samples$Filename == bb_file]
+# for (i in 1:length(peak_sequences)) {
+#     filename <- peak_sequences[i]
+#     bb_file <- paste0(tools::file_path_sans_ext(filename), ".bb")
+#     samples_plot_name <- samples$Graph_names[samples$Filename == bb_file]
 
-    seq <- readDNAStringSet(paste0(pth_fasta, filename))
-    motif <- find_motif_hits(seq)
-    peaks <- calculate_peaks(filename)
-    percentage <- round((motif / peaks) * 100, 2)
+#     seq <- readDNAStringSet(paste0(pth_fasta, filename))
+#     motif <- find_motif_hits(seq)
+#     peaks <- calculate_peaks(filename)
+#     percentage <- round((motif / peaks) * 100, 2)
 
-    data_row <- c(samples_plot_name, motif, peaks, paste0(percentage, "%"))
-    tbx5_motifs[nrow(tbx5_motifs) + 1, ] <- data_row
-}
+#     data_row <- c(samples_plot_name, motif, peaks, paste0(percentage, "%"))
+#     tbx5_motifs[nrow(tbx5_motifs) + 1, ] <- data_row
+# }
 
-# write.csv(tbx5_motif, "tbx5_motif_data.csv")
-# # THE END OF THE COMMENT
+# # write.csv(tbx5_motif, "tbx5_motif_data.csv")
+# # # THE END OF THE COMMENT
 library(reshape2)
 library(ggplot2)
 
@@ -291,20 +293,26 @@ motif_data$Sample <- factor(motif_data$Sample, levels = motif_data$Sample)
 subset_df <- motif_data[, 2:5]
 melted_df <- melt(subset_df)
 
+melted_df
+
 tf_percent <- ggplot(melted_df, aes(x = Sample, y = value, fill = variable,
                                     label = value)) + 
                 geom_bar(stat = "identity", colour = "#35170450", size = 0.5,
                          width = 0.8) +
                 scale_fill_manual(values = c("#e3a15e", "#c7633b"),
                                   labels = c("Tbx5 motyvų skaičius",
-                                             "Regionų skaičius")) +
-                guides(fill = guide_legend(title = "Spalvų paaiškinimas")) +
+                                             "Pikų skaičius")) +
+                scale_y_continuous(labels = label_number(suffix = " K",
+                               scale = 1e-3)) +
+                guides(fill = guide_legend(title = "Spalvų paaiškinimas", size = 6)) +
                 geom_text(size = 4, position = position_stack(vjust = 0.5),
-                          color = "black") +
-                labs(title = "", x = "Mėginys", y = "TF/Regionų skaičius") +
+                           color = "black") +
+                labs(title = "", x = "", y = "TF/Pikų skaičius") +
                 theme(axis.text = element_text(size = 10, colour = "black"),
-                      axis.text.x = element_text(angle = 60, hjust = 0.5,
-                                                 vjust = 0.5),
+                      axis.text.x = element_text(angle = 45, hjust = 1,
+                                                 vjust = 1, size = 12,
+                                                 face = "bold"),
+                      axis.text.y = element_text(size = 12, face = "bold"),
                       axis.title.x = element_text(size = 14, colour = "black"),
                       axis.title.y = element_text(size = 14, colour = "black"),
                       panel.grid.major = element_line(color = "#eeeeee"),
@@ -322,9 +330,11 @@ tf_percent <- ggplot(melted_df, aes(x = Sample, y = value, fill = variable,
                                                         size = 0.2,
                                                         linetype = "longdash"),
                       panel.grid.minor.x = element_line(colour = "#cab5b5",
-                                                        size = 0.2,
-                                                        linetype = "longdash"),
-                      legend.position = c(0.777, 0.788))
+                                                         size = 0.2,
+                                                         linetype = "longdash"),
+                      legend.position = c(0.79, 0.9),
+                      legend.title = element_text(size = 12), 
+                      legend.text = element_text(size = 11))
 
 png(file = paste0(PATH, "/Figures/tf_hit_percentage.png"), width = 400)
 tf_percent
@@ -428,18 +438,18 @@ motif_intersects <- upset(fromExpression(inte), nsets = 7,
                           sets.bar.color = "#ce6a6a",
                           mainbar.y.label = "Persidengiančių motyvų skaičius",
                           sets.x.label = "Mėginių motyvų skaičius",
-                          text.scale = 1.5, matrix.color = "#5f260f",
-                          point.size = 3)
+                          text.scale = 2, matrix.color = "#5f260f",
+                          point.size = 2, number.angles = 30)
 
 png(file = "../Figures/motif_intersections.png", width = 900)
 motif_intersects
 dev.off()
 
-length(Reduce(intersect, list(na.omit(identified_motifs[, 1]),
-                       na.omit(identified_motifs[, 2]),
-                       na.omit(identified_motifs[, 3]),
-                       na.omit(identified_motifs[, 4]),
-                       na.omit(identified_motifs[, 5]),
-                       na.omit(identified_motifs[, 6]),
-                       na.omit(identified_motifs[, 7]))))
+# length(Reduce(intersect, list(na.omit(identified_motifs[, 1]),
+#                        na.omit(identified_motifs[, 2]),
+#                        na.omit(identified_motifs[, 3]),
+#                        na.omit(identified_motifs[, 4]),
+#                        na.omit(identified_motifs[, 5]),
+#                        na.omit(identified_motifs[, 6]),
+#                        na.omit(identified_motifs[, 7]))))
 ```
