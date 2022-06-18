@@ -10,9 +10,9 @@ created for analysis' steps' visualization;
 for intermediate analysis in R program;
 - **Inputs/** stores data files of the selected samples. The directory
 contains two subdirectories:
-  - **BED/** stores text files describing genomic positions of
+  - **BED/** stores text files describing genomic positions of the
   selected samples;
-  - **BigBed/** stores binary files describing genomic positions of
+  - **BigBed/** stores binary files describing genomic positions of the
   selected samples.
 - **Latex/** stores files that were used to generate final thesis using
 Latex;
