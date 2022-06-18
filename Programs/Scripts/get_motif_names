@@ -1,0 +1,20 @@
+#!/bin/bash
+
+# The script generates motif name files that are used to
+# create properly formatted dataframe using R programming
+# language.
+
+BED=/home/daniele/Desktop/III_course/II_semester/Kursinis_darbas/BED/*;
+RESULTS=/home/daniele/HOMER/bin/results
+HOMER_BIN=/home/daniele/HOMER/bin
+
+for	bed_file in ${BED};
+    do
+        bed_name=$(basename ${bed_file});
+        result_dir=$(basename ${bed_file} .bed);
+        motif_count_extra=`ls -l ${RESULTS}/${result_dir}/knownResults/*.motif | wc -l| awk '{print $1 + 1}'`
+        motif_count=`echo ${motif_count_extra} | awk '{print $1 - 1}'`
+        head -${motif_count_extra} ${RESULTS}/${result_dir}/knownResults.txt | 
+                awk '{print $1}' |
+                perl -lne 'print $1 if /^([a-zA-Z0-9\(\).-]+)\/?.+$/g' > ${RESULTS}/${result_dir}/motif_names_${motif_count}
+    done

@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# The script converts bigBed files to BED files:
+
+bigBeds=/home/daniele/Desktop/III_course/II_semester/Kursinis_darbas/BigBed/*;
+BED=/home/daniele/Desktop/III_course/II_semester/Kursinis_darbas/BED;
+
+# Converting bigBed files to BED files:
+for	peak_file in ${bigBeds};
+	do
+		name=$(basename ${peak_file});
+		echo "Converting ${name} file...";
+		bed_file=$(basename ${name} bb)"bed";
+		bigBedToBed ${peak_file} ${BED}/${bed_file}
+	done

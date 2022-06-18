@@ -1,0 +1,18 @@
+#!/bin/bash
+
+# The script extracts sequences from Mus musculus genome based on the
+# BED file peak ranges:
+
+BED=/home/daniele/Desktop/III_course/II_semester/Kursinis_darbas/BED/*;
+FASTA=/home/daniele/Desktop/III_course/II_semester/Kursinis_darbas/FASTA;
+mm_genome=/home/daniele/Desktop/III_course/II_semester/Kursinis_darbas/GCF_000001635.27_GRCm39_genomic_mod.fna;
+
+# Retrieving sequences based on BED file peak ranges:
+for	bed_file in ${BED};
+	do
+		name=$(basename ${bed_file});
+		echo "Retrieving sequences from $(basename ${bed_file}) file...";
+		fasta_file=$(basename ${name} bed)"fasta";
+        echo "Changing file name into ${fasta_file}...";
+        bedtools getfasta -fi ${mm_genome} -bed ${bed_file} -fo ${FASTA}/${fasta_file}
+	done

@@ -1,0 +1,30 @@
+#!/bin/bash
+
+# The script runs 'findMotifsGenome.pl' program for every BED file.
+
+BED=/home/daniele/Desktop/III_course/II_semester/Kursinis_darbas/BED/*;
+RESULTS=/home/daniele/HOMER/bin/results
+HOMER_BIN=/home/daniele/HOMER/bin
+LOGS=/home/daniele/Desktop/III_course/II_semester/Kursinis_darbas/Logs;
+
+# Creating separate result folders for every analyzed BED file:
+# for	bed_file in ${BED};
+# 	do
+# 		name=$(basename ${bed_file} .bed);
+# 		mkdir ${RESULTS}/${name}
+# 	done
+
+# Running main 'findMotifsGenome.pl' program to perform de novo
+# motif discovery with every BED file using Mus musculus genome:
+for	bed_file in ${BED};
+	do
+        bed_name=$(basename ${bed_file});
+        result_dir=$(basename ${bed_file} .bed);
+        time_start=`date +"%Y-%m-%d %T"`
+        echo "Started analyzing ${bed_name} at ${time_start}." >> ${LOGS}/Times
+        ${HOMER_BIN}/findMotifsGenome.pl ${bed_file} mm10 ${RESULTS}/${result_dir} \
+                            -size 200 -mask
+        time_finish=`date +"%Y-%m-%d %T"`
+        echo "Finished analyzing ${bed_name} at ${time_finish}." >> ${LOGS}/Times
+        echo " " >> ${LOGS}/Times
+    done
