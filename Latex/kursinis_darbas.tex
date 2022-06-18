@@ -469,7 +469,7 @@ funkcijų klasifikacija.
 Antrajame paveiksle (2 pav.) vaizduojama analizės etapus apibendrinanti schema:
 \begin{figure}[htb]
     \begin{center}
-        \includegraphics[width=1\linewidth]{../Figures/Diagrama.png}
+        \includegraphics[width=1\linewidth]{../Figures/analysis_scheme.png}
         \vspace{-2\baselineskip}
         \caption*{\small\textbf{2 pav. Analizės atlikimo eiga}}
     \end{center}
@@ -535,14 +535,16 @@ duomenų paruošimo netikslumus.
 Antrajame statistinių duomenų vaizdavimo etape patikrinta, kaip mėginių pikai
 pasiskirstę atskirose chromosomose, atlikus normalizavimą pagal chromosomų ilgį.
 
-<TAISYTINOS DALIES PRADŽIA (NĖRA NORMALIZAVIMO)>\\
-Vaizduojamuose grafikuose (4 pav.) didžiausias pikų skaičius nustatytas
-pirmoje, antroje ir penktoje chromosomose. Naminės pelės pirmoji chromosoma yra
-pati didžiausia, turinti 195 milijonų bazių porų, antroji chromosoma sudaryta
-iš 182 megabazių, penktoji chromosoma - 152 milijonų bazių porų, todėl didesnis
-regionų skaičius šiose chromosomose nėra neįprastas reiškinys. Kitose
-chromosomose regionų skaičius yra mažesnis. Ypač mažas regionų skaičius
-nustatytas devynioliktoje (61 Mbp), X (169 Mbp) ir Y (91 Mbp) chromosomose.
+Vaizduojamuose grafikuose (4 pav.) didžiausias pikų skaičius po
+normalizavimo nustatytas penktoje, vienuoliktoje ir devynioliktoje
+chromosomose. Šiose chromosomose didžiausią pikų skaičių turėjo mėginys,
+kuriame tirtos iš naminių pelių širdies raumens išskirtos ląstelės, bei
+mėginys, kuriame embrionų fibroblastai veikti AGHMT faktorių komplektu.
+Taip pat galima pastebėti, kad pastarojo mėginio pikų skaičius beveik
+visose chromosomose yra daug didesnis nei kituose mėginiuose apskaičiuotas
+pikų skaičius.
+
+Mažiausias pikų skaičius nustatytas lytinėse - X ir Y - chromosomose.
 
 \begin{figure}[htb]
     \begin{center}
@@ -553,17 +555,20 @@ nustatytas devynioliktoje (61 Mbp), X (169 Mbp) ir Y (91 Mbp) chromosomose.
     \end{center}
 \end{figure}
 
-Biologinių replikų mėginiuose didžiausias regionų skaičius nustatytas antroje
-chromosomoje. Taip pat grafikuose išsiskiria kontrolinis HL - 1 širdies
-ląstelių mėginys, kuriame didžiausias regionų skaičius nustatytas penktojoje
-chromosomoje.
-
-<TAISYTINOS DALIES PABAIGA (NĖRA NORMALIZAVIMO)>
+Iš visų chromosomų išsiskiria vienuolikta chromosoma. Remiantis MGI\cite{MGI}
+(angl. \emph{Mouse Genome Informatics})
+svetainės duomenimis, vienuoliktos \emph{Mus musculus} chromosomos
+dydis - 122 megabazės, todėl gautas didžiausias pikų skaičius šioje
+chromosomoje gali indikuoti, kad prie šioje chromosomoje esančių nukleotidų
+sekų transkripcijos faktoriai jungiasi dažniau nei kitose chromosomose.
 
 Remiantis pavaizduotomis pikų skaičiaus pasiskirstymo chromosomose
-stulpelinėmis diagramomis, itin išsiskiriantis atrankumas chromosomų atžvilgiu
-nenustatytas, todėl galima teigti, jog šiame analizės etape duomenų
-problematiškumas nepastebimas arba jo nėra.
+stulpelinėmis diagramomis, nustatyta, kad kai kuriose chromosomose mėginių
+pikų skaičius gali būti mažesnis nei kitų mėginių, tačiau kitose chromosomose
+tų pačių mėginių pikų skaičius gali būti pakankamai aukštas. Nepaisant to,
+itin išsiskiriantis atrankumas chromosomų atžvilgiu nenustatytas, todėl galima
+teigti, jog šiame analizės etape duomenų problematiškumas nepastebimas arba
+jo nėra.
 
 \newpage
 
@@ -607,15 +612,26 @@ Mažiausią panašumą su kitais mėginiais turi mėginys
 (\small\emph{emb\_fibr\_r4\_4}), kuriame embrionų fibroblastų ląstelės
 veiktos ne pilnu kardiogeninių transkripcijos faktorių (GATA4, HAND2, MEF2C,
 Tbx5) komplektu.
-\newpage
 
-Remiantis spalvų intensyvumo grafiku didžiausius ir mažiausius persidengiančių
-pikų skaičius tarp mėginių turi tie patys mėginiai
-(\small\emph{emb\_fibr\_r1\_1}, \small\emph{emb\_fibr\_r4\_4}), kuriems 4.1 bei
-4.2 poskyriuose buvo nustatytos maksimalios ir minimalios reikšmės, todėl
-statistinis duomenų vaizdavimas, taikant skirtingas vizualizavimo funkcijas
-padeda įvertinti duomenų skirtumus ir grafikuose išskirti tuos pačius
-mėginius, turinčius maksimalias ir minimalias tiriamų dydžių reikšmes.
+Patikrinus, koks yra mėginių
+(\small\emph{crdc\_mscl\_r1\_2} ir \small\emph{emb\_fibr\_r1\_1}),
+kurie 4.2 poskyryje aprašytame analizės etape vienuoliktoje chromosomoje
+turėjo didžiausią pikų skaičių, modifikuotas \emph{Jaccard} koeficientas,
+buvo nustatyta, jog nors šie mėginiai turi daug pikų, tačiau tik 30.667\% ir
+36.321\% šių pikų persidengia mėginių tarpusavio atžvilgiu, todėl tai rodo,
+kad transkripcijos faktorių jungimasis prie chromatino yra nustatomas
+skirtingose vienuoliktos ir kitų chromosomų pozicijose.
+
+Apibendrinus 4.1, 4.2 ir 4.3 poskyriuose atliktas statistinių duomenų analizes
+galima teigti, kad statistinis duomenų vaizdavimas, taikant skirtingas
+vizualizavimo funkcijas bei metodus, padeda įvertinti duomenų skirtumus ir
+grafikuose išskirti duomenų rinkinius, turinčius maksimalias ir minimalias
+tiriamų dydžių reikšmes. Gautų analizių rezultatai parodė, kad ChIP sekoskaitos
+duomenys skirtingais poveikiais veiktose ląstelėse skiriasi itin stipriai.
+Taip pat, gauti rezultatai suteikė vertingos informacijos, kuri gali tapti
+naujų analizių vykdymo priežastimi (pvz., išsiaiškinti, kodėl vienuoliktoje
+naminės pelės chromosomoje DNR regionų, prie kurių jungiasi transkripcijos
+faktoriai, yra daugiau nei kitose chromosomose).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 % TBX5 MOTYVO NUSTATYMAS
@@ -653,8 +669,6 @@ kurio procentinė dalis (8.32\%) yra mažesnė už mėginyje
 \small\emph{crdc\_fibr\_r1\_3} nustatyto motyvo sekų skaičių (11.98\%),
 nors \small\emph{crdc\_mscl\_r1\_2} mėginiui būdingas didesnis bendras pikų
 skaičius.
-
-\newpage
 
 \subsection{\emph{De novo} identifikuoti motyvai}
 \emph{De novo} motyvų paieškos programos vykdymas buvo ilgiausiai trukęs
@@ -758,6 +772,8 @@ nustatytas didžiausias motyvų skaičius (345 motyvai). Nustatyti motyvai yra
 
 Patikrinus, kiek vienodų motyvų aptinkama visuose mėginiuose, buvo nustatyta,
 kad 131 motyvas yra būdingas visiems analizuojamiems mėginiams.
+
+\newpage
 
 \subsection{\emph{De novo} nustatytų motyvų biologinės funkcijos}
 Identifikavus motyvus, buvo nustatytos su šiais motyvais susijusių genų
@@ -934,6 +950,10 @@ Screening: A Transforming Growth Factor-β Type 1 Receptor Kinase Inhibitor
 Induces Efficient Cardiac Differentiation. Stem Cells Transl Med.
 2016;5(2):164-174. doi:10.5966/sctm.2015-0114.
 
+\bibitem{MGI} Bult CJ, Blake JA, Smith CL, Kadin JA, Richardson JE, the
+Mouse Genome Database Group. 2019. Mouse Genome Database (MGD) 2019.
+Nucleic Acids Res. 2019 Jan. 8;47 (D1): D801–D806.
+
 \end{thebibliography}
 
 \newpage
@@ -950,9 +970,9 @@ parašyti skriptai bei pagrindinė R programa, nuorodos.
 
 \begin{itemize}
     \item \textbf{Tarpinių rezultatų Scikick puslapis:}\\
-        https://karklas.mif.vu.lt/\(\sim\)dast6577/KursinisDarbas/v1.1/peaks\_MM.html
+        https://karklas.mif.vu.lt/~dast6577/KursinisDarbas/v2.0/peaks\_MM.html
     \item \textbf{Analizės Git repozitorija:}\\
-        https://github.com/dansta0804/TF\_analysis.git
+        https://github.com/dansta0804/Tbx5\_analysis.git
   \end{itemize}
 
 \end{document}
