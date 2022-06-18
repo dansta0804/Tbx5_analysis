@@ -16,7 +16,7 @@ contains two subdirectories:
   selected samples.
 - **Latex/** stores files that were used to generate final thesis using
 Latex;
-- **Programs/** direrectory contains main R program file and additional
+- **Programs/** directory contains main R program file and additional
 subdirectory **Scripts/** that stores Shell and Perl scripts that were
 used to perform file format conversions (from bigBed to BED, from BED
 to FASTA) and ease analysis in main R program.
