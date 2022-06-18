@@ -21,4 +21,4 @@ subdirectory **Scripts/** that stores Shell and Perl scripts that were
 used to perform file format conversions (from bigBed to BED, from BED
 to FASTA) and ease analysis in main R program.
 
-Results of the analysis can be found here [here]((https://karklas.mif.vu.lt/~dast6577/KursinisDarbas/v2.0/peaks_MM.html))
+Results of the analysis can be found [here](https://karklas.mif.vu.lt/~dast6577/KursinisDarbas/v2.0/peaks_MM.html)
