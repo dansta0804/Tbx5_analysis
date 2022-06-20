@@ -21,6 +21,7 @@
 \usepackage{blindtext}
 \onehalfspacing
 \usepackage[hidelinks]{hyperref}
+\usepackage{textcomp}
 
 \newcommand{\EE}{\mathbb{E}\,} % Mean
 \newcommand{\ee}{{\mathrm e}}  % nice exponent
@@ -63,7 +64,7 @@
 
 \hskip 140pt {\large Autorė: Danielė Stasiūnaitė}
 
-\hskip 140pt{\large VU el. p.: (daniele.stasiunaite@mif.stud.vu.lt)}
+\hskip 140pt{\large VU el. p.: daniele.stasiunaite@mif.stud.vu.lt}
 \bigskip
 \vskip 20pt
 
@@ -92,18 +93,21 @@
 prisidėti prie širdies ligų gydymo bei širdies audinių atstatymo po
 pažeidimų (pvz., širdies raumens plyšimo). Sėkmingam ląstelių regeneracijos
 taikymui praktikoje svarbu suprasti šio proceso mechanizmus bei išsiaiškinti
-juose dalyvaujančius genus bei jų svarbą.
-
-Tbx5 - \emph{Tbx5} geno koduojamas vienas iš daugelio kardiogeninių
-transkripcijos faktorių, aktyvuojančių genus, kurie dalyvauja širdies
-vystymosi embriogenezės metu bei audinio atstatyme regeneracijos metu.
+juose dalyvaujančius genus bei jų svarbą, todėl šiame darbe buvo analizuojamas
+Tbx5 kardiogeninis transkripcijos faktorius, kuris stipriai prisideda prie
+įvairių genų, dalyvaujančių širdies vystymosi embriogenezės metu bei audinio
+atstatyme regeneracijos metu, aktyvavimo. Šio transkripcijos faktoriaus svarba
+išryškėja tiriant įvairius vystymosi defektus - šį
+transkripcijos faktorių koduojančio geno mutacijos yra glaudžiai susijusios su
+organizmo vystymosi sutrikimais, įtakojančiais širdies dalių bei viršutinių
+galūnių formavimosi anomalijas.
                                                                                      
-Šiame darbe, naudojantis R programavimo kalbos bibliotekomis bei
-bioinformatiniais komandinės eilutės bei internetiniais duomenų apdorojimo
-bei analizės įrankiais, išanalizuota, kokiuose ChIP sekoskaitos metodu gautų
-naminės pelės (lot. \emph{Mus musculus}) ląstelių pikų mėginiuose Tbx5
-transkripcijos faktoriaus motyvų yra daugiausiai bei kokie motyvai gali būti
-identifikuoti analizuojamuose mėginiuose.
+Šiame darbe, naudojantis R programavimo kalbos bibliotekomis,
+bioinformatiniais komandinės eilutės įrankiais ir internetinėmis duomenų
+analizės priemonėmis, tirti ChIP sekoskaitos duomenys. Analizės metu
+nustatyta, kokiuose naminės pelės (lot. \emph{Mus musculus}) ląstelių
+pikų mėginiuose Tbx5 transkripcijos faktoriaus motyvų yra daugiausiai bei
+kokie motyvai gali būti identifikuoti analizuojamuose mėginiuose.
 
 Atlikta statistinė duomenų analizė parodė, kad panašiose ląstelėse,
 kurioms buvo taikytos skirtingos eksperimentinės sąlygos, ChIP sekoskaitos
@@ -127,19 +131,22 @@ that may play a significant role in heart disease treatment and heart tissue
 repair after physical heart damage (for example, cardiac rupture).
 Therefore, in order to successfully apply cell regeneration methods in practice,
 it is mandatory to determine and apprehend the mechanisms and gene
-products that regulate regeneration processes.
-
-Tbx5 - cardiogenic transcription factor that is encoded by \emph{Tbx5} gene.
-This factor activates genes that are involved in heart development during
-embryogenesis and tissue repair during regeneration.
+products that regulate regeneration processes. Due to this reason, in this
+work Tbx5 cardiogenic transcription factor was chosen as the main target
+for the analysis. Tbx5 transcription factor is involved in activation of the
+genes that are essential for heart development during embryogenesis and
+tissue repair during regeneration. The function of the Tbx5 transcription factor
+is important to the overall development of the organisms -  it was determined that
+\emph{Tbx5} gene mutations cause developmental disorders affecting the
+heart and upper limbs.
 
 In this work, the analysis of the ChIP sequencing samples that were
 retrieved from different house mouse (lat. \emph{Mus musculus}) cells was
-conducted using functions from R programming language libraries and performing
-analysis' steps using bioinformatics' command-line tools and online services
-in order to determine what type of house mouse cells has the greatest number
-of Tbx5 transcription factor motif sequences and what other motifs can be
-identified in the samples of interest.
+conducted using functions from R programming language libraries. Several
+analysis' steps were performed using bioinformatics' command-line tools and
+online services in order to determine what type of house mouse cells has
+the greatest number of Tbx5 transcription factor motif sequences and what
+other motifs can be identified in the samples of interest.
 
 The undertaken statistical analysis indicated that ChIP sequencing data and
 Tbx5 transcription factor motif count notably differ between analyzed
@@ -178,7 +185,8 @@ arba slopinti specifinių genų transkripciją.
 Regeneracijos procesų supratimui ir taikymui būtina išsiaiškinti, kokie
 transkripcijos faktoriai dalyvauja šiame procese bei kokias funkcijas jie
 atlieka, todėl šio darbo metu atlikta kardiogeninio transkripcijos
-faktoriaus - Tbx5 - analizė iš naminių pelių širdžių išgautų ląstelių.
+faktoriaus - Tbx5 - analizė su ChIP sekoskaitos būdu gautais naminių pelių
+širdžių ląstelių mėginiais.
 
 \subsection*{Darbo tikslas}
 
@@ -196,10 +204,6 @@ ląstelėms daro didelę įtaką Tbx5 transkripcijos faktoriaus motyvų skaičiu
         funkcijos yra būdingos identifikuotiems motyvams.
 \end{itemize}
 
-Atskiruose šio darbo poskyriuose pateikiami statistinius duomenų skirtumus
-vizualizuojantys grafikai bei gauti Tbx5 ir \emph{de novo} motyvų
-identifikavimo analizių rezultatai.
-
 \newpage
 
 %%%%%%%%%%%%%%%%%%%%%
@@ -209,14 +213,13 @@ identifikavimo analizių rezultatai.
 \section{Duomenų bazės ir duomenys}
 \subsection{GTRD duomenų bazė}
 Tyrimui naudoti duomenys atsisiųsti iš GTRD (Gene Transcription Regulation
-Database)\cite{GTRD} duomenų bazės, saugančios informaciją apie transkripcijos
-sekų ir atviro chromatino regionus. Taip pat duomenų bazėje saugomi
-nekartografuojamų regionų duomenys bei potencialūs žmonių bei naminių pelių
-regionai, prie kurių gali jungtis transkripcijos faktoriai.
-
-Ši duomenų bazė pasirinkta dėl sistemiškai surinktų ChIP sekoskaitos
-eksperimentų, kurių metu gauti rezultatai yra unifikuotai apdoroti ir
-paruošti tyrėjų meta-analizėms.
+Database)\cite{GTRD} duomenų bazės. Ši duomenų bazė pasirinkta dėl sistemiškai
+surinktų ChIP sekoskaitos eksperimentų, kurių metu gauti rezultatai yra
+unifikuotai apdoroti ir paruošti tyrėjų meta-analizėms. GTRD duomenų bazėje
+saugoma informacija apie transkripcijos sekų ir atviro chromatino regionus.
+Taip pat joje saugomi nekartografuojamų regionų duomenys bei potencialūs
+žmonių, naminių pelių, drozofilų, žiurkių, mielių bei kitų modelinių
+organizmų regionai, prie kurių gali jungtis transkripcijos faktoriai.
 
 GTRD duomenų bazėje duomenys saugomi binariniu anotacijų formatu bigBed,
 leidžiančiu atvaizduoti pasirinktą chromosomos regioną interaktyviose genominės
@@ -236,35 +239,36 @@ apie tyrimui atlikti naudotus duomenis, surinktus iš naminių pelių
     \begin{tabular}{|c|c|c|c|c|c|c|}
     \hline
     %\thead{Sample\\ window}
-    \textbf{GTRD ID} & \textbf{Ląstelių tipas} &
+    \textbf{\thead{Žymėjimas\\ grafikuose}} & \textbf{Ląstelių tipas} &
         \textbf{\thead{Kamienas}} & \textbf{\thead{Poveikis}} &
-        \textbf{Antikūnai} & \textbf{PubMed ID}\\
+        \textbf{Antikūnai} & \textbf{\thead{PubMed ID;\\ GTRD ID}} \\
     \hline
-    EXP030898 & \thead{HL - 1\\ (širdies raumens)} & C57BL/6J &
-                \thead{TRE\\ promotorius (2 d.)} & - & 21415370\cite{ARTCL1}\\ 
+    \emph{crdc\_mscl\_r1\_2} & \thead{HL - 1\\ (širdies raumens)} & C57BL/6J &
+                \thead{TRE\\ promotorius\\ (2 d.)} & - & \thead{21415370\cite{ARTCL1};\\EXP030898}\\ 
     \hline
-    EXP058852 & Širdies prieširdžių & C57BL/6 & - &
-                \thead{Tbx5\\ (sc-17866)} & 31080136\cite{ARTCL2}\\
+    \emph{heart\_r1\_1} & Širdies prieširdžių & C57BL/6 & - &
+                \thead{Tbx5\\ (sc-17866)} & \thead{31080136\cite{ARTCL2};\\EXP058852}\\
     \hline
-    EXP062056 & \thead{Pelių naujagimių širdies\\ fibroblastų, 
+    \emph{emb\_fibr\_r1\_1} & \thead{MEF\\ (embrionų fibroblastai)} & C57BL/6 &
+                \thead{AGHMT\\ (2 d.)} & \thead{anti-Tbx5\\ (sc-17866)} &
+                \thead{31080136\cite{ARTCL2};\\EXP058843}\\
+    \hline
+    \emph{emb\_fibr\_r2\_2} & \thead{MEF\\ (embrionų fibroblastai)} & C57BL/6 & \thead{GHMT\\ (2 d.)} &
+                \thead{Tbx5\\ (sc-17866)} & \thead{31080136\cite{ARTCL2};\\EXP058847}\\
+    \hline
+    \emph{emb\_fibr\_r3\_3} & \thead{MEF\\ (embrionų fibroblastai)} & C57BL/6 & \thead{GMT\\ (2 d.)} &
+                \thead{Tbx5\\ (sc-17866)} & \thead{31080136\cite{ARTCL2};\\EXP058850}\\
+    \hline
+    \emph{emb\_fibr\_r4\_4} & \thead{MEF\\ (embrionų fibroblastai)} & C57BL/6 &
+                \thead{vienas\\ faktorius (2 d.)} & \thead{Tbx5\\ (sc-17866)} &
+                \thead{31080136\cite{ARTCL2};\\EXP058856}\\
+    \hline
+    \emph{crdc\_fibr\_r1\_3} & \thead{Pelių naujagimių širdies\\ fibroblastų, 
                 ekspresuojančių\\ didelį kiekį T antigeno, linija} & CD1 &
                 \thead{sb431542,\\ xav939} & \thead{anti-TBX5\\ (sc-17866x)} &
-                31271750\cite{ARTCL3}\\
+                \thead{31271750\cite{ARTCL3};\\EXP062056}\\
     \hline
-    EXP058843 & \thead{MEF\\ (embrionų fibroblastai)} & C57BL/6 &
-                AGHMT (2 d.) & \thead{anti-Tbx5\\ (sc-17866)} &
-                31080136\cite{ARTCL2}\\
-    \hline
-    EXP058847 & \thead{MEF\\ (embrionų fibroblastai)} & C57BL/6 & GHMT (2 d.) &
-                \thead{Tbx5\\ (sc-17866)} & 31080136\cite{ARTCL2}\\
-    \hline
-    EXP058850 & \thead{MEF\\ (embrionų fibroblastai)} & C57BL/6 & GMT (2 d.) &
-                \thead{Tbx5\\ (sc-17866)} & 31080136\cite{ARTCL2}\\
-    \hline
-    EXP058856 & \thead{MEF\\ (embrionų fibroblastai)} & C57BL/6 &
-                \thead{vienas\\ faktorius (2 d.)} & \thead{Tbx5\\ (sc-17866)} &
-                31080136\cite{ARTCL2}\\
-    \hline
+    
     \end{tabular}
 \end{table}
 
@@ -311,19 +315,20 @@ apie tyrimui atlikti naudotus duomenis, surinktus iš naminių pelių
 \end{itemize}
 
 \subsection{Pasirinktų mėginių apžvalga}
+Pateiktame sąraše apibūdinti eksperimentai, kurie aprašyti trijuose
+nepriklausomuose straipsniuose.
+
+\textbf{Dviejų nepriklausomuose straipsniuose aprašytų eksperimentų apžvalga:}
 \begin{itemize}
     \item \textbf{EXP030898}: vienas mėginys iš septyniolikos eksperimento
         metu tirtų mėginių. Eksperimente buvo siekiama patvirtinti arba
         atmesti hipotezę apie širdies stipriklių (angl. \emph{enhancer})
-        identifikiavimą prie chromatino jungiantis keliems transkripcijos
+        identifikavimą prie chromatino jungiantis keliems transkripcijos
         faktoriams.
 
         HL - 1 širdies raumens ląstelės buvo infekuotos su adenovirusu
         bei pridėtu TRE promotoriumi, skatinančiu Tbx5 transkripcijos
         faktoriaus geno raišką.
-    \item \textbf{EXP058852}: prieširdžių ląstelės buvo du kartus po 24
-        valandas laikytos mišinyje su retrovirusais. Papildomi poveikiai nebuvo
-        taikyti.
     \item \textbf{EXP062056}: eksperimente ląstelės buvo infekuotos su GATA4,
         Mef2c, ir Tbx5 transkripcijos faktorius sintetinančiais retrovirusais.
         Ląstelės augintos terpėje, kurioje buvo inhibitoriaus sb431542,
@@ -333,11 +338,11 @@ apie tyrimui atlikti naudotus duomenis, surinktus iš naminių pelių
         ląstelių kardiomiogenezę.
 \end{itemize}
 
-Pasirinktų duomenų rinkinyje naudoti vieno eksperimento, kuriame buvo tirti
-širdies ląstelių atsinaujinimo ir diferenciacijos mechanizmai, keturiais
-skirtingais poveikiais tirti embrionų fibroblastų mėginiai:
-
+\textbf{Penkių viename straipsnyje aprašytų eksperimentų apžvalga:}
 \begin{itemize}
+    \item \textbf{EXP058852}: prieširdžių ląstelės buvo du kartus po 24
+    valandas laikytos mišinyje su retrovirusais. Papildomi poveikiai nebuvo
+    taikyti.
     \item \textbf{EXP058843}: embrionų fibroblastai veikti AGHMT. Esant
         prisijungusiems kardiogeniniams transkripcijos faktoriams, Akt1
         skatina fibroblastų diferenciaciją į širdies ląsteles - kardiomiocitus.
@@ -360,7 +365,8 @@ kalba\cite{R} (4.2.0 versija).
 Tarpiniams analizės rezultatams pateikti naudotas komandinės eilutės įrankis
 Scikick\cite{SCIK} (0.2.0 versija), leidžiantis generuoti R Markdown (Rmd)
 ataskaitas HTML formatu bei kurti struktūrizuotus puslapius, apjungiant
-iš daugelio Rmd failų gautus HTML ataskaitų failus.
+iš daugelio Rmd failų gautus HTML ataskaitų failus
+\hyperref[Priedas]{(6 skyriaus priedas)}.
 
 \subsection{Pikų skaičiaus nustatymas mėginiuose}
 Pikų skaičius skirtinguose mėginiuose apskaičiuotas su
@@ -517,7 +523,7 @@ skaičius skiriasi \(\sim\)25 tūkst. ir \(\sim\)100 tūkst. pikų.
 
 Mažiausiai pikų nustatyta mėginyje, kuriame tirti pelių naujagimių širdies
 fibroblastai paveikti inhibitoriais. Nepaisant to, kad naudoti inhibitoriai
-skatina širdies ląstelių diferenciaciją\cite{HEART_CELL_DIFF_ARTCL} ir darant
+skatina širdies ląstelių diferenciaciją\cite{HEART_CELL_DIFF_ARTCL}, ir darant
 prielaidą, kad ChIP sekoskaitos duomenys yra tikslūs ir juose nėra
 metodo klaidų, mažas pikų skaičius rodo, kad papildomas veikimas inhibitoriais
 gali daryti mažą įtaką transkripcijos faktoriaus jungimuisi prie DNR sekų.
@@ -526,6 +532,8 @@ Remiantis gautais rezultatais pikų skaičius skirtingais poveikiais veiktose
 panašiose ląstelėse varijuoja itin stipriai, tačiau šiuos rezultatus reikia
 vertinti atsargiai, atsižvelgiant į galimus ChIP sekoskaitos metodu gautų
 duomenų paruošimo netikslumus.
+
+\newpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % PIKŲ SKAIČIUS ATSKIROSE CHROMOSOMOSE
@@ -633,14 +641,21 @@ naujų analizių vykdymo priežastimi (pvz., išsiaiškinti, kodėl vienuoliktoj
 naminės pelės chromosomoje DNR regionų, prie kurių jungiasi transkripcijos
 faktoriai, yra daugiau nei kitose chromosomose).
 
+\newpage
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 % TBX5 MOTYVO NUSTATYMAS
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Tbx5 motyvo pasiskirstymas mėginiuose}
-Įvertinus vizualizuotų duomenų skirtumus, vykdomos analizės metu nustatytas
-Tbx5 motyvo taikinių skaičius skirtinguose mėginiuose. Rezultatas pateiktas
-šeštame paveiksle (6 pav.).
+Ankstesniuose poskyriuose aprašytas pikų variacijas bei skirtumus tarp mėginių
+galėjo įtakoti ne tik skirtingų eksperimentinių sąlygų taikymas, bet ir
+foninis ChIP sekoskaitos signalas. Be to, svarbu atsižvelgti ir į galimas ChIP
+sekoskaitos vykdymo eigos klaidas. Pavyzdžiui, kai kurių mėginių mažą pikų
+skaičių galėjo lemti nepakankamas ant mikrogardelės užpiltas DNR fragmentų
+kiekis, todėl šiame analizės etape duomenų kokybei įvertinti atliktas Tbx5
+motyvo taikinių skaičiaus nustatymas skirtinguose mėginiuose. Gautas rezultatas
+pateiktas šeštame paveiksle (6 pav.).
 
 \begin{figure}[htb]
     \begin{center}
@@ -670,17 +685,31 @@ kurio procentinė dalis (8.32\%) yra mažesnė už mėginyje
 nors \small\emph{crdc\_mscl\_r1\_2} mėginiui būdingas didesnis bendras pikų
 skaičius.
 
+\newpage
+
 \subsection{\emph{De novo} identifikuoti motyvai}
+Remiantis 4.4 poskyryje aprašytais Tbx5 motyvo tyrimo rezultatais galima
+pastebėti, jog visuose mėginiuose Tbx5 motyvo sekų skaičius buvo mažesnis nei 18\%, todėl
+šios analizės etape buvo vykdoma \emph{de novo} motyvų paieška, siekiant
+patikrinti, ar pagal ChIP sekoskaitos duomenis gautuose FASTA formato sekų
+rinkiniuose galima identifikuoti motyvų, kurių sekų fragmentų būtų daugiau
+nei Tbx5 motyvo sekų.
+
 \emph{De novo} motyvų paieškos programos vykdymas buvo ilgiausiai trukęs
 analizės etapas, lyginant su kitais analizės etapais. Šio etapo metu buvo
-sugeneruoti HTML formato failai, kuriuose buvo pateiktas identifikuotų motyvų
-sąrašas, išrikiuotas pagal \emph{p}-vertę didėjančia tvarka, motyvų sekų
-logotipai bei nuorodos į puslapius su pozicinėmis motyvų svorių matricomis.
+sugeneruoti HTML formato failai, kuriuose buvo pateiktas identifikuotų
+motyvų sąrašas, išrikiuotas pagal \emph{p}-vertę didėjančia tvarka,
+motyvų sekų logotipai bei nuorodos į puslapius su pozicinėmis motyvų
+svorių matricomis.
 
 Antroje lentelėje (2 lentelė) kiekvienam mėginiui pateikti trys identifikuoti
-motyvai, turintys mažiausią \emph{p}-vertę. Ketvirtame antros lentelės
-stulpelyje nurodyta, kokią procentinę dalį mėginyje sudaro identifikuotas
-Tbx5 motyvas.
+motyvai, turintys mažiausią \emph{p}-vertę.
+Šalia identifikuoto transkripcijos faktoriaus (TF) motyvo skliausteliuose
+nurodyta transkripcijos faktorių klasė, kuriai priklauso identifikuotas
+motyvas. Kiekvienas transkripcijos faktorius pagal savo prisijungimo
+prie DNR domeną yra priskiriamas atitinkamai superklasei (T-box, MADS, Zf, bZIP).
+Ketvirtame antros lentelės stulpelyje nurodyta, kokia mėginio pikų dalis
+turėjo Tbx5 motyvą.
 
 \begin{table}[htb]
     \newcolumntype{M}[1]{>{\centering\arraybackslash}m{#1}}
@@ -689,9 +718,9 @@ Tbx5 motyvas.
     \vspace{0.1\baselineskip}
     \begin{tabular}{|c|c|c|c|c|}
     \hline
-    \textbf{Mėginys} & \textbf{Pavadinimas} &
-                       \textbf{\thead{Procentinė\\ dalis}} &
-                       \textbf{Tbx5 motyvas} \\
+    \textbf{Mėginys} & \textbf{\thead{Identifikuotas\\ TF}} &
+                       \textbf{\thead{Identifikuoto TF\\ procentinė dalis}} &
+                       \textbf{\thead{Tbx5 motyvą turinčių\\ pikų dalis}} \\
     \hlineB{2.5}
     \multirow{3}{*}{\textbf{\emph{crdc\_mscl\_r1\_2*}}} & Tbx6(T-box)  & 20.28\% &
                                                 \multirow{3}{*}{54.87\%} \\
@@ -734,19 +763,18 @@ Tbx5 motyvas.
 \let\thefootnote\relax\footnotetext{\textbf{*} - identifikuotas Tbx5 motyvas
 statistiškai patikimas.}
 
-Remiantis pateiktos lentelės duomenimis dažniausias mėginiuose pasikartojantis
+Remiantis antros lentelės (2 lentelė) duomenimis dažniausias mėginiuose pasikartojantis
 motyvas priklauso TRPS1 ir GATA3 transkripcijos faktoriams. Didžiausia
 Tbx5 motyvo procentinė dalis, atlikus \emph{de novo} motyvų paiešką su HOMER
 įrankiu, nustatyta tarp širdies raumens ląstelių mėginio bei širdies
 fibroblastų, veiktų inhibitoriais, mėginio (\small\emph{crdc\_mscl\_r1\_2},
-\small\emph{crdc\_fibr\_r1\_3}).
-
-Mėginyje, kuriame tirtos iš naminių pelių širdžių prieširdžių išgautos ląstelės
-(\small\emph{heart\_r1\_1}), identifikuotas Tbx5 motyvas nėra statistiškai
-patikimas, atsižvelgus į itin didelę \emph{p}-vertę. 
+\small\emph{crdc\_fibr\_r1\_3}). Mėginyje, kuriame tirtos iš naminių pelių
+širdžių prieširdžių išgautos ląstelės (\small\emph{heart\_r1\_1}),
+identifikuotas Tbx5 motyvas nėra statistiškai patikimas, atsižvelgus į
+itin didelę \emph{p}-vertę. 
 
 Pateiktoje stulpelinėje diagramoje (7 pav.) vaizduojamas bendras identifikuotų
-motyvų skaičius kiekvienam mėginiui.
+skirtingų motyvų skaičius kiekvienam mėginiui.
 
 \begin{figure}[htb]
     \begin{center}
@@ -761,7 +789,10 @@ Nėra neįprasta, kad paskutinių mėginių (\small\emph{emb\_fibr\_r4\_4} ir
 \small\emph{crdc\_fibr\_r1\_3}) identifikuotų motyvų skaičius yra pats
 mažiausias - remiantis ankstesnių analizės etapų rezultatais (4.1, 4.2, 4.3
 poskyriai) šie mėginiai turi mažiausią pikų skaičių bei mažiausią juos
-atitinkančių sekų rinkinį.
+atitinkančių sekų rinkinį, tačiau atotrūkis tarp šių mėginių ir kitų mėginių
+yra daug mažesnis, palyginus su ankstesnių analizės etapų rezultatais.
+Tai rodo, kad nors pikų skaičius yra mažas, bendras identifikuotų motyvų
+skaičius yra panašus.
 
 Nepaisant šio atitikimo, remiantis 4.1 poskyrio rezultatais mėginys
 \small\emph{heart\_r1\_1} turi \(\sim\) 50 tūkst. daugiau pikų nei
@@ -778,7 +809,7 @@ kad 131 motyvas yra būdingas visiems analizuojamiems mėginiams.
 \subsection{\emph{De novo} nustatytų motyvų biologinės funkcijos}
 Identifikavus motyvus, buvo nustatytos su šiais motyvais susijusių genų
 funkcijos. Remiantis atliktos paieškos UniProtKB\cite{UNIPROTKB} duomenų
-bazėje rezultatais, trečioje lentelėje (3 lentelė) pateikti motyvai:
+bazėje rezultatais, antroje lentelėje (2 lentelė) pateikti motyvai:
 
 \begin{enumerate}
     \item \textbf{Tbx6:} Dalyvauja ląstelių proliferacijos ir organizacijos
@@ -824,16 +855,17 @@ medicininiuose taikymuose.
 %%%%%%%%%%%%
 
 \section{Išvados}
-Atlikus Tbx5 transkripcijos faktoriaus analizę su skirtingais naminės pelės
-ląstelių mėginiais, kuriems buvo taikyti skirtingi poveikiai, gauti rezultatai
-buvo apibendrinti:
+Atlikus Tbx5 transkripcijos faktoriaus analizę su ChIP sekoskaitos
+metodu gautais naminių pelių skirtingomis eksperimentinėmis sąlygomis veiktais
+ląstelių mėginiais, gauti rezultatai buvo apibendrinti:
 
 \begin{itemize}
     \item Iš duomenų bazės atsirinkti tinkamiausi mėginiai su panašiomis
         širdies audinių ląstelėmis, tačiau skirtingais taikytais poveikiais.
     \item Nepaisant panašių ląstelių analizavimo, skirtingų modifikacijų
-        pritaikymas bei galimas netikslus ChIP sekoskaitos duomenų paruošimas
-        lemia akivaizdžius duomenų skirtumus.
+        pritaikymas, galimas netikslus ChIP sekoskaitos duomenų paruošimas
+        bei natūralios biologinės/laboratorinės variacijos lemia akivaizdžius
+        duomenų skirtumus.
     \item Tbx5 transkripcijos faktoriaus motyvo taikinių skaičius tarp
         skirtingais poveikiais veiktų ląstelių mėginių skiriasi itin stipriai.
     \item \emph{De novo} identifikuoti motyvai yra susiję su ląstelių
@@ -962,7 +994,7 @@ Nucleic Acids Res. 2019 Jan. 8;47 (D1): D801–D806.
 % PRIEDAI
 %%%%%%%%%%%%
 
-\section{Priedas}
+\section{Priedas} \label{Priedas}
 
 Priedų sąraše pateikiamos tarpinių rezultatų puslapio, sugeneruoto su Scikick,
 bei Git repozitorijos, kurioje saugomi analizei naudoti duomenų failai,
@@ -970,9 +1002,9 @@ parašyti skriptai bei pagrindinė R programa, nuorodos.
 
 \begin{itemize}
     \item \textbf{Tarpinių rezultatų Scikick puslapis:}\\
-        https://karklas.mif.vu.lt/~dast6577/KursinisDarbas/v2.0/peaks\_MM.html
+        \url{https://karklas.mif.vu.lt/\string~dast6577/KursinisDarbas/v2.0/peaks\_MM.html}
     \item \textbf{Analizės Git repozitorija:}\\
-        https://github.com/dansta0804/Tbx5\_analysis.git
+        \url{https://github.com/dansta0804/Tbx5\_analysis.git}
   \end{itemize}
 
 \end{document}
