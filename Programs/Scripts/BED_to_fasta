@@ -13,6 +13,6 @@ for	bed_file in ${BED};
 		name=$(basename ${bed_file});
 		echo "Retrieving sequences from $(basename ${bed_file}) file...";
 		fasta_file=$(basename ${name} bed)"fasta";
-        echo "Changing file name into ${fasta_file}...";
-        bedtools getfasta -fi ${mm_genome} -bed ${bed_file} -fo ${FASTA}/${fasta_file}
+        	echo "Changing file name into ${fasta_file}...";
+        	bedtools getfasta -fi ${mm_genome} -bed ${bed_file} -fo ${FASTA}/${fasta_file}
 	done
