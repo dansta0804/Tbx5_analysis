@@ -17,7 +17,7 @@ LOGS=/home/daniele/Desktop/III_course/II_semester/Kursinis_darbas/Logs;
 # Running main 'findMotifsGenome.pl' program to perform de novo
 # motif discovery with every BED file using Mus musculus genome:
 for	bed_file in ${BED};
-	do
+    do
         bed_name=$(basename ${bed_file});
         result_dir=$(basename ${bed_file} .bed);
         time_start=`date +"%Y-%m-%d %T"`
