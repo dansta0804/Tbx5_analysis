@@ -214,7 +214,7 @@ ląstelėms daro didelę įtaką Tbx5 transkripcijos faktoriaus motyvų skaičiu
 \subsection{GTRD duomenų bazė}
 Tyrimui naudoti duomenys atsisiųsti iš GTRD (Gene Transcription Regulation
 Database)\cite{GTRD} duomenų bazės. Ši duomenų bazė pasirinkta dėl sistemiškai
-surinktų ChIP sekoskaitos eksperimentų, kurių metu gauti rezultatai yra
+surinktų ChIP sekoskaitos eks\-pe\-ri\-men\-tų, kurių metu gauti rezultatai yra
 unifikuotai apdoroti ir paruošti tyrėjų meta-analizėms. GTRD duomenų bazėje
 saugoma informacija apie transkripcijos sekų ir atviro chromatino regionus.
 Taip pat joje saugomi nekartografuojamų regionų duomenys bei potencialūs
@@ -266,7 +266,7 @@ apie tyrimui atlikti naudotus duomenis, surinktus iš naminių pelių
                 \thead{31080136\cite{ARTCL2};\\EXP058850}\\
     \hline
     \emph{emb\_fibr\_r4\_4} & \thead{MEF\\ (embrionų fibroblastai)} & C57BL/6 &
-                \thead{vienas\\ faktorius (2 d.)} & \thead{Tbx5\\ (sc-17866)} &
+                \thead{vienas Tbx5\\ faktorius (2 d.)} & \thead{Tbx5\\ (sc-17866)} &
                 \thead{31080136\cite{ARTCL2};\\EXP058856}\\
     \hline
     \emph{crdc\_fibr\_r1\_3} & \thead{Pelių naujagimių širdies\\ fibroblastų, 
@@ -280,7 +280,6 @@ apie tyrimui atlikti naudotus duomenis, surinktus iš naminių pelių
 
 \newpage
 
-\subsection{Santrumpų bei pavadinimų paaiškinimai}
 \begin{itemize}
     \item \textbf{HL - 1}: pelių širdies raumens ląstelės, išgautos iš
         navikinių prieširdžių kardiomiocitų linijos. Šios ląstelės gali
@@ -311,8 +310,9 @@ apie tyrimui atlikti naudotus duomenis, surinktus iš naminių pelių
     \item \textbf{xav939}: stipriai veikianti cheminė medžiaga; tankirazės
         inhibitorius. Tankirazė slopina specialaus baltymo, stabdančio
         telomerazės veiklą, jungimąsi prie telomerinių DNR sekų.
-    \item \textbf{AGHMT}: Akt1 - serino/treonino kinazė 1; GATA4, HAND2, MEF2C,
-        Tbx5 - kardiogeniniai transkripcijos faktoriai.
+    \item \textbf{AGHMT}: A - Akt1 kinazė, G - GATA4 transkripcijos faktorius,
+        H - HAND2 transkripcijos faktorius, M - MEF2C transkripcijos faktorius,
+        T - Tbx5 transkripcijos faktorius.
     \item \textbf{GHMT}: GATA4, HAND2, MEF2C, Tbx5 transkripcijos faktorių
         komplektas.
     \item \textbf{GMT}: GATA4, MEF2C, Tbx5 transkripcijos faktorių komplektas.
@@ -328,7 +328,7 @@ nepriklausomuose straipsniuose.
 \begin{itemize}
     \item \textbf{EXP030898}: vienas mėginys iš septyniolikos eksperimento
         metu tirtų mėginių. Eksperimente buvo siekiama patvirtinti arba
-        atmesti hipotezę apie širdies stipriklių (angl. \emph{enhancer})
+        atmesti hipotezę apie stipriklių (angl. \emph{enhancer})
         identifikavimą prie chromatino jungiantis keliems transkripcijos
         faktoriams.
 
@@ -352,10 +352,12 @@ nepriklausomuose straipsniuose.
     \item \textbf{EXP058843}: embrionų fibroblastai veikti AGHMT. Esant
         prisijungusiems kardiogeniniams transkripcijos faktoriams, Akt1
         skatina fibroblastų diferenciaciją į širdies ląsteles - kardiomiocitus.
-    \item \textbf{EXP058847}: neįtraukta Akt1 serino/treonino kinazė 1.
+    \item \textbf{EXP058847}: embrionų fibroblastai veikti visais transkripcijos
+        faktoriais (GHMT), tačiau nenaudota Akt1 kinazė.
     \item \textbf{EXP058850}: į kardiogeninių transkripcijos faktorių mišinį
-        neįtrauktas HAND2 transkripcijos faktorius.
-    \item \textbf{EXP058856}: ląstelės veiktos tik vienu kardiogeniniu 
+        neįtrauktas HAND2 transkripcijos faktorius, Akt1 kinazė taip pat
+        nenaudota.
+    \item \textbf{EXP058856}: ląstelės veiktos tik Tbx5 kardiogeniniu 
         transkripcijos faktoriumi.
   \end{itemize}
 \newpage
@@ -459,6 +461,7 @@ pirmame paveiksle (1 pav.).
         \vspace{-2\baselineskip}
         \caption*{\small\textbf{1 pav. Tbx5 transkripcijos faktoriaus
                                 sekos logotipas}}
+        \label{fig:birds}
     \end{center}
 \end{figure}
 
@@ -656,10 +659,10 @@ Ankstesniuose poskyriuose aprašytas pikų variacijas bei skirtumus tarp mėgini
 galėjo įtakoti ne tik skirtingų eksperimentinių sąlygų taikymas, bet ir
 foninis ChIP sekoskaitos signalas. Be to, svarbu atsižvelgti ir į galimas ChIP
 sekoskaitos vykdymo eigos klaidas. Pavyzdžiui, kai kurių mėginių mažą pikų
-skaičių galėjo lemti nepakankamas ant mikrogardelės užpiltas DNR fragmentų
-kiekis, todėl šiame analizės etape duomenų kokybei įvertinti atliktas Tbx5
-motyvo taikinių skaičiaus nustatymas skirtinguose mėginiuose. Gautas rezultatas
-pateiktas šeštame paveiksle (6 pav.).
+skaičių galėjo lemti nepakankamas pradinis sekoskaitos bibliotekos DNR kiekis
+ar per mažas bibliotekos kompleksiškumas, todėl šiame analizės etape duomenų
+kokybei įvertinti atliktas Tbx5 motyvo taikinių skaičiaus nustatymas
+skirtinguose mėginiuose. Gautas rezultatas pateiktas šeštame paveiksle (6 pav.).
 
 \begin{figure}[htb]
     \begin{center}
